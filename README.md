@@ -1,6 +1,6 @@
 # TG:BTC Bot
 
-Displays character stats when prompted with `![character] [attribute]`
+Displays character stats when prompted with `![character] [attribute]`  
 Example: `!arima wit`
 
 ## Setup
