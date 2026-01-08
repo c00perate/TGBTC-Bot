@@ -7,6 +7,8 @@ import csv
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
+BLOCKED_USERS = [int(id) for id in os.getenv("BLOCKED_USERS", "").split(",") if id]
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -41,6 +43,9 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    if message.author.id in BLOCKED_USERS:
+        return
+
     if message.author == bot.user:
         return
     
