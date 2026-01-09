@@ -37,6 +37,16 @@ with open('characters.csv', 'r') as f:
         row['HP'] = int(row['HP'])
         characters.append(row)
 
+def calculate_rankings():
+    stats = ['Base CP', 'ATK', 'DEF', 'HP', '3x Cell CP', '4x Cell CP']
+
+    for stat in stats:
+        sorted_chars = sorted(characters, key=lambda x: x[stat], reverse=True)
+        for i, char in enumerate(sorted_chars):
+            char[f'{stat}_rank'] = i + 1
+
+calculate_rankings()
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now running!')
@@ -80,16 +90,18 @@ async def on_message(message):
                         description=char['Title'],
                         color=colour[char['Attribute']]
                     )
+                    print(f"{char['Character']}{char['Title']}")
+                    embed.set_thumbnail(url=f"attachment://{char['Character']}{char['Title']}.jpg")
                     embed.add_field(name="Attribute", value=char['Attribute'])
                     embed.add_field(name="Faction", value=char['Faction'])
                     embed.add_field(name="Tactic", value=char['Tactic'])
-                    embed.add_field(name="Base CP", value=char['Base CP'])
-                    embed.add_field(name="3x Cell CP", value=char['3x Cell CP'])
-                    embed.add_field(name="4x Cell CP", value=char['4x Cell CP'])
-                    embed.add_field(name="Base ATK", value=char['ATK'])
-                    embed.add_field(name="Base DEF", value=char['DEF'])
-                    embed.add_field(name="Base HP", value=char['HP'])
-                    embed.add_field(name="Release Date", value=char['Release Date'])
+                    embed.add_field(name=f"Base CP ", value=f"{char['Base CP']} (#{char['Base CP_rank']})")
+                    embed.add_field(name=f"3x Cell CP ", value=f"{char['3x Cell CP']} (#{char['3x Cell CP_rank']})")
+                    embed.add_field(name=f"4x Cell CP ", value=f"{char['4x Cell CP']} (#{char['4x Cell CP_rank']})")
+                    embed.add_field(name=f"Base ATK ", value=f"{char['ATK']} (#{char['ATK_rank']})")
+                    embed.add_field(name=f"Base DEF ", value=f"{char['DEF']} (#{char['DEF_rank']})")
+                    embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
+                    embed.add_field(name=f"Release Date", value=char['Release Date'])
                     embed.add_field(name="Obtained", value=char['Obtained'])
                     embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n" \
                                           "Base CP is extrapolated from Strategic Arena")
