@@ -26,7 +26,6 @@ colour = {
 }
 
 characters = []
-#change from copy
 with open('characters.csv', 'r') as f:
     reader = csv.DictReader(f)
     for row in reader:
@@ -36,12 +35,10 @@ with open('characters.csv', 'r') as f:
         row['ATK'] = int(row['ATK'])
         row['DEF'] = int(row['DEF'])
         row['HP'] = int(row['HP'])
-        if(row['Nicknames']) == None:
-            row['Nicknames'] = ""
         characters.append(row)
 
 teams = []
-with open("teams.csv", "r") as f:
+with open('teams.csv', 'r') as f:
     reader = csv.DictReader(f)
     for row in reader:
         teams.append(row)
@@ -75,12 +72,17 @@ async def on_message(message):
         parts = message.content[1:].split(maxsplit=1)
 
         if len(parts) == 1 and parts[0].lower() == "command":
-            await message.channel.send("Command: ![character name] [attribute]\nExample: !arima wit\n\n Command: !team [faction]\n Example: !team noorg\n\n" \
-            "Command: !rank [attribute (hp, def, atk, 3x, 4x, base)]\n Example: !rank hp")
+            await message.channel.send("""Commands:\n
+                                       ![character name] [attribute]\n
+                                       Example: !arima wit\n\n
+                                       !team [faction]\n
+                                       Example: !team noorg\n\n
+                                       !rank [attribute (hp, def, atk, 3x, 4x, base)]\n
+                                       Example: !rank hp""")
             return
         
         if len(parts) == 1 and parts[0].lower() == "credits":
-            await message.channel.send("Made by C00per and Hnff for the Tokyo Ghoul Break the Chains Server!")
+            await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
             return
 
         if len(parts) == 1 and parts[0].lower() == "sheet":
@@ -97,41 +99,46 @@ async def on_message(message):
                 await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
                 return
 
-            embed = discord.Embed(title = f"{category.capitalize()} Teams", description=f"Current meta teams for {category.capitalize()} faction", color=discord.Color.random())
+            embed = discord.Embed(
+                title = f"{category.capitalize()} Teams", 
+                description=f"Current meta teams for {category.capitalize()} faction", 
+                color=discord.Color.random())
+            
             for i in range(len(teams)):
-                if(teams[i]["faction"].lower() == category.lower()):
-                    embed.add_field(name=teams[i]["title"], value=f""" - {teams[i]["char1"]}
- - {teams[i]["char2"]}
- - {teams[i]["char3"]}
- - {teams[i]["char4"]}
- - {teams[i]["backup"]}""")
+                if(teams[i]['faction'] == category.lower()):
+                    embed.add_field(name=teams[i]['title'], 
+                                    value=f""" - {teams[i]['char1']}
+                                               - {teams[i]['char2']}
+                                               - {teams[i]['char3']}
+                                               - {teams[i]['char4']}
+                                               - {teams[i]['backup']}""")
                     embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                     embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-                    embed.add_field(name = "", value= "", inline=False)
-                    embed.add_field(name = "", value= "", inline=False)
 
             await message.channel.send(embed=embed)
             return
 
 
         if len(parts) == 2 and parts[0].lower() == "rank":
-            print("ranking")
             category = parts[1]
-            searchqueries = {"hp":"HP", "atk":"ATK", "def":"DEF", "3x":"3x Cell CP", "4x":"4x Cell CP", "base" : "Base CP"}
+            searchqueries = {"hp":"HP_rank", "atk":"ATK_rank", "def":"DEF_rank", 
+                             "3x":"3x Cell CP_rank", "4x":"4x Cell CP_rank", "base":"Base CP_rank"}
 
             if category.lower() not in searchqueries:
                 await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
                 return
 
-            characters2 = list(characters)
-            functions.sort(characters2, searchqueries[category])
             basestr = ""
             for i in range(0, 10):
-                basestr += f"{i + 1} {characters2[i]['Character']} [{characters2[i]['Title']}] - {characters2[i][searchqueries[category]]}\n"
+                basestr += f"""{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}] 
+                            - {characters[i][searchqueries[category]]}\n"""
 
-            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]}", description=basestr, color=discord.Color.light_gray())
-            embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n" \
-                                          "Base CP is extrapolated from Strategic Arena")
+            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]}", 
+                                  description=basestr, 
+                                  color=discord.Color.light_gray())
+            
+            embed.set_footer(text=""""All Cell CP include LR cells (if any) without any upgrades\n
+                                      Base CP is extrapolated from Strategic Arena""")
 
             await message.channel.send(embed=embed)
             return
@@ -140,15 +147,17 @@ async def on_message(message):
             name = parts[0].lower()
             attribute = parts[1].upper()
 
-            matching = [char for char in characters if name in char['Character'].lower()
-                        and char['Attribute'] == attribute or name in char['Nicknames'].lower() and char['Attribute'] == attribute]
+            matching = [char for char in characters 
+                        if (name in char['Character'].lower() or name in char['Nicknames'].lower())
+                        and char['Attribute'] == attribute]
             if matching:
                 for char in matching:
                     noimage = False
-                    if os.path.isfile(f"Images\{char['Character']}{char['Title']}.jpg") == True:
-                        file = discord.File(f"Images\{char['Character']}{char['Title']}.jpg", filename= f"{char['Character']}{char['Title']}.jpg")
+                    if os.path.isfile(f"images\{char['Character']}{char['Title']}.jpg") == True:
+                        file = discord.File(f"images\{char['Character']}{char['Title']}.jpg", 
+                                            filename= f"{char['Character']}{char['Title']}.jpg")
                     else:
-                        file = discord.File(f"Images\error.png", filename= f"error.png")
+                        file = discord.File(f"images\error.png", filename= f"error.png")
                         noimage = True
                     embed = discord.Embed(
                         title=char['Character'],
@@ -170,13 +179,13 @@ async def on_message(message):
                     embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
                     embed.add_field(name=f"Release Date", value=char['Release Date'])
                     embed.add_field(name="Obtained", value=char['Obtained'])
-                    embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n" \
-                                          "Base CP is extrapolated from Strategic Arena")
+                    embed.set_footer(text="""All Cell CP include LR cells (if any) without any upgrades\n
+                                             Base CP is extrapolated from Strategic Arena""")
 
                     await message.channel.send(embed=embed, file=file)
             else:
-                await message.channel.send("Character not found! Make sure you typed correctly "
-                                           "or try '!command' for a guide.")
+                await message.channel.send("""Character not found! Make sure you typed correctly
+                                              or try '!command' for a guide.""")
         
         else:
             await message.channel.send("Invalid command! Try '!command' for a guide.") 
