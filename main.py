@@ -35,7 +35,7 @@ with open('characters.csv', 'r') as f:
         row['ATK'] = int(row['ATK'])
         row['DEF'] = int(row['DEF'])
         row['HP'] = int(row['HP'])
-        row['Nicknames'] = row.get('Nicknames', '')
+        row['Nicknames'] = str(row.get('Nicknames', ''))
         characters.append(row)
 
 teams = []
