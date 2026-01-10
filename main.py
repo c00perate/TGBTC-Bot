@@ -54,6 +54,13 @@ def calculate_rankings():
 
 calculate_rankings()
 
+faction_display = {
+    "anteiku":"Anteiku",
+    "aogiri":"Aogiri",
+    "ccg":"CCG",
+    "noorg":"NoOrg"
+}
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now running!')
@@ -92,24 +99,21 @@ async def on_message(message):
             return
         
         if len(parts) == 2 and parts[0].lower() == "team":
-            category = parts[1]
-            if category.lower() not in "noorganteikuccgaogiri":
+            category = parts[1].lower()
+            if category not in faction_display:
                 await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
                 return
+            display_name = faction_display[category]
 
             embed = discord.Embed(
-                title = f"{category.capitalize()} Teams", 
-                description=f"Current meta teams for {category.capitalize()} faction", 
+                title = f"{display_name} Teams", 
+                description=f"Current meta teams for {display_name} faction", 
                 color=discord.Color.random())
             
             for i in range(len(teams)):
-                if(teams[i]['faction'] == category.lower()):
+                if(teams[i]['faction'].lower() == category):
                     embed.add_field(name=teams[i]['title'], 
-                                    value=f"- {teams[i]['char1']}"
-                                           "- {teams[i]['char2']}"
-                                           "- {teams[i]['char3']}"
-                                           "- {teams[i]['char4']}"
-                                           "- {teams[i]['backup']}")
+                                    value=f"- {teams[i]['char1']}\n- {teams[i]['char2']}\n- {teams[i]['char3']}\n- {teams[i]['char4']}\n- {teams[i]['backup']}")
                     embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                     embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
 
@@ -177,26 +181,13 @@ async def on_message(message):
                         if (name in char['Character'].lower() or name in char['Nicknames'].lower())
                         and char['Attribute'] == attribute]
             if matching:
-                BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-                IMAGE_DIR = os.path.join(BASE_DIR, "images")
                 for char in matching:
-                    noimage = False
-                    filename = f"{char['Character']}{char['Title']}.jpg"
-                    path = os.path.join(IMAGE_DIR, filename)
-                    if os.path.isfile(path):
-                        file = discord.File(path, filename=filename)
-                    else:
-                        file = discord.File(os.path.join(IMAGE_DIR, "error.png"), filename="error.png")
-                        noimage = True
                     embed = discord.Embed(
                         title=char['Character'],
                         description=char['Title'],
                         color=colour[char['Attribute']]
                     )
-                    if noimage == False:
-                        embed.set_thumbnail(url=f"attachment://{char['Character']}{char['Title']}.jpg")
-                    else:
-                        embed.set_thumbnail(url=f"attachment://error.png")
+                    embed.set_thumbnail(url = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png")
                     embed.add_field(name="Attribute", value=char['Attribute'])
                     embed.add_field(name="Faction", value=char['Faction'])
                     embed.add_field(name="Tactic", value=char['Tactic'])
@@ -211,7 +202,7 @@ async def on_message(message):
                     embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
                                           "Base CP is extrapolated from Strategic Arena")
 
-                    await message.channel.send(embed=embed, file=file)
+                    await message.channel.send(embed=embed)
             else:
                 await message.channel.send("Character not found! Make sure you typed correctly"
                                            "or try '!command' for a guide.")
