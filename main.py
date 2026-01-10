@@ -66,14 +66,8 @@ async def on_message(message):
     if message.author == bot.user:
         return
     
-    if bot.user.mentioned_in(message):
-        await message.channel.send("Command: ![character name] [attribute]\nExample: !arima wit")
-    
-    if message.content.startswith('!'):
-        parts = message.content[1:].split(maxsplit=1)
-
-        if len(parts) == 1 and parts[0].lower() == "command":
-            await message.channel.send("Commands:\n"
+    if bot.user.mentioned_in(message) or message.content.lower() == "!command":
+            await message.channel.send("Commands:\n\n"
                                        "![character name] [attribute]\n"
                                        "Example: !arima wit\n\n"
                                        "!team [faction]\n"
@@ -81,6 +75,9 @@ async def on_message(message):
                                        "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
                                        "Example: !rank hp")
             return
+        
+    if message.content.startswith('!'):
+        parts = message.content[1:].split(maxsplit=1)
         
         if len(parts) == 1 and parts[0].lower() == "credits":
             await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
@@ -180,14 +177,16 @@ async def on_message(message):
                         if (name in char['Character'].lower() or name in char['Nicknames'].lower())
                         and char['Attribute'] == attribute]
             if matching:
+                BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+                IMAGE_DIR = os.path.join(BASE_DIR, "images")
                 for char in matching:
                     noimage = False
                     filename = f"{char['Character']}{char['Title']}.jpg"
-                    path = os.path.join("images", filename)
+                    path = os.path.join(IMAGE_DIR, filename)
                     if os.path.isfile(path):
                         file = discord.File(path, filename=filename)
                     else:
-                        file = discord.File(os.path.join("images", "error.png"), filename="error.png")
+                        file = discord.File(os.path.join(IMAGE_DIR, "error.png"), filename="error.png")
                         noimage = True
                     embed = discord.Embed(
                         title=char['Character'],
