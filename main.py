@@ -108,11 +108,11 @@ async def on_message(message):
             for i in range(len(teams)):
                 if(teams[i]['faction'] == category.lower()):
                     embed.add_field(name=teams[i]['title'], 
-                                    value=f""" - {teams[i]['char1']}
-                                               - {teams[i]['char2']}
-                                               - {teams[i]['char3']}
-                                               - {teams[i]['char4']}
-                                               - {teams[i]['backup']}""")
+                                    value=f"- {teams[i]['char1']}"
+                                           "- {teams[i]['char2']}"
+                                           "- {teams[i]['char3']}"
+                                           "- {teams[i]['char4']}"
+                                           "- {teams[i]['backup']}")
                     embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                     embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
 
@@ -182,11 +182,12 @@ async def on_message(message):
             if matching:
                 for char in matching:
                     noimage = False
-                    if os.path.isfile(f"images\{char['Character']}{char['Title']}.jpg") == True:
-                        file = discord.File(f"images\{char['Character']}{char['Title']}.jpg", 
-                                            filename= f"{char['Character']}{char['Title']}.jpg")
+                    filename = f"{char['Character']}{char['Title']}.jpg"
+                    path = os.path.join("images", filename)
+                    if os.path.isfile(path):
+                        file = discord.File(path, filename=filename)
                     else:
-                        file = discord.File(f"images\error.png", filename= f"error.png")
+                        file = discord.File(os.path.join("images", "error.png"), filename="error.png")
                         noimage = True
                     embed = discord.Embed(
                         title=char['Character'],
