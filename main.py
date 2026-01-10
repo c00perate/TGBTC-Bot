@@ -35,7 +35,7 @@ with open('characters.csv', 'r') as f:
         row['ATK'] = int(row['ATK'])
         row['DEF'] = int(row['DEF'])
         row['HP'] = int(row['HP'])
-        row['Nicknames'] = row.get('Nicknames', '').strip()
+        row['Nicknames'] = row.get('Nicknames', '')
         characters.append(row)
 
 teams = []
@@ -122,8 +122,32 @@ async def on_message(message):
 
         if len(parts) == 2 and parts[0].lower() == "rank":
             category = parts[1]
-            searchqueries = {"hp":"HP_rank", "atk":"ATK_rank", "def":"DEF_rank", 
-                             "3x":"3x Cell CP_rank", "4x":"4x Cell CP_rank", "base":"Base CP_rank"}
+            searchqueries = {
+                "hp": {
+                    "rank": "HP_rank",
+                    "value": "HP"
+                },
+                "atk": {
+                    "rank": "ATK_rank",
+                    "value": "ATK"
+                },
+                "def": {
+                    "rank": "DEF_rank",
+                    "value": "DEF"
+                },
+                "3x": {
+                    "rank": "3x Cell CP_rank",
+                    "value": "3x Cell CP"
+                },
+                "4x": {
+                    "rank": "4x Cell CP_rank",
+                    "value": "4x Cell CP"
+                },
+                "base": {
+                    "rank": "Base CP_rank",
+                    "value": "Base CP"
+                }
+            }
 
             if category.lower() not in searchqueries:
                 await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
@@ -132,9 +156,9 @@ async def on_message(message):
             basestr = ""
             for i in range(0, 10):
                 basestr += f"""{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}] 
-                            - {characters[i][searchqueries[category]]}\n"""
+                            - {characters[i][searchqueries[category]['rank']]}\n"""
 
-            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]}", 
+            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]['value']}", 
                                   description=basestr, 
                                   color=discord.Color.light_gray())
             
