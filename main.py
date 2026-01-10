@@ -1,29 +1,12 @@
 import discord
-import os
-from dotenv import load_dotenv
 from discord.ext import commands
 import csv
-
-load_dotenv()
-
-TOKEN = os.getenv("DISCORD_TOKEN")
-BLOCKED_USERS = [int(id) for id in os.getenv("BLOCKED_USERS", "").split(",") if id]
-
+from config import *
 
 intents = discord.Intents.default()
 intents.message_content = True
-url = "https://docs.google.com/spreadsheets/d/1xTd6d87NKzWBIdyTXbvqlRKioALJq9LgdFnvcutXztY/edit?usp=sharing"
-youtube = "https://www.youtube.com/@ThisGreenDino"
 
 bot = commands.Bot(command_prefix='!', intents=intents, activity=discord.Game(name="Type !command for a guide!"))
-
-colour = {
-    "WIT": discord.Color.purple(),
-    "PSY": discord.Color.yellow(),
-    "SPD": discord.Color.blue(),
-    "SKL": discord.Color.green(),
-    "STR": discord.Color.red()
-}
 
 characters = []
 with open('characters.csv', 'r') as f:
@@ -54,13 +37,6 @@ def calculate_rankings():
 
 calculate_rankings()
 
-faction_display = {
-    "anteiku":"Anteiku",
-    "aogiri":"Aogiri",
-    "ccg":"CCG",
-    "noorg":"NoOrg"
-}
-
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now running!')
@@ -74,13 +50,15 @@ async def on_message(message):
         return
     
     if bot.user.mentioned_in(message) or message.content.lower() == "!command":
-            await message.channel.send("Commands:\n\n"
-                                       "![character name] [attribute]\n"
-                                       "Example: !arima wit\n\n"
-                                       "!team [faction]\n"
-                                       "Example: !team noorg\n\n"
-                                       "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
-                                       "Example: !rank hp")
+            await message.channel.send(
+                "Commands:\n\n"
+                "![character name] [attribute]\n"
+                "Example: !arima wit\n\n"
+                "!team [faction]\n"
+                "Example: !team noorg\n\n"
+                "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
+                "Example: !rank hp"
+                )
             return
         
     if message.content.startswith('!'):
@@ -91,19 +69,19 @@ async def on_message(message):
             return
 
         if len(parts) == 1 and parts[0].lower() == "sheet":
-            await message.channel.send(f"Here's my [sheet]({url})")
+            await message.channel.send(f"Here's my [sheet]({SHEET_URL})")
             return
         
         if len(parts) == 1 and parts[0].lower() == "youtube":
-            await message.channel.send(f"Here's my [Youtube channel]({youtube})")
+            await message.channel.send(f"Here's my [Youtube channel]({YOUTUBE_URL})")
             return
         
         if len(parts) == 2 and parts[0].lower() == "team":
             category = parts[1].lower()
-            if category not in faction_display:
+            if category not in FACTION_DISPLAY:
                 await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
                 return
-            display_name = faction_display[category]
+            display_name = FACTION_DISPLAY[category]
 
             embed = discord.Embed(
                 title = f"{display_name} Teams", 
@@ -113,7 +91,12 @@ async def on_message(message):
             for i in range(len(teams)):
                 if(teams[i]['faction'].lower() == category):
                     embed.add_field(name=teams[i]['title'], 
-                                    value=f"- {teams[i]['char1']}\n- {teams[i]['char2']}\n- {teams[i]['char3']}\n- {teams[i]['char4']}\n- {teams[i]['backup']}")
+                                    value=
+                                        f"- {teams[i]['char1']}\n"
+                                        f"- {teams[i]['char2']}\n"
+                                        f"- {teams[i]['char3']}\n"
+                                        f"- {teams[i]['char4']}\n"
+                                        f"- {teams[i]['backup']}")
                     embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                     embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
 
@@ -123,47 +106,21 @@ async def on_message(message):
 
         if len(parts) == 2 and parts[0].lower() == "rank":
             category = parts[1].lower()
-            searchqueries = {
-                "hp": {
-                    "rank": "HP_rank",
-                    "value": "HP"
-                },
-                "atk": {
-                    "rank": "ATK_rank",
-                    "value": "ATK"
-                },
-                "def": {
-                    "rank": "DEF_rank",
-                    "value": "DEF"
-                },
-                "3x": {
-                    "rank": "3x Cell CP_rank",
-                    "value": "3x Cell CP"
-                },
-                "4x": {
-                    "rank": "4x Cell CP_rank",
-                    "value": "4x Cell CP"
-                },
-                "base": {
-                    "rank": "Base CP_rank",
-                    "value": "Base CP"
-                }
-            }
 
-            if category not in searchqueries:
+            if category not in SEARCH_QUERIES:
                 await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
                 return
 
             basestr = ""
 
-            rank_key = searchqueries[category]["rank"]
+            rank_key = SEARCH_QUERIES[category]["rank"]
             characters.sort(key=lambda c: int(c[rank_key]))
 
             for i in range(0, 10):
                 basestr += f"""{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}] 
-                            - {characters[i][searchqueries[category]['value']]}\n"""
+                            - {characters[i][SEARCH_QUERIES[category]['value']]}\n"""
 
-            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]['value']}", 
+            embed = discord.Embed(title=f"Top 10 Chars ranked by {SEARCH_QUERIES[category]['value']}", 
                                   description=basestr, 
                                   color=discord.Color.light_gray())
             
@@ -185,9 +142,9 @@ async def on_message(message):
                     embed = discord.Embed(
                         title=char['Character'],
                         description=char['Title'],
-                        color=colour[char['Attribute']]
+                        color=COLOUR[char['Attribute']]
                     )
-                    embed.set_thumbnail(url = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png")
+                    embed.set_thumbnail(url = ERROR_URL)
                     embed.add_field(name="Attribute", value=char['Attribute'])
                     embed.add_field(name="Faction", value=char['Faction'])
                     embed.add_field(name="Tactic", value=char['Tactic'])
