@@ -121,7 +121,7 @@ async def on_message(message):
 
 
         if len(parts) == 2 and parts[0].lower() == "rank":
-            category = parts[1]
+            category = parts[1].lower()
             searchqueries = {
                 "hp": {
                     "rank": "HP_rank",
@@ -149,14 +149,18 @@ async def on_message(message):
                 }
             }
 
-            if category.lower() not in searchqueries:
+            if category not in searchqueries:
                 await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
                 return
 
             basestr = ""
+
+            rank_key = searchqueries[category]["rank"]
+            characters.sort(key=lambda c: int(c[rank_key]))
+
             for i in range(0, 10):
                 basestr += f"""{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}] 
-                            - {characters[i][searchqueries[category]['rank']]}\n"""
+                            - {characters[i][searchqueries[category]['value']]}\n"""
 
             embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]['value']}", 
                                   description=basestr, 
