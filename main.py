@@ -64,73 +64,76 @@ async def on_message(message):
     if message.content.startswith('!'):
         parts = message.content[1:].split(maxsplit=1)
         
-        if len(parts) == 1 and parts[0].lower() == "credits":
-            await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
-            return
-
-        if len(parts) == 1 and parts[0].lower() == "sheet":
-            await message.channel.send(f"Here's my [sheet]({SHEET_URL})")
-            return
-        
-        if len(parts) == 1 and parts[0].lower() == "youtube":
-            await message.channel.send(f"Here's my [Youtube channel]({YOUTUBE_URL})")
-            return
-        
-        if len(parts) == 2 and parts[0].lower() == "team":
-            category = parts[1].lower()
-            if category not in FACTION_DISPLAY:
-                await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
-                return
-            display_name = FACTION_DISPLAY[category]
-
-            embed = discord.Embed(
-                title = f"{display_name} Teams", 
-                description=f"Current meta teams for {display_name} faction", 
-                color=discord.Color.random())
-            
-            for i in range(len(teams)):
-                if(teams[i]['faction'].lower() == category):
-                    embed.add_field(name=teams[i]['title'], 
-                                    value=
-                                        f"- {teams[i]['char1']}\n"
-                                        f"- {teams[i]['char2']}\n"
-                                        f"- {teams[i]['char3']}\n"
-                                        f"- {teams[i]['char4']}\n"
-                                        f"- {teams[i]['backup']}")
-                    embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
-                    embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-
-            await message.channel.send(embed=embed)
-            return
-
-
-        if len(parts) == 2 and parts[0].lower() == "rank":
-            category = parts[1].lower()
-
-            if category not in SEARCH_QUERIES:
-                await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
+        if len(parts) == 1:
+            if parts[0].lower() == "credits":
+                await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
                 return
 
-            basestr = ""
-
-            rank_key = SEARCH_QUERIES[category]["rank"]
-            characters.sort(key=lambda c: int(c[rank_key]))
-
-            for i in range(0, 10):
-                basestr += f"""{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}] 
-                            - {characters[i][SEARCH_QUERIES[category]['value']]}\n"""
-
-            embed = discord.Embed(title=f"Top 10 Chars ranked by {SEARCH_QUERIES[category]['value']}", 
-                                  description=basestr, 
-                                  color=discord.Color.light_gray())
+            if parts[0].lower() == "sheet":
+                await message.channel.send(f"Here's my [sheet]({SHEET_URL})")
+                return
             
-            embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
-                                  "Base CP is extrapolated from Strategic Arena")
+            if parts[0].lower() == "youtube":
+                await message.channel.send(f"Here's my [Youtube channel]({YOUTUBE_URL})")
+                return
+        
+        elif len(parts) == 2:
+            if parts[0].lower() == "team":
+                category = parts[1].lower()
+                if category not in FACTION_DISPLAY:
+                    await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
+                    return
+                display_name = FACTION_DISPLAY[category]
 
-            await message.channel.send(embed=embed)
-            return
+                embed = discord.Embed(
+                    title = f"{display_name} Teams", 
+                    description=f"Current meta teams for {display_name} faction", 
+                    color=discord.Color.random())
+                
+                for i in range(len(teams)):
+                    if(teams[i]['faction'].lower() == category):
+                        embed.add_field(name=teams[i]['title'], 
+                                        value=
+                                            f"- {teams[i]['char1']}\n"
+                                            f"- {teams[i]['char2']}\n"
+                                            f"- {teams[i]['char3']}\n"
+                                            f"- {teams[i]['char4']}\n"
+                                            f"- {teams[i]['backup']}")
+                        embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
+                        embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
 
-        if len(parts) == 2:
+                await message.channel.send(embed=embed)
+                return
+
+
+            if parts[0].lower() == "rank":
+                category = parts[1].lower()
+
+                if category not in SEARCH_QUERIES:
+                    await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
+                    return
+
+                basestr = ""
+
+                rank_key = SEARCH_QUERIES[category]["rank"]
+                characters.sort(key=lambda c: int(c[rank_key]))
+
+                for i in range(0, 10):
+                    basestr += (
+                        f"{i + 1}. {characters[i]['Character']} [{characters[i]['Title']}]"
+                        f" - {characters[i][SEARCH_QUERIES[category]['value']]}\n"
+                        )
+
+                embed = discord.Embed(title=f"Top 10 Chars ranked by {SEARCH_QUERIES[category]['value']}", 
+                                    description=basestr, 
+                                    color=discord.Color.light_gray())
+                
+                embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
+                                    "Base CP is extrapolated from Strategic Arena")
+
+                await message.channel.send(embed=embed)
+                return
+
             name = parts[0].lower()
             attribute = parts[1].upper()
 
@@ -157,12 +160,12 @@ async def on_message(message):
                     embed.add_field(name=f"Release Date", value=char['Release Date'])
                     embed.add_field(name="Obtained", value=char['Obtained'])
                     embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
-                                          "Base CP is extrapolated from Strategic Arena")
+                                        "Base CP is extrapolated from Strategic Arena")
 
                     await message.channel.send(embed=embed)
             else:
-                await message.channel.send("Character not found! Make sure you typed correctly"
-                                           "or try '!command' for a guide.")
+                await message.channel.send("Character not found! Make sure you typed correctly "
+                                        "or try '!command' for a guide.")
         
         else:
             await message.channel.send("Invalid command! Try '!command' for a guide.") 
