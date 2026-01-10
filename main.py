@@ -35,6 +35,7 @@ with open('characters.csv', 'r') as f:
         row['ATK'] = int(row['ATK'])
         row['DEF'] = int(row['DEF'])
         row['HP'] = int(row['HP'])
+        row['Nicknames'] = row.get('Nicknames', '').strip()
         characters.append(row)
 
 teams = []
@@ -72,13 +73,13 @@ async def on_message(message):
         parts = message.content[1:].split(maxsplit=1)
 
         if len(parts) == 1 and parts[0].lower() == "command":
-            await message.channel.send("""Commands:\n
-                                       ![character name] [attribute]\n
-                                       Example: !arima wit\n\n
-                                       !team [faction]\n
-                                       Example: !team noorg\n\n
-                                       !rank [attribute (hp, def, atk, 3x, 4x, base)]\n
-                                       Example: !rank hp""")
+            await message.channel.send("Commands:\n"
+                                       "![character name] [attribute]\n"
+                                       "Example: !arima wit\n\n"
+                                       "!team [faction]\n"
+                                       "Example: !team noorg\n\n"
+                                       "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
+                                       "Example: !rank hp")
             return
         
         if len(parts) == 1 and parts[0].lower() == "credits":
@@ -137,8 +138,8 @@ async def on_message(message):
                                   description=basestr, 
                                   color=discord.Color.light_gray())
             
-            embed.set_footer(text=""""All Cell CP include LR cells (if any) without any upgrades\n
-                                      Base CP is extrapolated from Strategic Arena""")
+            embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
+                                  "Base CP is extrapolated from Strategic Arena")
 
             await message.channel.send(embed=embed)
             return
@@ -179,13 +180,13 @@ async def on_message(message):
                     embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
                     embed.add_field(name=f"Release Date", value=char['Release Date'])
                     embed.add_field(name="Obtained", value=char['Obtained'])
-                    embed.set_footer(text="""All Cell CP include LR cells (if any) without any upgrades\n
-                                             Base CP is extrapolated from Strategic Arena""")
+                    embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
+                                          "Base CP is extrapolated from Strategic Arena")
 
                     await message.channel.send(embed=embed, file=file)
             else:
-                await message.channel.send("""Character not found! Make sure you typed correctly
-                                              or try '!command' for a guide.""")
+                await message.channel.send("Character not found! Make sure you typed correctly"
+                                           "or try '!command' for a guide.")
         
         else:
             await message.channel.send("Invalid command! Try '!command' for a guide.") 
