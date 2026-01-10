@@ -21,6 +21,18 @@ with open('characters.csv', 'r') as f:
         row['Nicknames'] = str(row.get('Nicknames', ''))
         characters.append(row)
 
+char_index = {}
+for char in characters:
+    key = (char['Character'].lower(), char['Attribute'])
+    char_index[key] = char
+
+    if char['Nicknames']:
+        nicknames = char['Nicknames'].lower()
+        for nickname in nicknames:
+            if nickname: 
+                key = (nickname, char['Attribute'])
+                char_index[key] = char
+
 teams = []
 with open('teams.csv', 'r') as f:
     reader = csv.DictReader(f)
@@ -49,22 +61,26 @@ async def on_message(message):
     if message.author == bot.user:
         return
     
-    if bot.user.mentioned_in(message) or message.content.lower() == "!command":
-            await message.channel.send(
-                "Commands:\n\n"
-                "![character name] [attribute]\n"
-                "Example: !arima wit\n\n"
-                "!team [faction]\n"
-                "Example: !team noorg\n\n"
-                "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
-                "Example: !rank hp"
-                )
-            return
+    if bot.user.mentioned_in(message):
+        if message.author.id == 1164259640452857906:
+            await message.channel.send("hi matti")
+        await message.channel.send("Try '!command' for help!")
         
     if message.content.startswith('!'):
-        parts = message.content[1:].split(maxsplit=1)
+        parts = message.content[1:].split(maxsplit=1).lower()
         
         if len(parts) == 1:
+            if parts[0] == "command":
+                await message.channel.send(
+                    "Commands:\n\n"
+                    "![character name] [attribute]\n"
+                    "Example: !arima wit\n\n"
+                    "!team [faction]\n"
+                    "Example: !team noorg\n\n"
+                    "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
+                    "Example: !rank hp"
+                    )
+                return
             if parts[0].lower() == "credits":
                 await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
                 return
@@ -137,32 +153,31 @@ async def on_message(message):
             name = parts[0].lower()
             attribute = parts[1].upper()
 
-            matching = [char for char in characters 
-                        if (name in char['Character'].lower() or name in char['Nicknames'].lower())
-                        and char['Attribute'] == attribute]
-            if matching:
-                for char in matching:
-                    embed = discord.Embed(
-                        title=char['Character'],
-                        description=char['Title'],
-                        color=COLOUR[char['Attribute']]
-                    )
-                    embed.set_thumbnail(url = ERROR_URL)
-                    embed.add_field(name="Attribute", value=char['Attribute'])
-                    embed.add_field(name="Faction", value=char['Faction'])
-                    embed.add_field(name="Tactic", value=char['Tactic'])
-                    embed.add_field(name=f"Base CP ", value=f"{char['Base CP']} (#{char['Base CP_rank']})")
-                    embed.add_field(name=f"3x Cell CP ", value=f"{char['3x Cell CP']} (#{char['3x Cell CP_rank']})")
-                    embed.add_field(name=f"4x Cell CP ", value=f"{char['4x Cell CP']} (#{char['4x Cell CP_rank']})")
-                    embed.add_field(name=f"Base ATK ", value=f"{char['ATK']} (#{char['ATK_rank']})")
-                    embed.add_field(name=f"Base DEF ", value=f"{char['DEF']} (#{char['DEF_rank']})")
-                    embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
-                    embed.add_field(name=f"Release Date", value=char['Release Date'])
-                    embed.add_field(name="Obtained", value=char['Obtained'])
-                    embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
-                                        "Base CP is extrapolated from Strategic Arena")
+            key = (name.lower(), attribute)
+            char = char_index.get(key)
+            
+            if char:
+                embed = discord.Embed(
+                    title=char['Character'],
+                    description=char['Title'],
+                    color=COLOUR[char['Attribute']]
+                )
+                embed.set_thumbnail(url = ERROR_URL)
+                embed.add_field(name="Attribute", value=char['Attribute'])
+                embed.add_field(name="Faction", value=char['Faction'])
+                embed.add_field(name="Tactic", value=char['Tactic'])
+                embed.add_field(name=f"Base CP ", value=f"{char['Base CP']} (#{char['Base CP_rank']})")
+                embed.add_field(name=f"3x Cell CP ", value=f"{char['3x Cell CP']} (#{char['3x Cell CP_rank']})")
+                embed.add_field(name=f"4x Cell CP ", value=f"{char['4x Cell CP']} (#{char['4x Cell CP_rank']})")
+                embed.add_field(name=f"Base ATK ", value=f"{char['ATK']} (#{char['ATK_rank']})")
+                embed.add_field(name=f"Base DEF ", value=f"{char['DEF']} (#{char['DEF_rank']})")
+                embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
+                embed.add_field(name=f"Release Date", value=char['Release Date'])
+                embed.add_field(name="Obtained", value=char['Obtained'])
+                embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
+                                    "Base CP is extrapolated from Strategic Arena")
+                await message.channel.send(embed=embed)
 
-                    await message.channel.send(embed=embed)
             else:
                 await message.channel.send("Character not found! Make sure you typed correctly "
                                         "or try '!command' for a guide.")
