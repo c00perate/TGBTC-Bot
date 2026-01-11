@@ -18,15 +18,15 @@ COLOUR = {
 SEARCH_QUERIES = {
     "hp": {
         "rank": "HP_rank",
-        "value": "HP"
+        "value": "Base HP"
     },
     "atk": {
         "rank": "ATK_rank",
-        "value": "ATK"
+        "value": "Base ATK"
     },
     "def": {
         "rank": "DEF_rank",
-        "value": "DEF"
+        "value": "Base DEF"
     },
     "3x": {
         "rank": "3x Cell CP_rank",

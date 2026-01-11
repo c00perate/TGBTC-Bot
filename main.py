@@ -72,7 +72,7 @@ async def on_message(message):
         if message.author.id == 1164259640452857906:
             await message.channel.send("hi matti")
             return
-        await message.channel.send("Try '!command' for help!")
+        await message.channel.send("Try `!command` for help!")
         return
         
     if message.content.startswith('!'):
@@ -82,16 +82,17 @@ async def on_message(message):
             if parts[0].lower() == "command":
                 await message.channel.send(
                     "Commands:\n\n"
-                    "![character name] [attribute]\n"
-                    "Example: !arima wit\n\n"
-                    "!team [faction]\n"
-                    "Example: !team noorg\n\n"
-                    "!rank [attribute (hp, def, atk, 3x, 4x, base)]\n"
-                    "Example: !rank hp"
+                    "`![character name] [attribute]`\n"
+                    "Example: `!arima wit`\n\n"
+                    "`!team [faction]`\n"
+                    "Example: `!team noorg`\n\n"
+                    "`!rank [attribute (hp, def, atk, 3x, 4x, base)]`\n"
+                    "Example: `!rank hp`"
                     )
                 return
             if parts[0].lower() == "credits":
-                await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!")
+                await message.channel.send("Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!\n"
+                                           "Special thanks to Ariku for providing the character thumbnails.")
                 return
 
             if parts[0].lower() == "sheet":
@@ -103,7 +104,7 @@ async def on_message(message):
                 return
             
             else:
-                await message.channel.send("Invalid command! Try '!command' for a guide.") 
+                await message.channel.send("Invalid command! Try `!command` for a guide.") 
                 return
 
         
@@ -111,7 +112,7 @@ async def on_message(message):
             if parts[0].lower() == "team":
                 category = parts[1].lower()
                 if category not in FACTION_DISPLAY:
-                    await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
+                    await message.channel.send(f"Invalid parameter! use `!team` with a valid query or try `!command` for more help!")
                     return
                 display_name = FACTION_DISPLAY[category]
 
@@ -141,7 +142,7 @@ async def on_message(message):
                 category = parts[1].lower()
 
                 if category not in SEARCH_QUERIES:
-                    await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
+                    await message.channel.send(f"Invalid parameter! use `!rank` with a valid query or try `!command` for more help!")
                     return
 
                 basestr = ""
@@ -155,12 +156,12 @@ async def on_message(message):
                         f" - {characters[i][SEARCH_QUERIES[category]['value']]}\n"
                         )
 
-                embed = discord.Embed(title=f"Top 10 characters ranked by {SEARCH_QUERIES[category]['value']}", 
+                embed = discord.Embed(title=f"Top 10 Characters Ranked by {SEARCH_QUERIES[category]['value']}", 
                                     description=basestr, 
                                     color=discord.Color.light_gray())
                 
-                embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
-                                    "Base CP is extrapolated from Strategic Arena")
+                embed.set_footer(text = "All Cell CP include LR cells (if any) without any upgrades\n"
+                                        "Base CP is extrapolated from Strategic Arena")
 
                 await message.channel.send(embed=embed)
                 return
@@ -172,8 +173,7 @@ async def on_message(message):
             matches = char_index.get(key, [])   
 
             if not matches: 
-                await message.channel.send("Character not found! Make sure you typed correctly "
-                                        "or try '!command' for a guide.")
+                await message.channel.send("Character not found! Make sure you typed correctly or try `!command` for more help!")
             else:
                 for char in matches:
                     character_slug = char['Character'].lower().replace(' ', '')
@@ -202,6 +202,6 @@ async def on_message(message):
 
         
         else:
-            await message.channel.send("Invalid command! Try '!command' for a guide.") 
+            await message.channel.send("Invalid command! Try `!command` for more help!") 
    
 bot.run(TOKEN)
