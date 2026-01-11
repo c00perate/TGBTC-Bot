@@ -131,7 +131,7 @@ async def on_message(message):
                                             f"- {teams[i]['backup']}")
                         embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                         embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-
+                        embed.set_thumbnail(url ="https://raw.githubusercontent.com/c00perate/btc-images/main/{display_name}.png")
                 await message.channel.send(embed=embed)
                 return
 
@@ -154,7 +154,7 @@ async def on_message(message):
                         f" - {characters[i][SEARCH_QUERIES[category]['value']]}\n"
                         )
 
-                embed = discord.Embed(title=f"Top 10 Chars ranked by {SEARCH_QUERIES[category]['value']}", 
+                embed = discord.Embed(title=f"Top 10 characters ranked by {SEARCH_QUERIES[category]['value']}", 
                                     description=basestr, 
                                     color=discord.Color.light_gray())
                 
@@ -175,16 +175,15 @@ async def on_message(message):
                                         "or try '!command' for a guide.")
             else:
                 for char in matches:
-                    character_slug = char['Character'].lower().replace(' ', '-')
-                    title_slug = char['Attribute'].lower().replace(' ', '-')
+                    character_slug = char['Character'].lower().replace(' ', '')
+                    title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
                     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/{character_slug}-{title_slug}.png"
                     embed = discord.Embed(
                         title=char['Character'],
                         description=char['Title'],
                         color=COLOUR[char['Attribute']]
                     )
-                    embed.set_thumbnail(url = ERROR_URL)
-                #    embed.set_thumbnail(url = thumbnail_url)
+                    embed.set_thumbnail(url = thumbnail_url)
                     embed.add_field(name="Attribute", value=char['Attribute'])
                     embed.add_field(name="Faction", value=char['Faction'])
                     embed.add_field(name="Tactic", value=char['Tactic'])
