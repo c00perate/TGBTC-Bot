@@ -86,8 +86,8 @@ async def on_message(message):
                     "Example: `!arima wit`\n\n"
                     "`!team [faction]`\n"
                     "Example: `!team noorg`\n\n"
-                    "`!rank [attribute (hp, def, atk, 3x, 4x, base)]`\n"
-                    "Example: `!rank hp`"
+                    "`!rank [base/3x/4x/atk/def/hp]`\n"
+                    "Example: `!rank 3x`"
                     )
                 return
             if parts[0].lower() == "credits":
@@ -118,7 +118,7 @@ async def on_message(message):
 
                 embed = discord.Embed(
                     title = f"{display_name} Teams", 
-                    description=f"Current meta teams for {display_name} faction", 
+                    description=f"Current meta teams for {display_name}", 
                     color=FACTION_DISPLAY[category]['colour']
                     )
                 display_name.lower()
