@@ -43,10 +43,22 @@ SEARCH_QUERIES = {
 }
 
 FACTION_DISPLAY = {
-    "anteiku":"Anteiku",
-    "aogiri":"Aogiri",
-    "ccg":"CCG",
-    "noorg":"NoOrg"
+    "anteiku": {
+        "name": "Anteiku",
+        "colour": discord.Color.blue()
+    },
+    "aogiri": {
+        "name": "Aogiri",
+        "colour": discord.Color.red()
+    },
+    "ccg": {
+        "name": "CCG",
+        "colour": discord.Color.green()
+    },
+    "noorg":{
+        "name": "No Org",
+        "colour": discord.Color.light_grey()
+    }
 }
 
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1xTd6d87NKzWBIdyTXbvqlRKioALJq9LgdFnvcutXztY/edit?usp=sharing"

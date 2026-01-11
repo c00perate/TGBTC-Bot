@@ -114,12 +114,13 @@ async def on_message(message):
                 if category not in FACTION_DISPLAY:
                     await message.channel.send(f"Invalid parameter! use `!team` with a valid query or try `!command` for more help!")
                     return
-                display_name = FACTION_DISPLAY[category]
+                display_name = FACTION_DISPLAY[category]['name']
 
                 embed = discord.Embed(
                     title = f"{display_name} Teams", 
                     description=f"Current meta teams for {display_name} faction", 
-                    color=discord.Color.random())
+                    color=FACTION_DISPLAY[category]['colour']
+                    )
                 display_name.lower()
                 
                 for i in range(len(teams)):
@@ -133,7 +134,7 @@ async def on_message(message):
                                             f"- {teams[i]['backup']}")
                         embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                         embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-                        embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/main/{display_name.lower()}.png")
+                        embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/main/{category.lower()}.png")
                 await message.channel.send(embed=embed)
                 return
 
