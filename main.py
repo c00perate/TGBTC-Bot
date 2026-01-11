@@ -119,6 +119,7 @@ async def on_message(message):
                     title = f"{display_name} Teams", 
                     description=f"Current meta teams for {display_name} faction", 
                     color=discord.Color.random())
+                display_name.lower()
                 
                 for i in range(len(teams)):
                     if(teams[i]['faction'].lower() == category):
@@ -131,7 +132,7 @@ async def on_message(message):
                                             f"- {teams[i]['backup']}")
                         embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                         embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-                        embed.set_thumbnail(url ="https://raw.githubusercontent.com/c00perate/btc-images/main/{display_name}.png")
+                        embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/main/{display_name.lower()}.png")
                 await message.channel.send(embed=embed)
                 return
 
