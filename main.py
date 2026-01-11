@@ -175,12 +175,16 @@ async def on_message(message):
                                         "or try '!command' for a guide.")
             else:
                 for char in matches:
+                    character_slug = char['Character'].lower().replace(' ', '-')
+                    title_slug = char['Attribute'].lower().replace(' ', '-')
+                    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/{character_slug}-{title_slug}.png"
                     embed = discord.Embed(
                         title=char['Character'],
                         description=char['Title'],
                         color=COLOUR[char['Attribute']]
                     )
                     embed.set_thumbnail(url = ERROR_URL)
+                #    embed.set_thumbnail(url = thumbnail_url)
                     embed.add_field(name="Attribute", value=char['Attribute'])
                     embed.add_field(name="Faction", value=char['Faction'])
                     embed.add_field(name="Tactic", value=char['Tactic'])
