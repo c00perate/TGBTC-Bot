@@ -134,7 +134,7 @@ async def on_message(message):
                                             f"- {teams[i]['backup']}")
                         embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
                         embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-                        embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/main/{category.lower()}.png")
+                        embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/8dda16c/{category.lower()}.png")
                 await message.channel.send(embed=embed)
                 return
 
