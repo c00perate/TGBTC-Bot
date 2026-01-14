@@ -151,7 +151,7 @@ async def on_message(message):
 
                         embed.add_field(name="Overall Team", value=team_members)
                         embed.add_field(name="Ultimate", value=f"{team['ult']}")
-                        embed.add_field(name="Overall 3x Cell CP", value=overall_cp3, inline=False)
+                        embed.add_field(name="Overall 3x Cell CP", value=overall_cp3)
                         embed.add_field(name="Overall 4x Cell CP", value=overall_cp4)
                         embed.add_field(name="Description", value=f"{team['description']}",inline=False)
                         embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/8dda16c/{category.lower()}.png")
