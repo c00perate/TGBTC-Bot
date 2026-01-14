@@ -1,5 +1,5 @@
-faction,title,char1,char2,char3,char4,backup,ult,description
-noorg,Overall Team,Uta [The Past],Rize Kamishiro [Christmas],Yoshimura [Cleaner],Hideyoshi Nagachika [Best Friend],Uta [New Year],Might of Awaken,Ooga booga
-anteiku,Overall Team,Touka Kirishima [New Year],Touka Kirishima [Flamewing],Ken Kaneki [1st Anniversary],Hideyoshi Nagachika [Best Friend],Touka Kirishima [1st Anniversary],Might of Awaken,Standard Anteiku; run Charm on BTouka
-ccg,Overall Team,Kishou Arima [Invincible Investigator],Hideyoshi Nagachika [Best Friend],Juuzou Suzuya [Halloween],Kureo Mado [Fueguchi 2],Kishou Arima [Halloween],Might of Awaken,Burst CCG
-aogiri,Overall Team,Noro [Overpower],Ayato Kirishima [Easter],Hideyoshi Nagachika [Best Friend],Naki [Prisoner],Ken Kaneki [Combat Suit],Might of Awaken,When Aogiri support???
+faction,char1,title1,attr1,char2,title2,attr2,char3,title3,attr3,char4,title4,attr4,char5,title5,attr5,ult,description
+noorg,Uta,The Past,PSY,Rize Kamishiro,Christmas,STR,Yoshimura,Cleaner,PSY,Hideyoshi Nagachika,Best Friend,PSY,Uta,New Year,STR,Might of Awaken,Ooga booga
+anteiku,Touka Kirishima,New Year,SPD,Touka Kirishima,Flamewing,SKL,Ken Kaneki,1st Anniversary,SKL,Hideyoshi Nagachika,Best Friend,PSY,Touka Kirishima,1st Anniversary,STR,Might of Awaken,Standard Anteiku; run Charm on BTouka
+ccg,Kishou Arima,Invincible Investigator,WIT,Hideyoshi Nagachika,Best Friend,PSY,Juuzou Suzuya,Halloween,STR,Iwao Kuroiwa,Arata Proto (Rampage),SKL,Kureo Mado,Fueguchi 2,SPD,Might of Awaken,Best CCG and double support is ass if you have Iwao/Garima cell
+aogiri,Noro,Overpower,WIT,Ayato Kirishima,Easter,SKL,Hideyoshi Nagachika,Best Friend,PSY,Naki,Prisoner,SPD,Ken Kaneki,Combat Outfit,STR,Might of Awaken,When Aogiri support??? Need a better mken fr

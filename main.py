@@ -46,6 +46,16 @@ with open('teams.csv', 'r') as f:
     for row in reader:
         teams.append(row)
 
+def find_char(char_name, char_attr, char_title):
+    key = (char_name.lower(), char_attr.upper())
+    matches = char_index.get(key, [])
+
+    for match in matches:
+        if match['Title'].lower() == char_title.lower():
+            return match
+    
+    return None 
+
 def calculate_rankings():
     stats = ['Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP']
 
@@ -122,19 +132,30 @@ async def on_message(message):
                     color=FACTION_DISPLAY[category]['colour']
                     )
                 display_name.lower()
-                
-                for i in range(len(teams)):
-                    if(teams[i]['faction'].lower() == category):
-                        embed.add_field(name=teams[i]['title'], 
-                                        value=
-                                            f"- {teams[i]['char1']}\n"
-                                            f"- {teams[i]['char2']}\n"
-                                            f"- {teams[i]['char3']}\n"
-                                            f"- {teams[i]['char4']}\n"
-                                            f"- {teams[i]['backup']}")
-                        embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
-                        embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
+
+                for team in teams:
+                    if team['faction'].lower() == category:
+                        team_members = ""
+                        overall_cp3 = 0
+                        overall_cp4 = 0
+
+                        for i in range(1, 6):
+                            char_name = team.get(f"char{i}")
+                            char_attr = team.get(f"attr{i}")
+                            char_title = team.get(f"title{i}")
+
+                            char = find_char(char_name, char_attr, char_title)
+                            team_members += f"- {char['Character']} [{char['Title']}]\n"
+                            overall_cp3 += char['3x Cell CP']
+                            overall_cp4 += char['4x Cell CP']
+
+                        embed.add_field(name="Overall Team", value=team_members)
+                        embed.add_field(name="Ultimate", value=f"{team['ult']}")
+                        embed.add_field(name="Overall 3x Cell CP", value=overall_cp3, inline=False)
+                        embed.add_field(name="Overall 4x Cell CP", value=overall_cp4)
+                        embed.add_field(name="Description", value=f"{team['description']}",inline=False)
                         embed.set_thumbnail(url =f"https://raw.githubusercontent.com/c00perate/btc-images/8dda16c/{category.lower()}.png")
+
                 await message.channel.send(embed=embed)
                 return
 
