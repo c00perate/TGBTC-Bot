@@ -16,6 +16,7 @@ class CharacterDatabase:
     def __init__(self, csv_path: str = 'characters.csv'):
         self.characters: List[Dict] = []
         self.char_index: Dict[tuple, List[Dict]] = defaultdict(list)
+        self.rankings: Dict[str, List[Dict]] = {}
         self._load_characters(csv_path)
         self._build_index()
         self._calculate_rankings()
@@ -47,8 +48,9 @@ class CharacterDatabase:
             # Index individual words only if multi-word name
             name_parts = character_name.split()
             if len(name_parts) > 1:
-                self.char_index[(name_parts, attribute)].append(char)
-            
+                for part in name_parts:
+                    self.char_index[(part, attribute)].append(char)  
+
             # Index nicknames
             if char['Nicknames']:
                 for nickname in char['Nicknames'].lower().split(';'):
@@ -62,7 +64,7 @@ class CharacterDatabase:
         
         for stat in stats:
             sorted_chars = sorted(self.characters, key=lambda x: x[stat], reverse=True)
-            self.rankings[stat] = sorted_chars #new
+            self.rankings[stat] = sorted_chars
             for rank, char in enumerate(sorted_chars, start=1):
                 char[f'{stat}_rank'] = rank
     
@@ -90,11 +92,6 @@ class CharacterDatabase:
     
     def get_top_characters(self, stat: str, limit: int = 10) -> List[Dict]:
         """Get top N characters by stat"""
-        #rank_key = f'{stat}_rank'
-        #sorted_chars = sorted(self.characters, key=lambda c: c[rank_key]) 
-        #return sorted_chars[:limit]
-    
-
         return self.rankings.get(stat, [])[:limit]
 
 
@@ -196,9 +193,8 @@ def create_team_embed(faction: str, team: Dict, char_db: CharacterDatabase) -> d
         char_attr = team.get(f"attr{i}")
         char_title = team.get(f"title{i}")
         
-        #not needed if char name is guaranteed to exist right?
-        #if not char_name:
-        #    continue
+        if not char_name:
+            continue
         
         char = char_db.find_character(char_name, char_attr, char_title)
         if char:
@@ -322,7 +318,7 @@ async def on_message(message):
         return
     
     # Handle mentions
-    if bot.user.mentioned_in(message) and not (message.mention_everyone or message.mention_here):
+    if bot.user.mentioned_in(message) and not message.mention_everyone:
         if message.author.id == 1164259640452857906:
             await message.channel.send("hi matti")
         else:
