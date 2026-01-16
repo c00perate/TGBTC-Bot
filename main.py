@@ -24,6 +24,7 @@ class CharacterDatabase:
         """Load characters from CSV with type conversion"""
         int_fields = ['Base CP', '3x Cell CP', '4x Cell CP', 'Base ATK', 'Base DEF', 'Base HP']
         
+        #encoding to account for funny characters
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for row in reader:
@@ -46,9 +47,7 @@ class CharacterDatabase:
             # Index individual words only if multi-word name
             name_parts = character_name.split()
             if len(name_parts) > 1:
-                for part in name_parts:
-                    if len(part) > 2:  # Skip very short words
-                        self.char_index[(part, attribute)].append(char)
+                self.char_index[(name_parts, attribute)].append(char)
             
             # Index nicknames
             if char['Nicknames']:
@@ -63,6 +62,7 @@ class CharacterDatabase:
         
         for stat in stats:
             sorted_chars = sorted(self.characters, key=lambda x: x[stat], reverse=True)
+            self.rankings[stat] = sorted_chars #new
             for rank, char in enumerate(sorted_chars, start=1):
                 char[f'{stat}_rank'] = rank
     
@@ -90,9 +90,12 @@ class CharacterDatabase:
     
     def get_top_characters(self, stat: str, limit: int = 10) -> List[Dict]:
         """Get top N characters by stat"""
-        rank_key = f'{stat}_rank'
-        sorted_chars = sorted(self.characters, key=lambda c: c[rank_key])
-        return sorted_chars[:limit]
+        #rank_key = f'{stat}_rank'
+        #sorted_chars = sorted(self.characters, key=lambda c: c[rank_key]) 
+        #return sorted_chars[:limit]
+    
+
+        return self.rankings.get(stat, [])[:limit]
 
 
 class TeamDatabase:
@@ -193,8 +196,9 @@ def create_team_embed(faction: str, team: Dict, char_db: CharacterDatabase) -> d
         char_attr = team.get(f"attr{i}")
         char_title = team.get(f"title{i}")
         
-        if not char_name:
-            continue
+        #not needed if char name is guaranteed to exist right?
+        #if not char_name:
+        #    continue
         
         char = char_db.find_character(char_name, char_attr, char_title)
         if char:
@@ -228,9 +232,9 @@ async def show_commands(ctx):
     """Show available commands"""
     await ctx.send(
         "Commands:\n\n"
-        "`![character name] [attribute]`\n"
+        "`![character name] [skl/spd/str/psy/wit]`\n"
         "Example: `!arima wit`\n\n"
-        "`!team [faction]`\n"
+        "`!team [anteiku/aogiri/ccg/noorg]`\n"
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
         "Example: `!rank 3x`"
@@ -318,7 +322,7 @@ async def on_message(message):
         return
     
     # Handle mentions
-    if bot.user.mentioned_in(message) and not message.mention_everyone:
+    if bot.user.mentioned_in(message) and not (message.mention_everyone or message.mention_here):
         if message.author.id == 1164259640452857906:
             await message.channel.send("hi matti")
         else:
