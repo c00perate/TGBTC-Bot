@@ -1,7 +1,6 @@
 # TG:BTC Bot
 
-Displays character stats when prompted with `![character] [attribute]`  
-Example: `!arima wit`
+Try `!command` to view full command list
 
 ## Setup
 1. Install dependencies: `pip install -r requirements.txt`
