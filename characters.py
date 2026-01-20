@@ -32,9 +32,11 @@ class CharacterDatabase:
             
             key = (character_name, attribute)
             self.char_index[key].append(char)
-            self.char_name[character_name].append(char)
-            
+
             name_parts = character_name.split()
+            if len(name_parts) == 1:
+                self.char_name[character_name].append(char)
+            
             if len(name_parts) > 1:
                 for part in name_parts:
                     self.char_index[(part, attribute)].append(char)
