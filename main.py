@@ -50,8 +50,8 @@ async def show_commands(ctx):
     await ctx.send(
         "Commands:\n\n"
         "`![character name] [optional: skl/spd/str/psy/wit]`\n"
-        "Example: `!arima wit`\n\n"
-        "Example: `!arima` (brings up the entire list of matching characters)"
+        "Example: `!arima wit`\n"
+        "Example: `!arima` (brings up the entire list of matching characters)\n\n"
         "`!team [anteiku/aogiri/ccg/noorg]`\n"
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
