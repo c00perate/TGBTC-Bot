@@ -154,9 +154,15 @@ async def handle_character_search(ctx):
                            "or try `!command` for help!")
             return
         
-        for char in matches:
-            embed = create_character_embed(char)
+        embed = create_character_embed(matches[0])
+
+        if len(matches) == 1:
             await ctx.send(embed=embed)
+
+        else:
+            view = CharacterPaginator(matches)
+            message = await ctx.send(embed=embed, view=view)
+            view.message = message
 
     else:
         await ctx.send("Invalid command! Try `!command` for help!")

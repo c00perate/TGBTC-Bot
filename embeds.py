@@ -1,6 +1,5 @@
 import discord
 from typing import Dict
-from characters import CharacterDatabase
 from config import *
 
 
@@ -38,8 +37,7 @@ def create_character_embed(char: Dict) -> discord.Embed:
     
     return embed
 
-
-def create_team_embed(faction: str, team: Dict, char_db: CharacterDatabase) -> discord.Embed:
+def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     display_name = FACTION_DISPLAY[faction]['name']
     
     embed = discord.Embed(
