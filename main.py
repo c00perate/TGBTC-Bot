@@ -49,8 +49,9 @@ async def on_message(message):
 async def show_commands(ctx):
     await ctx.send(
         "Commands:\n\n"
-        "`![character name] [skl/spd/str/psy/wit]`\n"
+        "`![character name] [optional: skl/spd/str/psy/wit]`\n"
         "Example: `!arima wit`\n\n"
+        "Example: `!arima` (brings up the entire list of matching characters)"
         "`!team [anteiku/aogiri/ccg/noorg]`\n"
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
@@ -129,20 +130,37 @@ async def handle_character_search(ctx):
     
     parts = content[1:].split(maxsplit=1)
     
-    if len(parts) != 2:
+    if len(parts) == 1:
+        name = parts[0]
+        matches = char_db.find_name(name)
+
+        if not matches:
+            await ctx.send("Character not found! Make sure you typed correctly "
+                           "or try `!command` for help!")
+            return
+        elif len(matches) == 1:
+            embed = create_character_embed(matches[0])
+            await ctx.send(embed=embed)
+        else:
+            embed = create_name_embed(matches)
+            await ctx.send(embed=embed)
+
+    elif len(parts) == 2:
+        name, attribute = parts
+        matches = char_db.find_characters(name, attribute)
+        
+        if not matches:
+            await ctx.send("Character not found! Make sure you typed correctly "
+                           "or try `!command` for help!")
+            return
+        
+        for char in matches:
+            embed = create_character_embed(char)
+            await ctx.send(embed=embed)
+
+    else:
         await ctx.send("Invalid command! Try `!command` for help!")
         return
-    
-    name, attribute = parts
-    matches = char_db.find_characters(name, attribute)
-    
-    if not matches:
-        await ctx.send("Character not found! Make sure you typed correctly or try `!command` for help!")
-        return
-    
-    for char in matches:
-        embed = create_character_embed(char)
-        await ctx.send(embed=embed)
 
 
 if __name__ == '__main__':

@@ -93,3 +93,19 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str) -> disc
     )
     
     return embed
+
+def create_name_embed(matches: list) -> discord.Embed:
+    description = '\n'.join(
+        f"{i}. {char['Character']} [{char['Title']}] - {char['Attribute']}"
+        for i, char in enumerate(matches, start=1)
+    )
+
+    embed = discord.Embed(
+        title="List of all Mentioned Characters:",
+        description=description,
+        color=discord.Color.light_gray()
+    )
+
+    embed.set_footer(text="Use ![name] [attribute] to view specific character")
+
+    return embed

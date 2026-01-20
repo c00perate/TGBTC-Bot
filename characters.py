@@ -8,6 +8,7 @@ class CharacterDatabase:
     def __init__(self, csv_path: str = 'characters.csv'):
         self.characters: List[Dict] = []
         self.char_index: Dict[tuple, List[Dict]] = defaultdict(list)
+        self.char_name: Dict[str, List[Dict]] = defaultdict(list)
         self.rankings: Dict[str, List[Dict]] = {}
         self._load_characters(csv_path)
         self._build_index()
@@ -31,17 +32,20 @@ class CharacterDatabase:
             
             key = (character_name, attribute)
             self.char_index[key].append(char)
+            self.char_name[character_name].append(char)
             
             name_parts = character_name.split()
             if len(name_parts) > 1:
                 for part in name_parts:
-                    self.char_index[(part, attribute)].append(char)  
+                    self.char_index[(part, attribute)].append(char)
+                    self.char_name[part].append(char)  
 
             if char['Nicknames']:
                 for nickname in char['Nicknames'].lower().split(';'):
                     nickname = nickname.strip()
                     if nickname:
                         self.char_index[(nickname, attribute)].append(char)
+                        self.char_name[nickname].append(char)
     
     def _calculate_rankings(self):
         stats = ['Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP']
@@ -56,9 +60,6 @@ class CharacterDatabase:
         key = (name.lower(), attribute.upper())
         matches = self.char_index.get(key, [])
         
-        if not matches:
-            return None
-        
         if title:
             title_lower = title.lower()
             for match in matches:
@@ -70,6 +71,9 @@ class CharacterDatabase:
     def find_characters(self, name: str, attribute: str) -> List[Dict]:
         key = (name.lower(), attribute.upper())
         return self.char_index.get(key, [])
+
+    def find_name(self, name: str) -> List[Dict]:
+        return self.char_name.get(name.lower(), [])
     
     def get_top_characters(self, stat: str, limit: int = 10) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
