@@ -161,6 +161,7 @@ async def handle_character_search(ctx):
 
         else:
             view = CharacterPaginator(matches)
+            await ctx.send(f"Found {len(matches)} matches:\n")
             message = await ctx.send(embed=embed, view=view)
             view.message = message
 

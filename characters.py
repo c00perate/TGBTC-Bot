@@ -91,14 +91,10 @@ class CharacterPaginator(View):
         self.current_index = 0
         self.message = None
         
-        # Disable previous button on first page
         self.update_buttons()
     
     def update_buttons(self):
-        """Enable/disable buttons based on current page."""
-        # Disable previous if on first page
         self.children[0].disabled = (self.current_index == 0)
-        # Disable next if on last page
         self.children[1].disabled = (self.current_index == len(self.matches) - 1)
     
     @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
@@ -118,7 +114,6 @@ class CharacterPaginator(View):
             await interaction.response.edit_message(embed=embed, view=self)
     
     async def on_timeout(self):
-        """Disable buttons when view times out."""
         for child in self.children:
             child.disabled = True
         if self.message:

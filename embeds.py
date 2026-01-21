@@ -6,7 +6,7 @@ from config import *
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
     title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
-    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/{character_slug}-{title_slug}.png"
+    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
     
     embed = discord.Embed(
         title=char['Character'],
