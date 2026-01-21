@@ -9,43 +9,36 @@ def create_character_embed(char: Dict) -> discord.Embed:
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
     
     embed = discord.Embed(
-        title=char['Character'],
-        description=char['Title'],
+        title=f"{char['Character']} [{char['Title']}]",
+        description=f"**{char['Attribute']}** | **{char['Faction']}** | **{char['Tactic']}**",
         color=COLOUR[char['Attribute']]
     )
     embed.set_thumbnail(url=thumbnail_url)
     
     fields = [
-        ("Attribute", char['Attribute'], True),
-        ("Faction", char['Faction'], True),
-        ("Tactic", char['Tactic'], True),
-        ("Base CP", f"{char['Base CP']} (#{char['Base CP_rank']})", True),
-        ("3x Cell CP", f"{char['3x Cell CP']} (#{char['3x Cell CP_rank']})", True),
-        ("4x Cell CP", f"{char['4x Cell CP']} (#{char['4x Cell CP_rank']})", True),
-        ("Base ATK", f"{char['Base ATK']} (#{char['Base ATK_rank']})", True),
-        ("Base DEF", f"{char['Base DEF']} (#{char['Base DEF_rank']})", True),
-        ("Base HP", f"{char['Base HP']} (#{char['Base HP_rank']})", True),
-        ("Release Date", char['Release Date'], True),
-        ("Obtained", char['Obtained'], True),
+        ("Combat Power", f"**Base:** {char['Base CP']} (#{char['Base CP_rank']})\n"
+                         f"**3x Cell:** {char['3x Cell CP']} (#{char['3x Cell CP_rank']})\n"
+                         f"**4x Cell:** {char['4x Cell CP']} (#{char['4x Cell CP_rank']})", False),
+
+        ("Base Stats", f"**ATK:** {char['Base ATK']} (#{char['Base ATK_rank']})\n"
+                       f"**DEF:** {char['Base DEF']} (#{char['Base DEF_rank']})\n"
+                       f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
+
+        ("Details", f"**Release Date:** {char['Release Date']}\n"
+                    f"**Obtained:** {char['Obtained']}", False),
     ]
     
     for name, value, inline in fields:
         embed.add_field(name=name, value=value, inline=inline)
     
-    embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n"
-                          "Base CP is extrapolated from Strategic Arena")
+    embed.set_footer(text="All Cell CP include LR cells without upgrades\n"
+                          "Data taken from Strategic Arena")
     
     return embed
 
 def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
+
     display_name = FACTION_DISPLAY[faction]['name']
-    
-    embed = discord.Embed(
-        title=f"{display_name} Teams",
-        description=f"Current meta teams for {display_name}",
-        color=FACTION_DISPLAY[faction]['colour']
-    )
-    
     team_members = []
     overall_cp3 = 0
     overall_cp4 = 0
@@ -64,11 +57,15 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
             overall_cp3 += char['3x Cell CP']
             overall_cp4 += char['4x Cell CP']
     
-    embed.add_field(name="Overall Team", value='\n'.join(team_members), inline=False)
+    embed = discord.Embed(
+        title=f"{display_name} Team",
+        description=f"\n".join(team_members),
+        color=FACTION_DISPLAY[faction]['colour']
+    )
+
     embed.add_field(name="Ultimate", value=team['ult'], inline=False)
-    embed.add_field(name="Overall 3x Cell CP", value=str(overall_cp3), inline=True)
-    embed.add_field(name="Overall 4x Cell CP", value=str(overall_cp4), inline=True)
-    embed.add_field(name="Description", value=team['description'], inline=False)
+    embed.add_field(name="Overall CP", value=f"**3x Cell:** {str(overall_cp3)}\n"
+                                             f"**4x Cell:** {str(overall_cp4)}")
     embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/8dda16c/{faction.lower()}.png")
     
     return embed
@@ -86,8 +83,8 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str) -> disc
     )
     
     embed.set_footer(
-        text="All Cell CP include LR cells (if any) without any upgrades\n"
-             "Base CP is extrapolated from Strategic Arena"
+        text="All Cell CP include LR cells without upgrades\n"
+             "Data taken from Strategic Arena"
     )
     
     return embed
