@@ -1,6 +1,7 @@
 import discord
-from typing import Dict
+from typing import Dict, List
 from config import *
+from discord.ui import View, Button
 
 
 def create_character_embed(char: Dict) -> discord.Embed:
@@ -104,3 +105,72 @@ def create_name_embed(matches: list) -> discord.Embed:
     embed.set_footer(text="Use ![name] [attribute] to view specific character")
 
     return embed
+
+def create_cell_embed(char: Dict) -> discord.Embed:
+    character_slug = char['Character'].lower().replace(' ', '')
+    title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
+    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
+    
+    embed = discord.Embed(
+        title=f"{char['Character']} [{char['Title']}]",
+        description=f"**{char['Attribute']}** | **{char['Faction']}** | **{char['Tactic']}**",
+        color=COLOUR[char['Attribute']]
+    )
+    embed.set_thumbnail(url=thumbnail_url)
+    
+    fields = [
+        ("Combat Power", f"**Base:** {char['Base CP']} (#{char['Base CP_rank']})\n"
+                         f"**3x Cell:** {char['3x Cell CP']} (#{char['3x Cell CP_rank']})\n"
+                         f"**4x Cell:** {char['4x Cell CP']} (#{char['4x Cell CP_rank']})", False),
+
+        ("Base Stats", f"**ATK:** {char['Base ATK']} (#{char['Base ATK_rank']})\n"
+                       f"**DEF:** {char['Base DEF']} (#{char['Base DEF_rank']})\n"
+                       f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
+
+        ("Details", f"**Release Date:** {char['Release Date']}\n"
+                    f"**Obtained:** {char['Obtained']}", False),
+    ]
+    
+    for name, value, inline in fields:
+        embed.add_field(name=name, value=value, inline=inline)
+    
+    embed.set_footer(text="All Cell CP include LR cells without upgrades\n"
+                          "Data taken from Strategic Arena")
+    
+    return embed
+
+
+class Paginator(View):
+    def __init__(self, matches: List[Dict], timeout=180):
+        super().__init__(timeout=timeout)
+        self.matches = matches
+        self.current_index = 0
+        self.message = None
+        
+        self.update_buttons()
+    
+    def update_buttons(self):
+        self.children[0].disabled = (self.current_index == 0)
+        self.children[1].disabled = (self.current_index == len(self.matches) - 1)
+    
+    @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
+    async def previous_button(self, interaction: discord.Interaction, button: Button):
+        if self.current_index > 0:
+            self.current_index -= 1
+            self.update_buttons()
+            embed = create_character_embed(self.matches[self.current_index])
+            await interaction.response.edit_message(embed=embed, view=self)
+    
+    @discord.ui.button(label="Next ▶", style=discord.ButtonStyle.primary)
+    async def next_button(self, interaction: discord.Interaction, button: Button):
+        if self.current_index < len(self.matches) - 1:
+            self.current_index += 1
+            self.update_buttons()
+            embed = create_character_embed(self.matches[self.current_index])
+            await interaction.response.edit_message(embed=embed, view=self)
+    
+    async def on_timeout(self):
+        for child in self.children:
+            child.disabled = True
+        if self.message:
+            await self.message.edit(view=self)

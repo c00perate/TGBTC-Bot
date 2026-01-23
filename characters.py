@@ -1,10 +1,6 @@
 import csv
 from collections import defaultdict
 from typing import Optional, List, Dict
-from discord.ui import View, Button
-from embeds import create_character_embed
-import discord
-
 
 class CharacterDatabase:
     
@@ -83,38 +79,3 @@ class CharacterDatabase:
     def get_top_characters(self, stat: str, limit: int = 10) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
     
-
-class CharacterPaginator(View):
-    def __init__(self, matches: List[Dict], timeout=180):
-        super().__init__(timeout=timeout)
-        self.matches = matches
-        self.current_index = 0
-        self.message = None
-        
-        self.update_buttons()
-    
-    def update_buttons(self):
-        self.children[0].disabled = (self.current_index == 0)
-        self.children[1].disabled = (self.current_index == len(self.matches) - 1)
-    
-    @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
-    async def previous_button(self, interaction: discord.Interaction, button: Button):
-        if self.current_index > 0:
-            self.current_index -= 1
-            self.update_buttons()
-            embed = create_character_embed(self.matches[self.current_index])
-            await interaction.response.edit_message(embed=embed, view=self)
-    
-    @discord.ui.button(label="Next ▶", style=discord.ButtonStyle.primary)
-    async def next_button(self, interaction: discord.Interaction, button: Button):
-        if self.current_index < len(self.matches) - 1:
-            self.current_index += 1
-            self.update_buttons()
-            embed = create_character_embed(self.matches[self.current_index])
-            await interaction.response.edit_message(embed=embed, view=self)
-    
-    async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True
-        if self.message:
-            await self.message.edit(view=self)

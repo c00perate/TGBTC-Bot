@@ -51,7 +51,7 @@ async def show_commands(ctx):
         "Commands:\n\n"
         "`![character name] [optional: skl/spd/str/psy/wit]`\n"
         "Example: `!arima wit`\n"
-        "Example: `!arima` (brings up the entire list of matching characters)\n\n"
+        "Example: `!arima`\n\n"
         "`!team [anteiku/aogiri/ccg/noorg]`\n"
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
@@ -94,12 +94,40 @@ async def show_ranking(ctx, category: str):
     await ctx.send(embed=embed)
 
 
+@bot.command(name='cell')
+async def show_cells(ctx, name: str):
+
+    parts = name[1:].split(maxsplit=1)
+
+    if len(parts) != 2:
+        await ctx.send("Missing argument! Try `!command` for help.")
+
+    name, attribute = parts
+    matches = char_db.find_characters(name, attribute)
+    
+    if not matches:
+        await ctx.send("Character not found! Make sure you typed correctly "
+                        "or try `!command` for help!")
+        return
+    
+    embed = create_cell_embed(matches[0])
+
+    if len(matches) == 1:
+        await ctx.send(embed=embed)
+
+    else:
+        view = Paginator(matches)
+        await ctx.send(f"Found {len(matches)} matches:\n")
+        message = await ctx.send(embed=embed, view=view)
+        view.message = message
+    
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await handle_character_search(ctx)
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"Missing argument! Try `!command` for help.")
+        await ctx.send("Missing argument! Try `!command` for help.")
     else:
         print(f"Error: {error}")
         await ctx.send("An error occurred. Try `!command` for help!")
@@ -160,7 +188,7 @@ async def handle_character_search(ctx):
             await ctx.send(embed=embed)
 
         else:
-            view = CharacterPaginator(matches)
+            view = Paginator(matches)
             await ctx.send(f"Found {len(matches)} matches:\n")
             message = await ctx.send(embed=embed, view=view)
             view.message = message
