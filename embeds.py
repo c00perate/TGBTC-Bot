@@ -106,29 +106,22 @@ def create_name_embed(matches: list) -> discord.Embed:
 
     return embed
 
-def create_cell_embed(char: Dict) -> discord.Embed:
-    character_slug = char['Character'].lower().replace(' ', '')
-    title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
-    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
+def create_cell_embed(cell: Dict) -> discord.Embed:
+    #character_slug = char['Character'].lower().replace(' ', '')
+    #title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
+    #thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
+    thumbnail_url = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png"
     
     embed = discord.Embed(
-        title=f"{char['Character']} [{char['Title']}]",
-        description=f"**{char['Attribute']}** | **{char['Faction']}** | **{char['Tactic']}**",
-        color=COLOUR[char['Attribute']]
+        title=f"{cell['Character']} [{cell['Title']}] {cell['Type']} Cell",
+        description=f"{cell['Base Stat']} {cell['Type']}",
+        color=COLOUR[cell['Attribute']]
     )
     embed.set_thumbnail(url=thumbnail_url)
     
     fields = [
-        ("Combat Power", f"**Base:** {char['Base CP']} (#{char['Base CP_rank']})\n"
-                         f"**3x Cell:** {char['3x Cell CP']} (#{char['3x Cell CP_rank']})\n"
-                         f"**4x Cell:** {char['4x Cell CP']} (#{char['4x Cell CP_rank']})", False),
-
-        ("Base Stats", f"**ATK:** {char['Base ATK']} (#{char['Base ATK_rank']})\n"
-                       f"**DEF:** {char['Base DEF']} (#{char['Base DEF_rank']})\n"
-                       f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
-
-        ("Details", f"**Release Date:** {char['Release Date']}\n"
-                    f"**Obtained:** {char['Obtained']}", False),
+        ("Cell Stats", f"+{cell['Stat 1']} \n+{cell['Stat 2']} \n+{cell['Stat 3']} \n+{cell['Stat 4']}", False),
+        ("Cell Effect", f"{cell['Description']}", False),
     ]
     
     for name, value, inline in fields:
