@@ -95,9 +95,9 @@ async def show_ranking(ctx, category: str):
 
 
 @bot.command(name='cell')
-async def show_cells(ctx, name: str):
+async def show_cells(ctx, *, name: str):
 
-    parts = name[1:].split(maxsplit=1)
+    parts = name.split(maxsplit=1)
 
     if len(parts) != 2:
         await ctx.send("Missing argument! Try `!command` for help.")
