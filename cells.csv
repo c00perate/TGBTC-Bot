@@ -1,2 +1,7 @@
-Character,Title,Attribute,Type,Base Stat,Stat 1,Stat 2,Stat 3,Stat 4,Description,Nicknames
-Touka Kirishima,Flamewing,SKL,ATK,7100,1.5% ATK,1.5% ATK,1.5% ATK,1.5% ATK,Wassup,Toka
+Character,Title,Attribute,Type,Base Stat,Stat 1,Stat 2,Stat 3,Stat 4,Nicknames,Description,Effect
+Touka Kirishima,Flamewing,SKL,ATK,7100,1.5% ATK,1.5% ATK,1.5% ATK,1.5% ATK,toka,"When an allied character with Charm dies, gains the following effects: Remove all debuffs, increase max HP by 30%, prevent all stats from being reduced below base values, gain **Charm** for 2 turns, and restore 50% of max HP.","*Hunt: Reduce Restoration Rate by 20%, Regeneration Rate and Lifesteal Rate by 12%, and Max HP by 4%. | *Clean-up: When taking damage from CCG characters, increase damage taken by 15%. If affected by Weak, takes 20% extra damage. When removed, clears all Hunt"
+
+
+
+
+

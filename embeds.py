@@ -65,7 +65,7 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     embed.add_field(name="Ultimate", value=team['ult'], inline=False)
     embed.add_field(name="Overall CP", value=f"**3x Cell:** {str(overall_cp3)}\n"
                                              f"**4x Cell:** {str(overall_cp4)}")
-    embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/8dda16c/{faction.lower()}.png")
+    embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/main/factions/{faction.lower()}.png")
     
     return embed
 
@@ -107,7 +107,9 @@ def create_name_embed(matches: list) -> discord.Embed:
 def create_cell_embed(cell: Dict) -> discord.Embed:
     character_slug = cell['Character'].lower().replace(' ', '')
     title_slug = cell['Title'].lower().replace(' ', '').replace('/', '')
-    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
+    type_slug = cell['Type'].lower()
+    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/lrcells/{character_slug}-{title_slug}-{type_slug}.png"
+    effect = cell['Effect'] if cell['Effect'] else None
     
     embed = discord.Embed(
         title=f"{cell['Character']} [{cell['Title']}]\n{cell['Type']} Cell",
@@ -123,5 +125,8 @@ def create_cell_embed(cell: Dict) -> discord.Embed:
     
     for name, value, inline in fields:
         embed.add_field(name=name, value=value, inline=inline)
+
+    if effect:
+        embed.set_footer(text=effect)
     
     return embed
