@@ -5,6 +5,7 @@ from config import *
 from teams import*
 from characters import *
 from embeds import *
+from buttons import *
 
 
 intents = discord.Intents.default()
@@ -24,6 +25,7 @@ team_db = TeamDatabase()
 async def on_ready():
     print(f'{bot.user} is now running!')
     print(f'Loaded {len(char_db.characters)} characters')
+    print(f'Loaded {len(char_db.cells)} cells')
     print(f'Loaded {len(team_db.teams)} teams')
 
 
@@ -97,29 +99,31 @@ async def show_ranking(ctx, category: str):
 @bot.command(name='cell')
 async def show_cells(ctx, *, name: str):
 
-    parts = name.split(maxsplit=1)
+    parts = name.split()
 
-    if len(parts) != 2:
+    if len(parts) == 3:
+        name, attribute, type = parts
+        matches = char_db.find_cells(name, attribute, type)
+        
+        if not matches:
+            await ctx.send("Cell not found! Make sure you typed correctly "
+                            "or try `!command` for help!")
+            return
+        
+        embed = create_cell_embed(matches[0])
+
+        if len(matches) == 1:
+            await ctx.send(embed=embed)
+
+        else:
+            view = Paginator(matches)
+            await ctx.send(f"Found {len(matches)} matches:\n")
+            message = await ctx.send(embed=embed, view=view)
+            view.message = message
+
+    else: 
         await ctx.send("Missing argument! Try `!command` for help.")
 
-    name, attribute = parts
-    matches = char_db.find_characters(name, attribute)
-    
-    if not matches:
-        await ctx.send("Character not found! Make sure you typed correctly "
-                        "or try `!command` for help!")
-        return
-    
-    embed = create_cell_embed(matches[0])
-
-    if len(matches) == 1:
-        await ctx.send(embed=embed)
-
-    else:
-        view = Paginator(matches)
-        await ctx.send(f"Found {len(matches)} matches:\n")
-        message = await ctx.send(embed=embed, view=view)
-        view.message = message
     
 
 @bot.event

@@ -53,7 +53,7 @@ class CharacterDatabase:
                         self.char_name[nickname].append(char)
 
     def _load_cells(self, csv_path: str):
-        int_fields = ['Base Stat', 'Stat 1', 'Stat 2', 'Stat 3', 'Stat 4']
+        int_fields = ['Base Stat']
         
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
@@ -61,30 +61,29 @@ class CharacterDatabase:
                 for field in int_fields:
                     row[field] = int(row[field])
                 row['Nicknames'] = str(row.get('Nicknames', ''))
-                self.characters.append(row)
+                self.cells.append(row)
 
     def _build_cell_index(self):
         for cell in self.cells:
-            character_name = cell['Character'].lower()
+            cell_name = cell['Character'].lower()
             attribute = cell['Attribute']
-            type = cell['Type'].lower()
+            type = cell['Type']
             
-            key = (character_name, attribute, type)
+            key = (cell_name, attribute, type)
             self.cell_index[key].append(cell)
 
-            name_parts = character_name.split()
+            name_parts = cell_name.split()
             
             if len(name_parts) > 1:
                 for part in name_parts:
-                    self.char_index[(part, attribute)].append(cell)
-                    self.char_name[part].append(cell)  
+                    self.cell_index[(part, attribute, type)].append(cell)
 
             if cell['Nicknames']:
                 for nickname in cell['Nicknames'].lower().split(';'):
                     nickname = nickname.strip()
                     if nickname:
-                        self.char_index[(nickname, attribute)].append(cell)
-                        self.char_name[nickname].append(cell)
+                        self.cell_index[(nickname, attribute, type)].append(cell)
+                        print(f"added {nickname}")
     
     def _calculate_rankings(self):
         stats = ['Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP']

@@ -1,8 +1,6 @@
 import discord
-from typing import Dict, List
+from typing import Dict
 from config import *
-from discord.ui import View, Button
-
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
@@ -107,63 +105,23 @@ def create_name_embed(matches: list) -> discord.Embed:
     return embed
 
 def create_cell_embed(cell: Dict) -> discord.Embed:
-    #character_slug = char['Character'].lower().replace(' ', '')
-    #title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
-    #thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
-    thumbnail_url = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png"
+    character_slug = cell['Character'].lower().replace(' ', '')
+    title_slug = cell['Title'].lower().replace(' ', '').replace('/', '')
+    thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
     
     embed = discord.Embed(
-        title=f"{cell['Character']} [{cell['Title']}] {cell['Type']} Cell",
-        description=f"{cell['Base Stat']} {cell['Type']}",
+        title=f"{cell['Character']} [{cell['Title']}]\n{cell['Type']} Cell",
+        description=f"**Base Stat: {cell['Base Stat']} {cell['Type']}**",
         color=COLOUR[cell['Attribute']]
     )
     embed.set_thumbnail(url=thumbnail_url)
     
     fields = [
-        ("Cell Stats", f"+{cell['Stat 1']} \n+{cell['Stat 2']} \n+{cell['Stat 3']} \n+{cell['Stat 4']}", False),
+        ("Cell Stats", f"+{cell['Stat 1']} \t+{cell['Stat 2']} \n+{cell['Stat 3']} \t+{cell['Stat 4']}", False),
         ("Cell Effect", f"{cell['Description']}", False),
     ]
     
     for name, value, inline in fields:
         embed.add_field(name=name, value=value, inline=inline)
     
-    embed.set_footer(text="All Cell CP include LR cells without upgrades\n"
-                          "Data taken from Strategic Arena")
-    
     return embed
-
-
-class Paginator(View):
-    def __init__(self, matches: List[Dict], timeout=180):
-        super().__init__(timeout=timeout)
-        self.matches = matches
-        self.current_index = 0
-        self.message = None
-        
-        self.update_buttons()
-    
-    def update_buttons(self):
-        self.children[0].disabled = (self.current_index == 0)
-        self.children[1].disabled = (self.current_index == len(self.matches) - 1)
-    
-    @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
-    async def previous_button(self, interaction: discord.Interaction, button: Button):
-        if self.current_index > 0:
-            self.current_index -= 1
-            self.update_buttons()
-            embed = create_character_embed(self.matches[self.current_index])
-            await interaction.response.edit_message(embed=embed, view=self)
-    
-    @discord.ui.button(label="Next ▶", style=discord.ButtonStyle.primary)
-    async def next_button(self, interaction: discord.Interaction, button: Button):
-        if self.current_index < len(self.matches) - 1:
-            self.current_index += 1
-            self.update_buttons()
-            embed = create_character_embed(self.matches[self.current_index])
-            await interaction.response.edit_message(embed=embed, view=self)
-    
-    async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True
-        if self.message:
-            await self.message.edit(view=self)
