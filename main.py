@@ -51,13 +51,15 @@ async def on_message(message):
 async def show_commands(ctx):
     await ctx.send(
         "Commands:\n\n"
-        "`![character name] [optional: skl/spd/str/psy/wit]`\n"
+        "`![character] [optional: skl/spd/str/psy/wit]`\n"
         "Example: `!arima wit`\n"
         "Example: `!arima`\n\n"
         "`!team [anteiku/aogiri/ccg/noorg]`\n"
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
-        "Example: `!rank 3x`"
+        "Example: `!rank 3x`\n\n"
+        "`!cell [character] [attribute] [atk/def/hp]`\n"
+        "Example: `!cell kaneki str atk`"
     )
 
 
