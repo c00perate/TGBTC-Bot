@@ -118,6 +118,6 @@ class CharacterDatabase:
         key = (name.lower(), attribute.upper(), type.upper())
         return self.cell_index.get(key, [])
     
-    def get_top_characters(self, stat: str, limit: int = 10) -> List[Dict]:
+    def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
     

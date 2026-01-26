@@ -1,8 +1,8 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
 Kishou Arima,Invincible Investigator,WIT,CCG,DPS,212336,236164,237733,38465,28682,604666,12/29/2025,Carnival,
 Hideyoshi Nagachika,Best Friend,PSY,No Org,Support,209511,233194,234714,33372,29523,622748,11/24/2025,Carnival, Hide
-Yoshimura,Cleaner,PSY,No Org,DPS,209159,232868,234397,37371,28020,596101,10/20/2025,Carnival, Kuzen; Owl
-Yakumo Oomori,Warrior,WIT,Aogiri,Burst,205736,232754,233707,35817,27816,588488,3/17/2025,Carnival, Yamori; Jason
+Yoshimura,Cleaner,PSY,No Org,DPS,209159,232868,234397,37371,28020,596101,10/20/2025,Carnival, Kuzen;Owl
+Yakumo Oomori,Warrior,WIT,Aogiri,Burst,205736,232754,233707,35817,27816,588488,3/17/2025,Carnival, Yamori;Jason
 Noro,Overpower,WIT,Aogiri,DPS,208607,232291,233812,37026,27688,599908,9/15/2025,Carnival
 Sen Takatsuki,Elegant Deception,SPD,No Org,Support,208335,231992,233504,33285,29523,616086,1/24/2026,Limited Banner
 Uta,The Past,PSY,No Org,DPS,208157,231852,233377,36824,28493,591818,8/11/2025,Carnival, GOAT
@@ -23,7 +23,7 @@ Kousuke Houji,Chi She,SKL,CCG,Support,206740,230343,231836,34350,28759,596101,11
 Ayato Kirishima,Wings of Power-seeker,PSY,Aogiri,DPS,204392,230263,231302,35817,26796,588488,1/13/2025,Carnival
 Touka Kirishima,1st Anniversary,STR,Anteiku,Support,206641,230253,231750,34062,29014,598956,11/1/2025,Exclusive Banner, Toka
 Ken Kaneki,Centipede Rampage,WIT,Aogiri,DPS,204171,230143,231109,35817,26287,593246,12/9/2024,Carnival, Centi
-Touka Kirishima,Flamewing,SKL,Anteiku,Balance,204484,230023,231003,35242,27561,583729,2/8/2025,Exclusive Banner, Toka; Charm
+Touka Kirishima,Flamewing,SKL,Anteiku,Balance,204484,230023,231003,35242,27561,583729,2/8/2025,Exclusive Banner, Toka;Charm
 Juuzou Suzuya,Halloween,STR,CCG,DPS,206334,229947,231444,36163,27890,587184,10/17/2025,Exclusive Banner, Juzo
 Kishou Arima,Halloween,SPD,CCG,Balance,206323,229928,231423,35386,28316,589131,10/17/2025,Fragments
 Uta,Rescue,SKL,No Org,Support,203796,229831,230760,33688,28351,589439,7/12/2025,Limited Banner
@@ -36,12 +36,12 @@ Tatara,Wordless Avenger,SPD,Aogiri,DPS,198231,228349,229319,34379,26542,545662,2
 Nishiki Nishio,Taiikusai,SPD,Anteiku,DPS,204496,228039,229513,35904,27281,580398,9/6/2025,Exclusive Banner
 Touka Kirishima,Taiikusai,SKL,Anteiku,Control,204407,227935,229404,34005,28300,586584,9/6/2025,Fragments, Toka
 Hinami Fueguchi,Growing Maiden,SPD,Anteiku,Support,200173,227920,228848,30926,29345,559937,2/8/2025,Chain Pack
-Matasaka Kamishiro,Shachi,WIT,No Org,Burst,204019,227545,229013,39846,26796,521870,10/31/2024,VIP, Shachi; Sachi
+Matasaka Kamishiro,Shachi,WIT,No Org,Burst,204019,227545,229013,39846,26796,521870,10/31/2024,VIP, Shachi;Sachi
 Touka Kirishima,Natsu Matsuri,SKL,Anteiku,Support,203849,227376,228844,34148,28198,585633,8/9/2025,Fragments, Toka
 Sen Takatsuki,Novelist,STR,No Org,Support,200972,227337,228238,32652,27816,574212,3/2/2025,Exclusive Banner
 Hinami Fueguchi,Tanabata,STR,Anteiku,Support,203753,227277,228744,34120,28173,585633,6/28/2025,Exclusive Banner
 Ayato Kirishima,Tanabata,SPD,Aogiri,Balance,203738,227267,228736,34983,27586,584681,6/28/2025,Chain Pack
-Yakumo Oomori,Torture,SKL,Aogiri,DPS,203716,227248,228718,36220,27077,575640,6/19/2025,Limited Banner, Yamori; Jason
+Yakumo Oomori,Torture,SKL,Aogiri,DPS,203716,227248,228718,36220,27077,575640,6/19/2025,Limited Banner, Yamori;Jason
 Tatara,Revenge,STR,Aogiri,Balance,203646,227169,228636,34868,28096,575164,5/31/2025,Fragments
 Juuzou Suzuya,Pet Boy,STR,No Org,Control,203620,227150,228619,35271,28020,572309,5/22/2025,Limited Banner, Juzo
 Yoshitoki Washuu,Chief,SPD,CCG,Support,203628,227115,228570,32767,28606,587060,6/5/2025,Limited Banner
@@ -74,7 +74,7 @@ Hinami Fueguchi,Christmas,SPD,Anteiku,Balance,192192,215299,216627,34091,23738,5
 Enji Koma,Devil Ape,STR,Anteiku,Control,186791,215033,215909,33515,23738,469528,10/31/2024,Free
 Touka Kirishima,Blazewing,STR,Anteiku,Burst,187568,214606,215512,33228,22719,502837,10/31/2024,Free, Toka
 Kaya Irimi,Black Dog,SPD,Anteiku,Balance,187083,214263,215039,34379,21444,502837,10/31/2024,Free
-Yakumo Oomori,Jason,STR,Aogiri,Control,187524,214168,214949,34379,23228,474287,10/31/2024,Free, Yamori; Jason
+Yakumo Oomori,Jason,STR,Aogiri,Control,187524,214168,214949,34379,23228,474287,10/31/2024,Free, Yamori;Jason
 Hinami Fueguchi,Fledgling Butterfly,SKL,Anteiku,Balance,187492,214054,214855,34379,21189,512354,10/31/2024,Fragments
 Kousuke Houji,Red Tongue Hitman,SPD,CCG,Control,186855,213905,214681,34091,22973,474287,10/31/2024,Free, Hoji
 Chuu Hachikawa,Envoy of Vengeance,STR,CCG,Burst,187022,213765,214536,34666,23483,460012,10/31/2024,Free, Chu

@@ -37,7 +37,6 @@ async def on_message(message):
     if message.author == bot.user:
         return
     
-<<<<<<< HEAD
     if bot.user.mentioned_in(message) and not message.mention_everyone:
         if message.author.id == 1164259640452857906:
             await message.channel.send("hi matti")
@@ -92,11 +91,17 @@ async def show_ranking(ctx, category: str):
         return
     
     stat_name = SEARCH_QUERIES[category_lower]['value']
-    top_chars = char_db.get_top_characters(stat_name, limit=10)
-    
-    embed = create_ranking_embed(stat_name, top_chars, stat_name)
+    top_chars = char_db.get_top_characters(stat_name, limit=len(char_db.characters))
 
-    await ctx.send(embed=embed)
+    count = 0
+    pages = []
+    while(count < len(top_chars)):
+        pages.append(create_ranking_embed(stat_name, top_chars[count:count+10], stat_name, count+1))
+        count += 10
+
+    view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
+    message = await ctx.send(embed=pages[0], view=view)
+    view.message = message
 
 
 @bot.command(name='cell')
@@ -119,7 +124,7 @@ async def show_cells(ctx, *, name: str):
             await ctx.send(embed=embed)
 
         else:
-            view = Paginator(matches)
+            view = Paginator(matches, author_id=ctx.author.id)
             await ctx.send(f"Found {len(matches)} matches:\n")
             message = await ctx.send(embed=embed, view=view)
             view.message = message
@@ -128,7 +133,6 @@ async def show_cells(ctx, *, name: str):
         await ctx.send("Missing argument! Try `!command` for help.")
 
     
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
@@ -195,270 +199,11 @@ async def handle_character_search(ctx):
             await ctx.send(embed=embed)
 
         else:
-            view = Paginator(matches)
+            view = Paginator(matches, author_id=ctx.author.id)
             await ctx.send(f"Found {len(matches)} matches:\n")
             message = await ctx.send(embed=embed, view=view)
             view.message = message
 
-=======
-    if bot.user.mentioned_in(message):
-        await message.channel.send("Command: ![character name] [attribute]\nExample: !arima wit")
-    
-    if message.content.startswith('!'):
-        parts = message.content[1:].split(maxsplit=1)
-
-<<<<<<< Updated upstream
-        if len(parts) == 1 and parts[0].lower() == "command":
-            await message.channel.send("Command: ![character name] [attribute]\nExample: !arima wit\n\n Command: !team [faction]\n Example: !team noorg\n\n" \
-            "Command: !rank [attribute (hp, def, atk, 3x, 4x, base)]\n Example: !rank hp")
-            return
-        
-        if len(parts) == 1 and parts[0].lower() == "credits":
-            await message.channel.send("Made by C00per and Hnff for the Tokyo Ghoul Break the Chains Server!")
-=======
-
-@bot.command(name='command')
-async def show_commands(ctx):
-    await ctx.send(
-        "Commands:\n\n"
-        "`![character] [optional: skl/spd/str/psy/wit]`\n"
-        "Example: `!arima wit`\n"
-        "Example: `!arima`\n\n"
-        "`!team [anteiku/aogiri/ccg/noorg]`\n"
-        "Example: `!team noorg`\n\n"
-        "`!rank [base/3x/4x/atk/def/hp]`\n"
-        "Example: `!rank 3x`\n\n"
-        "`!cell [character] [attribute] [atk/def/hp]`\n"
-        "Example: `!cell kaneki str atk`"
-    )
-
-
-@bot.command(name='team')
-async def show_team(ctx, faction: str):
-    faction_lower = faction.lower()
-    
-    if faction_lower not in FACTION_DISPLAY:
-        await ctx.send("Invalid faction! Try `!command` for help.")
-        return
-    
-    teams = team_db.get_teams_by_faction(faction_lower)
-    
-    if not teams:
-        await ctx.send(f"No teams found for {faction}")
-        return
-    
-    for team in teams:
-        embed = create_team_embed(faction_lower, team, char_db)
-        await ctx.send(embed=embed)
-
-
-@bot.command(name='rank')
-async def show_ranking(ctx, category: str):
-    category_lower = category.lower()
-    
-    if category_lower not in SEARCH_QUERIES:
-        await ctx.send("Invalid parameter! Use `!rank` with a valid query or try `!command` for help!")
-        return
-    
-    stat_name = SEARCH_QUERIES[category_lower]['value']
-    top_chars = char_db.get_top_characters(stat_name, limit=len(char_db.characters))
-
-    count = 0
-    pages = []
-    while(count < len(top_chars)):
-        pages.append(create_ranking_embed(stat_name, top_chars[count:count+10], stat_name, count+1))
-        count += 10
-
-    view = Paginator(pages, lambda e: e)
-    message = await ctx.send(embed=pages[0], view=view)
-    view.message = message
-
-
-@bot.command(name='cell')
-async def show_cells(ctx, *, name: str):
-
-    parts = name.split()
-
-    if len(parts) == 3:
-        name, attribute, type = parts
-        matches = char_db.find_cells(name, attribute, type)
-        
-        if not matches:
-            await ctx.send("Cell not found! Make sure you typed correctly "
-                            "or try `!command` for help!")
-            return
-        
-        embed = create_cell_embed(matches[0])
-
-        if len(matches) == 1:
-            await ctx.send(embed=embed)
-
-        else:
-            await ctx.send(f"Found {len(matches)} matches:\n")
-            view = Paginator(matches, create_cell_embed)
-            embed = create_cell_embed(matches[0])
-            message = await ctx.send(embed=embed, view=view)
-            view.message = message
-
-    else: 
-        await ctx.send("Missing argument! Try `!command` for help.")
-
-    
-
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        await handle_character_search(ctx)
-    elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("Missing argument! Try `!command` for help.")
-    else:
-        print(f"Error: {error}")
-        await ctx.send("An error occurred. Try `!command` for help!")
-
-
-@bot.command(name='credits')
-async def show_credits(ctx):
-    await ctx.send(
-        "Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!\n"
-        "Special thanks to Ariku for providing the character thumbnails."
-    )
-
-@bot.command(name='sheet')
-async def show_sheet(ctx):
-    await ctx.send(f"Here's my [sheet]({SHEET_URL})")
-
-
-@bot.command(name='youtube')
-async def show_youtube(ctx):
-    await ctx.send(f"Here's my [Youtube channel]({YOUTUBE_URL})")
-
-
-async def handle_character_search(ctx):
-    content = ctx.message.content
-    
-    if not content.startswith('!'):
-        return
-    
-    parts = content[1:].split(maxsplit=1)
-    
-    if len(parts) == 1:
-        name = parts[0]
-        matches = char_db.find_name(name)
-
-        if not matches:
-            await ctx.send("Character not found! Make sure you typed correctly "
-                           "or try `!command` for help!")
->>>>>>> Stashed changes
-            return
-
-        if len(parts) == 1 and parts[0].lower() == "sheet":
-            await message.channel.send(f"Here's my [sheet]({url})")
-            return
-        
-        if len(parts) == 1 and parts[0].lower() == "youtube":
-            await message.channel.send(f"Here's my [Youtube channel]({youtube})")
-            return
-        
-        if len(parts) == 2 and parts[0].lower() == "team":
-            category = parts[1]
-            if category.lower() not in "noorganteikuccgaogiri":
-                await message.channel.send(f"Invalid Parameter! use !team with a valid query or !command for more help!")
-                return
-
-            embed = discord.Embed(title = f"{category.capitalize()} Teams", description=f"Current meta teams for {category.capitalize()} faction", color=discord.Color.random())
-            for i in range(len(teams)):
-                if(teams[i]["faction"].lower() == category.lower()):
-                    embed.add_field(name=teams[i]["title"], value=f""" - {teams[i]["char1"]}
- - {teams[i]["char2"]}
- - {teams[i]["char3"]}
- - {teams[i]["char4"]}
- - {teams[i]["backup"]}""")
-                    embed.add_field(name="Ultimate", value=f"{teams[i]['ult']}", inline=True)
-                    embed.add_field(name="Description", value=f"{teams[i]['description']}",inline=False)
-                    embed.add_field(name = "", value= "", inline=False)
-                    embed.add_field(name = "", value= "", inline=False)
-
-            await message.channel.send(embed=embed)
-            return
-
-
-        if len(parts) == 2 and parts[0].lower() == "rank":
-            print("ranking")
-            category = parts[1]
-            searchqueries = {"hp":"HP", "atk":"ATK", "def":"DEF", "3x":"3x Cell CP", "4x":"4x Cell CP", "base" : "Base CP"}
-
-            if category.lower() not in searchqueries:
-                await message.channel.send(f"Invalid Parameter! use !rank with a valid query or !command for more help!")
-                return
-
-            characters2 = list(characters)
-            functions.sort(characters2, searchqueries[category])
-            basestr = ""
-            for i in range(0, 10):
-                basestr += f"{i + 1} {characters2[i]['Character']} [{characters2[i]['Title']}] - {characters2[i][searchqueries[category]]}\n"
-
-            embed = discord.Embed(title=f"Top 10 Chars ranked by {searchqueries[category]}", description=basestr, color=discord.Color.light_gray())
-            embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n" \
-                                          "Base CP is extrapolated from Strategic Arena")
-
-            await message.channel.send(embed=embed)
-            return
-
-        if len(parts) == 2:
-            name = parts[0].lower()
-            attribute = parts[1].upper()
-
-            matching = [char for char in characters if name in char['Character'].lower()
-                        and char['Attribute'] == attribute or name in char['Nicknames'].lower() and char['Attribute'] == attribute]
-            if matching:
-                for char in matching:
-                    noimage = False
-                    if os.path.isfile(f"Images\{char['Character']}{char['Title']}.jpg") == True:
-                        file = discord.File(f"Images\{char['Character']}{char['Title']}.jpg", filename= f"{char['Character']}{char['Title']}.jpg")
-                    else:
-                        file = discord.File(f"Images\error.png", filename= f"error.png")
-                        noimage = True
-                    embed = discord.Embed(
-                        title=char['Character'],
-                        description=char['Title'],
-                        color=colour[char['Attribute']]
-                    )
-                    if noimage == False:
-                        embed.set_thumbnail(url=f"attachment://{char['Character']}{char['Title']}.jpg")
-                    else:
-                        embed.set_thumbnail(url=f"attachment://error.png")
-                    embed.add_field(name="Attribute", value=char['Attribute'])
-                    embed.add_field(name="Faction", value=char['Faction'])
-                    embed.add_field(name="Tactic", value=char['Tactic'])
-                    embed.add_field(name=f"Base CP ", value=f"{char['Base CP']} (#{char['Base CP_rank']})")
-                    embed.add_field(name=f"3x Cell CP ", value=f"{char['3x Cell CP']} (#{char['3x Cell CP_rank']})")
-                    embed.add_field(name=f"4x Cell CP ", value=f"{char['4x Cell CP']} (#{char['4x Cell CP_rank']})")
-                    embed.add_field(name=f"Base ATK ", value=f"{char['ATK']} (#{char['ATK_rank']})")
-                    embed.add_field(name=f"Base DEF ", value=f"{char['DEF']} (#{char['DEF_rank']})")
-                    embed.add_field(name=f"Base HP ", value=f"{char['HP']} (#{char['HP_rank']})")
-                    embed.add_field(name=f"Release Date", value=char['Release Date'])
-                    embed.add_field(name="Obtained", value=char['Obtained'])
-                    embed.set_footer(text="All Cell CP include LR cells (if any) without any upgrades\n" \
-                                          "Base CP is extrapolated from Strategic Arena")
-
-                    await message.channel.send(embed=embed, file=file)
-            else:
-                await message.channel.send("Character not found! Make sure you typed correctly "
-                                           "or try '!command' for a guide.")
-        
-        else:
-<<<<<<< Updated upstream
-            await message.channel.send("Invalid command! Try '!command' for a guide.") 
-   
-bot.run(TOKEN)
-=======
-            view = Paginator(matches, create_character_embed)
-            embed = create_character_embed(matches[0])
-            message = await ctx.send(embed=embed, view=view)
-            view.message = message
-
-
->>>>>>> origin/Huff
     else:
         await ctx.send("Invalid command! Try `!command` for help!")
         return
@@ -468,9 +213,4 @@ if __name__ == '__main__':
     try:
         bot.run(TOKEN)
     except Exception as e:
-<<<<<<< HEAD
         print(f"Failed to start bot: {e}")
-=======
-        print(f"Failed to start bot: {e}")
->>>>>>> Stashed changes
->>>>>>> origin/Huff

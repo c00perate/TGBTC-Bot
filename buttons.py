@@ -1,15 +1,14 @@
 import discord
-from typing import Dict, List
 from config import *
 from discord.ui import View, Button
-from embeds import create_character_embed
 
 class Paginator(View):
-    def __init__(self, items, embed_factory, timeout=180):
+    def __init__(self, items, embed_factory, author_id, timeout=180):
         super().__init__(timeout=timeout)
         self.items = items
         self.embed_factory = embed_factory
         self.current_index = 0
+        self.author_id = author_id
         self.message = None
 
         self.update_buttons()
@@ -17,6 +16,15 @@ class Paginator(View):
     def update_buttons(self):
         self.children[0].disabled = (self.current_index == 0)
         self.children[1].disabled = (self.current_index == len(self.items) - 1)
+
+    async def interaction_check(self, interaction: discord.Interaction) -> bool:
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message(
+                "These buttons aren't for you.",
+                ephemeral=True
+            )
+            return False
+        return True    
 
     @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
     async def previous_button(self, interaction: discord.Interaction, button: Button):
