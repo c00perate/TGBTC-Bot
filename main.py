@@ -110,8 +110,8 @@ async def show_cells(ctx, *, name: str):
     parts = name.split()
 
     if len(parts) == 3:
-        name, attribute, type = parts
-        matches = char_db.find_cells(name, attribute, type)
+        name, attribute, cellType = parts
+        matches = char_db.find_cells(name, attribute, cellType)
         
         if not matches:
             await ctx.send("Cell not found! Make sure you typed correctly "
@@ -124,9 +124,8 @@ async def show_cells(ctx, *, name: str):
             await ctx.send(embed=embed)
 
         else:
-            view = Paginator(matches, author_id=ctx.author.id)
-            await ctx.send(f"Found {len(matches)} matches:\n")
-            message = await ctx.send(embed=embed, view=view)
+            view = Paginator(matches, embed_factory=create_cell_embed, author_id=ctx.author.id)
+            message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
             view.message = message
 
     else: 
@@ -199,9 +198,8 @@ async def handle_character_search(ctx):
             await ctx.send(embed=embed)
 
         else:
-            view = Paginator(matches, author_id=ctx.author.id)
-            await ctx.send(f"Found {len(matches)} matches:\n")
-            message = await ctx.send(embed=embed, view=view)
+            view = Paginator(matches, embed_factory=create_character_embed, author_id=ctx.author.id)
+            message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
             view.message = message
 
     else:

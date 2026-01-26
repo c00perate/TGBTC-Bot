@@ -67,23 +67,22 @@ class CharacterDatabase:
         for cell in self.cells:
             cell_name = cell['Character'].lower()
             attribute = cell['Attribute']
-            type = cell['Type']
+            cellType = cell['Type']
             
-            key = (cell_name, attribute, type)
+            key = (cell_name, attribute, cellType)
             self.cell_index[key].append(cell)
 
             name_parts = cell_name.split()
             
             if len(name_parts) > 1:
                 for part in name_parts:
-                    self.cell_index[(part, attribute, type)].append(cell)
+                    self.cell_index[(part, attribute, cellType)].append(cell)
 
             if cell['Nicknames']:
                 for nickname in cell['Nicknames'].lower().split(';'):
                     nickname = nickname.strip()
                     if nickname:
-                        self.cell_index[(nickname, attribute, type)].append(cell)
-                        print(f"added {nickname}")
+                        self.cell_index[(nickname, attribute, cellType)].append(cell)
     
     def _calculate_rankings(self):
         stats = ['Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP']
@@ -114,8 +113,8 @@ class CharacterDatabase:
     def find_name(self, name: str) -> List[Dict]:
         return self.char_name.get(name.lower(), [])
     
-    def find_cells(self, name: str, attribute: str, type: str) -> List[Dict]:
-        key = (name.lower(), attribute.upper(), type.upper())
+    def find_cells(self, name: str, attribute: str, cellType: str) -> List[Dict]:
+        key = (name.lower(), attribute.upper(), cellType.upper())
         return self.cell_index.get(key, [])
     
     def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
