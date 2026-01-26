@@ -69,10 +69,17 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     
     return embed
 
+<<<<<<< HEAD
 def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str) -> discord.Embed:
     description = '\n'.join(
         f"{i}. {char['Character']} [{char['Title']}] - {char[stat_key]}"
         for i, char in enumerate(top_chars, start=1)
+=======
+def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_num: int) -> discord.Embed:
+    description = '\n'.join(
+        f"{i}. {char['Character']} [{char['Title']}] - {char[stat_key]}"
+        for i, char in enumerate(top_chars, start=start_num)
+>>>>>>> origin/Huff
     )
 
     embed = discord.Embed(
