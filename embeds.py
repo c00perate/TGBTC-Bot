@@ -1,5 +1,5 @@
 import discord
-from typing import Dict
+from typing import Dict, List
 from config import *
 
 def create_character_embed(char: Dict) -> discord.Embed:
@@ -104,7 +104,23 @@ def create_name_embed(matches: list) -> discord.Embed:
 
     return embed
 
-def create_cell_embed(cell: Dict) -> discord.Embed:
+def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discord.Embed:
+    description = '\n'.join(
+        f"{start_index + i + 1}. {cell['Character']} [{cell['Title']}] - {cell['Attribute']} ({cell['Type']})"
+        for i, cell in enumerate(matches)
+    )
+    
+    embed = discord.Embed(
+        title="List of Cells",
+        description=description,
+        color=discord.Color.light_gray()
+    )
+    
+    embed.set_footer(text="Use !cell [name] [attribute] to view a specific cell")
+    
+    return embed
+
+def create_cells_embed(cell: Dict) -> discord.Embed:
     character_slug = cell['Character'].lower().replace(' ', '')
     title_slug = cell['Title'].lower().replace(' ', '').replace('/', '')
     type_slug = cell['Type'].lower()

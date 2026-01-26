@@ -109,7 +109,43 @@ async def show_cells(ctx, *, name: str):
 
     parts = name.split()
 
-    if len(parts) == 3:
+    if len(parts) == 2:
+        name, attribute = parts
+        matches = char_db.find_cells_list(name, attribute)
+        
+        if not matches:
+            await ctx.send("Cell not found! Make sure you typed correctly "
+                           "or try `!command` for help!")
+            return
+        
+
+        if len(matches) == 1:
+            embed = create_cells_embed(matches[0])
+            await ctx.send(embed=embed)
+
+        else:
+            count = 0
+            pages = []
+            while count < len(matches):
+                # Create embed for this page (10 items)
+                page_embed = create_cells_list_embed(
+                    matches[count:count+10], 
+                    start_index=count
+                )
+                pages.append(page_embed)
+                count += 10
+            
+            view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
+            embed = pages[0]
+            message = await ctx.send(embed=embed, view=view)
+            view.message = message
+        
+            #view = Paginator(matches, embed_factory=create_cells_list_embed, author_id=ctx.author.id)
+            #message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
+            #view.message = message
+
+
+    elif len(parts) == 3:
         name, attribute, cellType = parts
         matches = char_db.find_cells(name, attribute, cellType)
         
@@ -118,13 +154,13 @@ async def show_cells(ctx, *, name: str):
                             "or try `!command` for help!")
             return
         
-        embed = create_cell_embed(matches[0])
+        embed = create_cells_embed(matches[0])
 
         if len(matches) == 1:
             await ctx.send(embed=embed)
 
         else:
-            view = Paginator(matches, embed_factory=create_cell_embed, author_id=ctx.author.id)
+            view = Paginator(matches, embed_factory=create_cells_embed, author_id=ctx.author.id)
             message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
             view.message = message
 
