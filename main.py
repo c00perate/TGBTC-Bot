@@ -58,8 +58,9 @@ async def show_commands(ctx):
         "Example: `!team noorg`\n\n"
         "`!rank [base/3x/4x/atk/def/hp]`\n"
         "Example: `!rank 3x`\n\n"
-        "`!cell [character] [attribute] [atk/def/hp]`\n"
-        "Example: `!cell kaneki str atk`"
+        "`!cell [character] [attribute] [optional: atk/def/hp]`\n"
+        "Example: `!cell kaneki str atk`\n"
+        "Example: `!cell kaneki str`"
     )
 
 

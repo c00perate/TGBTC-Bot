@@ -116,7 +116,7 @@ def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discor
         color=discord.Color.light_gray()
     )
     
-    embed.set_footer(text="Use !cell [name] [attribute] to view a specific cell")
+    embed.set_footer(text="Use !cell [name] [attribute] [type] to view a specific cell")
     
     return embed
 

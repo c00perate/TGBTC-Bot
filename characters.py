@@ -9,7 +9,7 @@ class CharacterDatabase:
         self.char_index: Dict[tuple, List[Dict]] = defaultdict(list)
         self.char_name: Dict[str, List[Dict]] = defaultdict(list)
         self.cells: List[Dict] = []
-        self.cells_list: Dict[tuple, List[Dict]] = defaultdict(list) #
+        self.cells_list: Dict[tuple, List[Dict]] = defaultdict(list)
         self.cells_index: Dict[tuple, List[Dict]] = defaultdict(list)
         self.rankings: Dict[str, List[Dict]] = {}
         self._load_characters('characters.csv')
