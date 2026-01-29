@@ -14,6 +14,7 @@ intents.message_content = True
 bot = commands.Bot(
     command_prefix='!',
     intents=intents,
+    max_messages=0,
     activity=discord.Game(name="Type !command for a guide!")
 )
 
