@@ -1,5 +1,5 @@
 app = 'tgbtc-bot'
-primary_region = 'yyz'
+primary_region = 'iad'
 
 [env]
   PYTHONUNBUFFERED = '1'
