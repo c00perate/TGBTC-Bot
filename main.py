@@ -95,6 +95,7 @@ async def show_ranking(ctx, category: str):
     stat_name = SEARCH_QUERIES[category_lower]['value']
     top_chars = char_db.get_top_characters(stat_name, limit=len(char_db.characters))
 
+    #try not preloadin geverything
     count = 0
     pages = []
     while(count < len(top_chars)):
@@ -126,10 +127,10 @@ async def show_cells(ctx, *, name: str):
             await ctx.send(embed=embed)
 
         else:
+            #try not preloading all the embeds
             count = 0
             pages = []
             while count < len(matches):
-                # Create embed for this page (10 items)
                 page_embed = create_cells_list_embed(
                     matches[count:count+10], 
                     start_index=count
@@ -141,10 +142,6 @@ async def show_cells(ctx, *, name: str):
             embed = pages[0]
             message = await ctx.send(embed=embed, view=view)
             view.message = message
-        
-            #view = Paginator(matches, embed_factory=create_cells_list_embed, author_id=ctx.author.id)
-            #message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
-            #view.message = message
 
 
     elif len(parts) == 3:

@@ -19,7 +19,7 @@ class CharacterDatabase:
         self._calculate_rankings()
     
     def _load_characters(self, csv_path: str):
-        int_fields = ['Base CP', '3x Cell CP', '4x Cell CP', 'Base ATK', 'Base DEF', 'Base HP']
+        int_fields = ('Base CP', '3x Cell CP', '4x Cell CP', 'Base ATK', 'Base DEF', 'Base HP')
         
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
@@ -92,7 +92,7 @@ class CharacterDatabase:
                         self.cells_list[(nickname, attribute)].append(cell)
     
     def _calculate_rankings(self):
-        stats = ['Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP']
+        stats = ('Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP')
         
         for stat in stats:
             sorted_chars = sorted(self.characters, key=lambda x: x[stat], reverse=True)
