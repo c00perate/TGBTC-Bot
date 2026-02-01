@@ -11,6 +11,7 @@ Ken Kaneki,1st Anniversary,SKL,Anteiku,DPS,207923,231608,233129,36767,28555,5880
 Uta,New Year,STR,No Org,Support,207791,231438,232947,33630,29218,613231,1/10/2026,Exclusive Banner
 Touka Kirishima,New Year,SPD,Anteiku,DPS,207497,231147,232656,36422,28096,590867,12/27/2025,Exclusive Banner, Toka;Btouka
 Iwao Kuroiwa,Arata Proto (Rampage),SKL,CCG,Support,204036,231127,232148,34289,27555,595884,8/23/2025,Limited Banner
+Hinami Fueguchi,Tanabata,STR,Anteiku,Support,203753,230890,231822,34120,28173,585633,6/28/2025,Exclusive Banner, Thina
 Kishou Arima,Second Owl Raid,WIT,CCG,DPS,207176,230831,232342,37256,27586,588963,7/7/2025,Carnival, Warima
 Ken Kaneki,Natsu Matsuri,STR,Anteiku,Balance,203960,230815,231799,35040,27343,590894,8/9/2025,Exclusive Banner, Sken
 Yoshimura,Owl (Anteiku),WIT,Anteiku,DPS,207145,230799,232310,36968,27510,594673,6/2/2025,Carnival, Owl
@@ -39,7 +40,6 @@ Hinami Fueguchi,Growing Maiden,SPD,Anteiku,Support,200173,227920,228848,30926,29
 Matasaka Kamishiro,Shachi,WIT,No Org,Burst,204019,227545,229013,39846,26796,521870,10/31/2024,VIP, Shachi;Sachi
 Touka Kirishima,Natsu Matsuri,SKL,Anteiku,Support,203849,227376,228844,34148,28198,585633,8/9/2025,Fragments, Toka;Stouka
 Sen Takatsuki,Novelist,STR,No Org,Support,200972,227337,228238,32652,27816,574212,3/2/2025,Exclusive Banner
-Hinami Fueguchi,Tanabata,STR,Anteiku,Support,203753,227277,228744,34120,28173,585633,6/28/2025,Exclusive Banner, Thina
 Ayato Kirishima,Tanabata,SPD,Aogiri,Balance,203738,227267,228736,34983,27586,584681,6/28/2025,Chain Pack, Tayato
 Yakumo Oomori,Torture,SKL,Aogiri,DPS,203716,227248,228718,36220,27077,575640,6/19/2025,Limited Banner, Yamori;Jason
 Tatara,Revenge,STR,Aogiri,Balance,203646,227169,228636,34868,28096,575164,5/31/2025,Fragments, Rtatara
@@ -57,7 +57,9 @@ Ken Kaneki,Combat Outfit,STR,Aogiri,Support,195657,222914,223815,33228,25522,545
 Juuzou Suzuya,CCG Maverick,SKL,CCG,DPS,191215,221984,222471,34954,22209,536146,11/18/2024,Limited Banner, Juzo;Gjuzo
 Renji Yomo,Reliable Partner,SPD,Anteiku,Control,194782,221309,222270,33515,25012,550421,1/6/2025,Limited Banner
 Ken Kaneki,Christmas,STR,Anteiku,Control,194112,221052,221913,35242,25267,512354,12/23/2024,Exclusive Banner
+Kaya Irimi,Black Dog,SPD,Anteiku,Balance,187083,220179,220627,34379,21444,502837,10/31/2024,Free
 Ken Kaneki,Awaken,SPD,Anteiku,DPS,189492,220106,220439,35242,21699,517112,10/31/2024,Exclusive Banner, Bken
+Uta,Mask-Maker,SPD,No Org,Support,189255,220088,220441,31501,22719,540904,12/2/2024,Limited Banner
 Renji Yomo,Taciturn Warrior,SPD,Anteiku,Support,189445,219616,220024,32364,25522,488562,10/31/2024,Fragments
 Shuu Tsukiyama,Gourmet,STR,No Org,Balance,188007,219427,220396,29775,23738,540904,10/31/2024,Free, Shu
 Touka Kirishima,Rabbit,SPD,Anteiku,Burst,192399,218917,219797,34954,24757,502837,1/1/2025,Chain Pack, Toka;Rabbit
@@ -67,13 +69,11 @@ Iwao Kuroiwa,Arata Proto,SKL,CCG,Balance,188136,217737,218130,30926,24757,498079
 Yukinori Shinohara,Arata Proto,SKL,CCG,Control,187365,217057,217525,33228,21444,521870,10/31/2024,Free
 Akira Mado,Father's Will,SPD,CCG,Control,191684,217018,217939,34091,25012,502837,12/9/2024,Chain Pack
 Noro,Quick Revival,SPD,Aogiri,DPS,186946,216948,217242,33803,19660,540904,10/31/2024,Free
-Uta,Mask-Maker,SPD,No Org,Support,189255,216522,217363,31501,22719,540904,12/2/2024,Limited Banner
 Mougan Tanakamaru,Battleground Gentleman,STR,CCG,Balance,186397,216388,216801,35242,21954,469528,10/31/2024,Free, Mogan
 Ryouko Fueguchi,Daughter Protector,SKL,Anteiku,Support,188689,216073,216922,30350,26287,493320,11/18/2024,Fragments, Ryoko
 Hinami Fueguchi,Christmas,SPD,Anteiku,Balance,192192,215299,216627,34091,23738,536146,12/23/2024,Chain Pack
 Enji Koma,Devil Ape,STR,Anteiku,Control,186791,215033,215909,33515,23738,469528,10/31/2024,Free
 Touka Kirishima,Blazewing,STR,Anteiku,Burst,187568,214606,215512,33228,22719,502837,10/31/2024,Free, Toka
-Kaya Irimi,Black Dog,SPD,Anteiku,Balance,187083,214263,215039,34379,21444,502837,10/31/2024,Free
 Yakumo Oomori,Jason,STR,Aogiri,Control,187524,214168,214949,34379,23228,474287,10/31/2024,Free, Yamori;Jason
 Hinami Fueguchi,Fledgling Butterfly,SKL,Anteiku,Balance,187492,214054,214855,34379,21189,512354,10/31/2024,Fragments
 Kousuke Houji,Red Tongue Hitman,SPD,CCG,Control,186855,213905,214681,34091,22973,474287,10/31/2024,Free, Hoji
