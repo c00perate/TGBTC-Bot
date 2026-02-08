@@ -3,7 +3,7 @@ from config import *
 from discord.ui import View, Button
 
 class Paginator(View):
-    def __init__(self, items, embed_factory, author_id, timeout=180):
+    def __init__(self, items, embed_factory, author_id, timeout=60):
         super().__init__(timeout=timeout)
         self.items = items
         self.embed_factory = embed_factory
