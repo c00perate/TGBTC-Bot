@@ -6,6 +6,7 @@ from teams import*
 from characters import *
 from embeds import *
 from buttons import *
+from cells import *
 
 
 intents = discord.Intents.default()
@@ -20,13 +21,14 @@ bot = commands.Bot(
 
 char_db = CharacterDatabase()
 team_db = TeamDatabase()
+cell_db = CellsDatabase()
 
 
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now running!')
     print(f'Loaded {len(char_db.characters)} characters')
-    print(f'Loaded {len(char_db.cells)} cells')
+    print(f'Loaded {len(cell_db.cells)} cells')
     print(f'Loaded {len(team_db.teams)} teams')
 
 
@@ -114,7 +116,7 @@ async def show_cells(ctx, *, name: str):
 
     if len(parts) == 2:
         name, attribute = parts
-        matches = char_db.find_cells_list(name, attribute)
+        matches = cell_db.find_cells_list(name, attribute)
         
         if not matches:
             await ctx.send("Cell not found! Make sure you typed correctly "
@@ -126,6 +128,10 @@ async def show_cells(ctx, *, name: str):
             embed = create_cells_embed(matches[0])
             await ctx.send(embed=embed)
 
+        elif len(matches) < 11:
+            embed = create_cells_list_embed(matches)
+            await ctx.send(embed=embed)
+                
         else:
             #try not preloading all the embeds
             count = 0
@@ -146,7 +152,7 @@ async def show_cells(ctx, *, name: str):
 
     elif len(parts) == 3:
         name, attribute, cellType = parts
-        matches = char_db.find_cells(name, attribute, cellType)
+        matches = cell_db.find_cells(name, attribute, cellType)
         
         if not matches:
             await ctx.send("Cell not found! Make sure you typed correctly "
@@ -232,9 +238,26 @@ async def handle_character_search(ctx):
         if len(matches) == 1:
             await ctx.send(embed=embed)
 
-        else:
+        elif len(matches) < 11:
             view = Paginator(matches, embed_factory=create_character_embed, author_id=ctx.author.id)
             message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
+            view.message = message
+
+        else:
+            #try not preloading all the embeds
+            count = 0
+            pages = []
+            while count < len(matches):
+                page_embed = create_name_embed(
+                    matches[count:count+10], 
+                    start_index=count
+                )
+                pages.append(page_embed)
+                count += 10
+            
+            view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
+            embed = pages[0]
+            message = await ctx.send(embed=embed, view=view)
             view.message = message
 
     else:

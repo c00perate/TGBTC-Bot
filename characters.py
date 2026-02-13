@@ -8,14 +8,9 @@ class CharacterDatabase:
         self.characters: List[Dict] = []
         self.char_index: Dict[tuple, List[Dict]] = defaultdict(list)
         self.char_name: Dict[str, List[Dict]] = defaultdict(list)
-        self.cells: List[Dict] = []
-        self.cells_list: Dict[tuple, List[Dict]] = defaultdict(list)
-        self.cells_index: Dict[tuple, List[Dict]] = defaultdict(list)
         self.rankings: Dict[str, List[Dict]] = {}
         self._load_characters('characters.csv')
-        self._load_cells('cells.csv')
         self._build_character_index()
-        self._build_cells_index()
         self._calculate_rankings()
     
     def _load_characters(self, csv_path: str):
@@ -52,44 +47,6 @@ class CharacterDatabase:
                     if nickname:
                         self.char_index[(nickname, attribute)].append(char)
                         self.char_name[nickname].append(char)
-
-    def _load_cells(self, csv_path: str):
-        int_fields = ['Base Stat']
-        
-        with open(csv_path, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                for field in int_fields:
-                    row[field] = int(row[field])
-                row['Nicknames'] = str(row.get('Nicknames', ''))
-                self.cells.append(row)
-
-    def _build_cells_index(self):
-        for cell in self.cells:
-            cell_name = cell['Character'].lower()
-            attribute = cell['Attribute']
-            cellType = cell['Type']
-            
-            key = (cell_name, attribute, cellType)
-            key2 = (cell_name, attribute) 
-            self.cells_index[key].append(cell)
-
-            name_parts = cell_name.split()
-
-            if len(name_parts) == 1:
-                self.cells_list[key2].append(cell) 
-            
-            if len(name_parts) > 1:
-                for part in name_parts:
-                    self.cells_index[(part, attribute, cellType)].append(cell)
-                    self.cells_list[(part, attribute)].append(cell)
-
-            if cell['Nicknames']:
-                for nickname in cell['Nicknames'].lower().split(';'):
-                    nickname = nickname.strip()
-                    if nickname:
-                        self.cells_index[(nickname, attribute, cellType)].append(cell)
-                        self.cells_list[(nickname, attribute)].append(cell)
     
     def _calculate_rankings(self):
         stats = ('Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP')
@@ -119,14 +76,6 @@ class CharacterDatabase:
 
     def find_name(self, name: str) -> List[Dict]:
         return self.char_name.get(name.lower(), [])
-    
-    def find_cells(self, name: str, attribute: str, cellType: str) -> List[Dict]:
-        key = (name.lower(), attribute.upper(), cellType.upper())
-        return self.cells_index.get(key, [])
-    
-    def find_cells_list(self, name: str, attribute: str) -> List[Dict]:
-        key = (name.lower(), attribute.upper())
-        return self.cells_list.get(key, [])
     
     def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
