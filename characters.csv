@@ -1,6 +1,7 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
 Ayato Kirishima,Wings of Ardor,WIT,Aogiri,DPS,212895,236741,238316,39126,28555,602287,2/2/2026,Carnival, Wayato
 Kishou Arima,Invincible Investigator,WIT,CCG,DPS,212336,236164,237733,38465,28682,604666,12/29/2025,Carnival,
+Shuu Tsukiyama,Bloody Feast,PSY,Anteiku,Burst,207113,234452,235431,37544,27051,592294,4/28/2025,Carnival, Shu
 Hideyoshi Nagachika,Best Friend,PSY,No Org,Support,209511,233194,234714,33372,29523,622748,11/24/2025,Carnival, Hide
 Yoshimura,Cleaner,PSY,No Org,DPS,209159,232868,234397,37371,28020,596101,10/20/2025,Carnival, Kuzen;Owl
 Yakumo Oomori,Warrior,WIT,Aogiri,Burst,205736,232754,233707,35817,27816,588488,3/17/2025,Carnival, Yamori;Jason
@@ -18,7 +19,6 @@ Kishou Arima,Second Owl Raid,WIT,CCG,DPS,207176,230831,232342,37256,27586,588963
 Ken Kaneki,Natsu Matsuri,STR,Anteiku,Balance,203960,230815,231799,35040,27343,590894,8/9/2025,Exclusive Banner, Sken
 Yoshimura,Owl (Anteiku),WIT,Anteiku,DPS,207145,230799,232310,36968,27510,594673,6/2/2025,Carnival, Owl
 Koutarou Amon,Doujima-Kai,PSY,CCG,Balance,205312,230776,231745,35530,28835,564696,2/17/2025,Carnival, Kotaro;Doujima
-Shuu Tsukiyama,Bloody Feast,PSY,Anteiku,Burst,207113,230762,232271,37544,27051,592294,4/28/2025,Carnival, Shu
 Juuzou Suzuya,Scorpion 1/56,SPD,CCG,Control,203967,230694,231717,35299,27535,582302,7/26/2025,Limited Banner, Juzo;Bjuzo
 Rize Kamishiro,Christmas,STR,No Org,Balance,206940,230563,232063,35731,28045,594198,12/13/2025,Exclusive Banner
 Kishou Arima,Half Year Anniversary,SKL,CCG,Burst,203568,230550,231501,36738,26618,573737,5/8/2025,Exclusive Banner, Garima
@@ -59,6 +59,7 @@ Ken Kaneki,Combat Outfit,STR,Aogiri,Support,195657,222914,223815,33228,25522,545
 Juuzou Suzuya,CCG Maverick,SKL,CCG,DPS,191215,221984,222471,34954,22209,536146,11/18/2024,Limited Banner, Juzo;Gjuzo
 Renji Yomo,Reliable Partner,SPD,Anteiku,Control,194782,221309,222270,33515,25012,550421,1/6/2025,Limited Banner
 Ken Kaneki,Christmas,STR,Anteiku,Control,194112,221052,221913,35242,25267,512354,12/23/2024,Exclusive Banner
+Akira Mado,Father's Will,SPD,CCG,Control,191684,220683,221156,34091,25012,502837,12/9/2024,Chain Pack
 Kaya Irimi,Black Dog,SPD,Anteiku,Balance,187083,220179,220627,34379,21444,502837,10/31/2024,Free
 Ken Kaneki,Awaken,SPD,Anteiku,DPS,189492,220106,220439,35242,21699,517112,10/31/2024,Exclusive Banner, Bken
 Uta,Mask-Maker,SPD,No Org,Support,189255,220088,220441,31501,22719,540904,12/2/2024,Limited Banner
@@ -69,9 +70,9 @@ Ayato Kirishima,Rebelwing,STR,Aogiri,DPS,191864,218640,219490,35530,22719,526629
 Itori,Helter Skelter,STR,No Org,Support,187830,218379,218738,27185,25522,545662,11/18/2024,Fragments
 Iwao Kuroiwa,Arata Proto,SKL,CCG,Balance,188136,217737,218130,30926,24757,498079,10/31/2024,Free
 Yukinori Shinohara,Arata Proto,SKL,CCG,Control,187365,217057,217525,33228,21444,521870,10/31/2024,Free
-Akira Mado,Father's Will,SPD,CCG,Control,191684,217018,217939,34091,25012,502837,12/9/2024,Chain Pack
 Noro,Quick Revival,SPD,Aogiri,DPS,186946,216948,217242,33803,19660,540904,10/31/2024,Free
 Mougan Tanakamaru,Battleground Gentleman,STR,CCG,Balance,186397,216388,216801,35242,21954,469528,10/31/2024,Free, Mogan
+Ayumu Hogi,Long-haired Ghoul Investigator,SPD,CCG,Balance,186864,216299,216757,33228,23738,474287,10/31/2024,Free
 Ryouko Fueguchi,Daughter Protector,SKL,Anteiku,Support,188689,216073,216922,30350,26287,493320,11/18/2024,Fragments, Ryoko
 Hinami Fueguchi,Christmas,SPD,Anteiku,Balance,192192,215299,216627,34091,23738,536146,12/23/2024,Chain Pack
 Enji Koma,Devil Ape,STR,Anteiku,Control,186791,215033,215909,33515,23738,469528,10/31/2024,Free
@@ -90,6 +91,5 @@ Kureo Mado,Quinque Maniac,STR,CCG,DPS,186780,213262,214083,34091,22464,483804,10
 Koutarou Amon,Twinblades of Justice,STR,CCG,Burst,186960,213236,214017,33803,22719,483804,10/31/2024,Free, Kotaro
 Rize Kamishiro,Binge Eater,SKL,No Org,DPS,186771,213016,213837,33515,22973,479045,10/31/2024,Free
 Younger Bin,Tail Brothers,SKL,Aogiri,DPS,186413,212946,213802,32652,25522,445737,10/31/2024,Free
-Ayumu Hogi,Long-haired Ghoul Investigator,SPD,CCG,Balance,186864,212633,213509,33228,23738,474287,10/31/2024,Free
 Nashiro Yasuhisa,Spotless Shroud,SPD,No Org,DPS,187262,212596,213433,32364,24757,474287,10/31/2024,Free
 Kurona Yasuhisa,Inky Shroud,SPD,No Org,DPS,187232,212566,213403,32364,24757,474287,10/31/2024,Free
