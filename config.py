@@ -62,5 +62,4 @@ FACTION_DISPLAY = {
 }
 
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1xTd6d87NKzWBIdyTXbvqlRKioALJq9LgdFnvcutXztY/edit?usp=sharing"
-YOUTUBE_URL = "https://www.youtube.com/@ThisGreenDino"
 ERROR_URL = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png"

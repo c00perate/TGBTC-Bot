@@ -1,8 +1,8 @@
 import discord
-from config import *
 from discord.ui import View, Button
 
 class Paginator(View):
+
     def __init__(self, items, embed_factory, author_id, timeout=60):
         super().__init__(timeout=timeout)
         self.items = items
@@ -10,12 +10,13 @@ class Paginator(View):
         self.current_index = 0
         self.author_id = author_id
         self.message = None
-
         self.update_buttons()
+
 
     def update_buttons(self):
         self.children[0].disabled = (self.current_index == 0)
         self.children[1].disabled = (self.current_index == len(self.items) - 1)
+
 
     async def interaction_check(self, interaction: discord.Interaction) -> bool:
         if interaction.user.id != self.author_id:
@@ -26,6 +27,7 @@ class Paginator(View):
             return False
         return True    
 
+
     @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
     async def previous_button(self, interaction: discord.Interaction, button: Button):
         if self.current_index > 0:
@@ -34,6 +36,7 @@ class Paginator(View):
             embed = self.embed_factory(self.items[self.current_index])
             await interaction.response.edit_message(embed=embed, view=self)
 
+
     @discord.ui.button(label="Next ▶", style=discord.ButtonStyle.primary)
     async def next_button(self, interaction: discord.Interaction, button: Button):
         if self.current_index < len(self.items) - 1:
@@ -41,6 +44,7 @@ class Paginator(View):
             self.update_buttons()
             embed = self.embed_factory(self.items[self.current_index])
             await interaction.response.edit_message(embed=embed, view=self)
+
 
     async def on_timeout(self):
         for child in self.children:

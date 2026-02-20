@@ -1,6 +1,6 @@
 import discord
 from typing import Dict, List
-from config import *
+from config import FACTION_DISPLAY, COLOUR
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
@@ -35,8 +35,8 @@ def create_character_embed(char: Dict) -> discord.Embed:
     
     return embed
 
-def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
 
+def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     display_name = FACTION_DISPLAY[faction]['name']
     team_members = []
     overall_cp3 = 0
@@ -69,6 +69,7 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     
     return embed
 
+
 def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_num: int) -> discord.Embed:
     description = '\n'.join(
         f"{i}. {char['Character']} [{char['Title']}] - {char[stat_key]}"
@@ -88,6 +89,7 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_n
     
     return embed
 
+
 def create_name_embed(matches: list) -> discord.Embed:
     description = '\n'.join(
         f"{i}. {char['Character']} [{char['Title']}] - {char['Attribute']}"
@@ -104,6 +106,7 @@ def create_name_embed(matches: list) -> discord.Embed:
 
     return embed
 
+
 def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discord.Embed:
     description = '\n'.join(
         f"{start_index + i + 1}. {cell['Character']} [{cell['Title']}] - {cell['Attribute']} ({cell['Type']})"
@@ -119,6 +122,7 @@ def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discor
     embed.set_footer(text="Use !cell [name] [attribute] [type] to view a specific cell")
     
     return embed
+
 
 def create_cells_embed(cell: Dict) -> discord.Embed:
     character_slug = cell['Character'].lower().replace(' ', '')

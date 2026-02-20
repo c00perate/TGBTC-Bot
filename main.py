@@ -1,13 +1,6 @@
 import discord
 from discord.ext import commands
-
-from config import *
-from teams import*
-from characters import *
-from embeds import *
-from buttons import *
-from cells import *
-
+from config import TOKEN, BLOCKED_USERS
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -19,17 +12,12 @@ bot = commands.Bot(
     activity=discord.Game(name="Type !command for a guide!")
 )
 
-char_db = CharacterDatabase()
-team_db = TeamDatabase()
-cell_db = CellsDatabase()
-
 
 @bot.event
 async def on_ready():
     print(f'{bot.user} is now running!')
-    print(f'Loaded {len(char_db.characters)} characters')
-    print(f'Loaded {len(cell_db.cells)} cells')
-    print(f'Loaded {len(team_db.teams)} teams')
+    print(f'Connected to {len(bot.guilds)} servers')
+    print(f'Loaded cogs: {[cog for cog in bot.cogs]}')
 
 
 @bot.event
@@ -66,117 +54,15 @@ async def show_commands(ctx):
         "Example: `!cell kaneki str`"
     )
 
-
-@bot.command(name='team')
-async def show_team(ctx, faction: str):
-    faction_lower = faction.lower()
-    
-    if faction_lower not in FACTION_DISPLAY:
-        await ctx.send("Invalid faction! Try `!command` for help.")
-        return
-    
-    teams = team_db.get_teams_by_faction(faction_lower)
-    
-    if not teams:
-        await ctx.send(f"No teams found for {faction}")
-        return
-    
-    for team in teams:
-        embed = create_team_embed(faction_lower, team, char_db)
-        await ctx.send(embed=embed)
-
-
-@bot.command(name='rank')
-async def show_ranking(ctx, category: str):
-    category_lower = category.lower()
-    
-    if category_lower not in SEARCH_QUERIES:
-        await ctx.send("Invalid parameter! Use `!rank` with a valid query or try `!command` for help!")
-        return
-    
-    stat_name = SEARCH_QUERIES[category_lower]['value']
-    top_chars = char_db.get_top_characters(stat_name, limit=len(char_db.characters))
-
-    #try not preloadin geverything
-    count = 0
-    pages = []
-    while(count < len(top_chars)):
-        pages.append(create_ranking_embed(stat_name, top_chars[count:count+10], stat_name, count+1))
-        count += 10
-
-    view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
-    message = await ctx.send(embed=pages[0], view=view)
-    view.message = message
-
-
-@bot.command(name='cell')
-async def show_cells(ctx, *, name: str):
-
-    parts = name.split()
-
-    if len(parts) == 2:
-        name, attribute = parts
-        matches = cell_db.find_cells_list(name, attribute)
-        
-        if not matches:
-            await ctx.send("Cell not found! Make sure you typed correctly "
-                           "or try `!command` for help!")
-            return
-        
-
-        if len(matches) == 1:
-            embed = create_cells_embed(matches[0])
-            await ctx.send(embed=embed)
-
-        elif len(matches) < 11:
-            embed = create_cells_list_embed(matches)
-            await ctx.send(embed=embed)
-                
-        else:
-            #try not preloading all the embeds
-            count = 0
-            pages = []
-            while count < len(matches):
-                page_embed = create_cells_list_embed(
-                    matches[count:count+10], 
-                    start_index=count
-                )
-                pages.append(page_embed)
-                count += 10
-            
-            view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
-            embed = pages[0]
-            message = await ctx.send(embed=embed, view=view)
-            view.message = message
-
-
-    elif len(parts) == 3:
-        name, attribute, cellType = parts
-        matches = cell_db.find_cells(name, attribute, cellType)
-        
-        if not matches:
-            await ctx.send("Cell not found! Make sure you typed correctly "
-                            "or try `!command` for help!")
-            return
-        
-        embed = create_cells_embed(matches[0])
-
-        if len(matches) == 1:
-            await ctx.send(embed=embed)
-
-        else:
-            view = Paginator(matches, embed_factory=create_cells_embed, author_id=ctx.author.id)
-            message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
-            view.message = message
-
-    else: 
-        await ctx.send("Missing argument! Try `!command` for help.")
-
-    
+ 
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await handle_character_search(ctx)
+        character_cog = bot.get_cog('Characters')
+        if character_cog:
+            await character_cog.handle_character_search(ctx)
+        else:
+            await ctx.send("Cogs not found!")
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("Missing argument! Try `!command` for help.")
     else:
@@ -184,86 +70,15 @@ async def on_command_error(ctx, error):
         await ctx.send("An error occurred. Try `!command` for help!")
 
 
-@bot.command(name='credits')
-async def show_credits(ctx):
-    await ctx.send(
-        "Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server!\n"
-        "Special thanks to Ariku for providing the character thumbnails."
-    )
-
-@bot.command(name='sheet')
-async def show_sheet(ctx):
-    await ctx.send(f"Here's my [sheet]({SHEET_URL})")
+async def setup_hook():
+    await bot.load_extension('cogs.cellCogs')
+    await bot.load_extension('cogs.charCogs')
+    await bot.load_extension('cogs.miscCogs')
+    await bot.load_extension('cogs.rankCogs')
+    await bot.load_extension('cogs.teamCogs')
 
 
-@bot.command(name='youtube')
-async def show_youtube(ctx):
-    await ctx.send(f"Here's my [Youtube channel]({YOUTUBE_URL})")
-
-
-async def handle_character_search(ctx):
-    content = ctx.message.content
-    
-    if not content.startswith('!'):
-        return
-    
-    parts = content[1:].split(maxsplit=1)
-    
-    if len(parts) == 1:
-        name = parts[0]
-        matches = char_db.find_name(name)
-
-        if not matches:
-            await ctx.send("Character not found! Make sure you typed correctly "
-                           "or try `!command` for help!")
-            return
-        elif len(matches) == 1:
-            embed = create_character_embed(matches[0])
-            await ctx.send(embed=embed)
-        else:
-            embed = create_name_embed(matches)
-            await ctx.send(embed=embed)
-
-    elif len(parts) == 2:
-        name, attribute = parts
-        matches = char_db.find_characters(name, attribute)
-        
-        if not matches:
-            await ctx.send("Character not found! Make sure you typed correctly "
-                           "or try `!command` for help!")
-            return
-        
-        embed = create_character_embed(matches[0])
-
-        if len(matches) == 1:
-            await ctx.send(embed=embed)
-
-        elif len(matches) < 11:
-            view = Paginator(matches, embed_factory=create_character_embed, author_id=ctx.author.id)
-            message = await ctx.send(f"Found {len(matches)} matches:\n", embed=embed, view=view)
-            view.message = message
-
-        else:
-            #try not preloading all the embeds
-            count = 0
-            pages = []
-            while count < len(matches):
-                page_embed = create_name_embed(
-                    matches[count:count+10], 
-                    start_index=count
-                )
-                pages.append(page_embed)
-                count += 10
-            
-            view = Paginator(pages, lambda e: e, author_id=ctx.author.id)
-            embed = pages[0]
-            message = await ctx.send(embed=embed, view=view)
-            view.message = message
-
-    else:
-        await ctx.send("Invalid command! Try `!command` for help!")
-        return
-
+bot.setup_hook = setup_hook 
 
 if __name__ == '__main__':
     try:

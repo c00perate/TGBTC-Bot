@@ -9,10 +9,11 @@ class CharacterDatabase:
         self.char_index: Dict[tuple, List[Dict]] = defaultdict(list)
         self.char_name: Dict[str, List[Dict]] = defaultdict(list)
         self.rankings: Dict[str, List[Dict]] = {}
-        self._load_characters('characters.csv')
+        self._load_characters('csv/characters.csv')
         self._build_character_index()
         self._calculate_rankings()
     
+
     def _load_characters(self, csv_path: str):
         int_fields = ('Base CP', '3x Cell CP', '4x Cell CP', 'Base ATK', 'Base DEF', 'Base HP')
         
@@ -24,6 +25,7 @@ class CharacterDatabase:
                 row['Nicknames'] = str(row.get('Nicknames', ''))
                 self.characters.append(row)
     
+
     def _build_character_index(self):
         for char in self.characters:
             character_name = char['Character'].lower()
@@ -48,6 +50,7 @@ class CharacterDatabase:
                         self.char_index[(nickname, attribute)].append(char)
                         self.char_name[nickname].append(char)
     
+
     def _calculate_rankings(self):
         stats = ('Base CP', 'Base ATK', 'Base DEF', 'Base HP', '3x Cell CP', '4x Cell CP')
         
@@ -57,6 +60,7 @@ class CharacterDatabase:
             for rank, char in enumerate(sorted_chars, start=1):
                 char[f'{stat}_rank'] = rank
     
+
     #for teams.py, to display title
     def find_character(self, name: str, attribute: str, title: Optional[str] = None) -> Optional[Dict]:
         key = (name.lower(), attribute.upper())
@@ -70,12 +74,15 @@ class CharacterDatabase:
         
         return matches[0] if matches else None
     
+
     def find_characters(self, name: str, attribute: str) -> List[Dict]:
         key = (name.lower(), attribute.upper())
         return self.char_index.get(key, [])
 
+
     def find_name(self, name: str) -> List[Dict]:
         return self.char_name.get(name.lower(), [])
+    
     
     def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]

@@ -3,13 +3,15 @@ from collections import defaultdict
 from typing import List, Dict
 
 class CellsDatabase:
+
     def __init__(self):
         self.cells: List[Dict] = []
         self.cells_list: Dict[tuple, List[Dict]] = defaultdict(list)
         self.cells_index: Dict[tuple, List[Dict]] = defaultdict(list)
-        self._load_cells('cells.csv')
+        self._load_cells('csv/cells.csv')
         self._build_cells_index()
     
+
     def _load_cells(self, csv_path: str):
         int_fields = ['Base Stat']
         
@@ -20,6 +22,7 @@ class CellsDatabase:
                     row[field] = int(row[field])
                 row['Nicknames'] = str(row.get('Nicknames', ''))
                 self.cells.append(row)
+
 
     def _build_cells_index(self):
         for cell in self.cells:
@@ -48,9 +51,11 @@ class CellsDatabase:
                         self.cells_index[(nickname, attribute, cellType)].append(cell)
                         self.cells_list[(nickname, attribute)].append(cell)
     
+
     def find_cells(self, name: str, attribute: str, cellType: str) -> List[Dict]:
         key = (name.lower(), attribute.upper(), cellType.upper())
         return self.cells_index.get(key, [])
+    
     
     def find_cells_list(self, name: str, attribute: str) -> List[Dict]:
         key = (name.lower(), attribute.upper())
