@@ -4,8 +4,8 @@ Kishou Arima,Invincible Investigator,WIT,CCG,DPS,212336,236164,237733,38465,2868
 Shuu Tsukiyama,Bloody Feast,PSY,Anteiku,Burst,207113,234452,235431,37544,27051,592294,4/28/2025,Carnival, Shu
 Hideyoshi Nagachika,Best Friend,PSY,No Org,Support,209511,233194,234714,33372,29523,622748,11/24/2025,Carnival, Hide
 Yoshimura,Cleaner,PSY,No Org,DPS,209159,232868,234397,37371,28020,596101,10/20/2025,Carnival, Kuzen;Owl
-Hinami Fueguchi,Hina Matsuri,SKL,Anteiku,Support,209048,232700,234210,33141,29218,622272,3/3/2026,Exclusive Banner, Hina
 Yakumo Oomori,Warrior,WIT,Aogiri,Burst,205736,232754,233707,35817,27816,588488,3/17/2025,Carnival, Yamori;Jason
+Hinami Fueguchi,Hina Matsuri,SKL,Anteiku,Support,209048,232700,234210,33141,29218,622272,3/3/2026,Exclusive Banner, Hina
 Nishiki Nishio,Anteiku,STR,Anteiku,Support,208886,232534,234043,33889,28912,615134,2/22/2026,Limited Banner
 Noro,Overpower,WIT,Aogiri,DPS,208607,232291,233812,37026,27688,599908,9/15/2025,Carnival
 Rize Kamishiro,Valentine's Day,SPD,No Org,Balance,208601,232277,233795,34868,28224,621320,2/7/2026,Exclusive Banner
@@ -14,6 +14,7 @@ Uta,The Past,PSY,No Org,DPS,208157,231852,233377,36824,28493,591818,8/11/2025,Ca
 Roma Hoito,Anteiku,SKL,Anteiku,Support,208099,231764,233278,35040,29192,597053,1/17/2026,Limited Banner
 Ken Kaneki,1st Anniversary,SKL,Anteiku,DPS,207923,231608,233129,36767,28555,588012,11/15/2025,Exclusive Banner
 Uta,New Year,STR,No Org,Support,207791,231438,232947,33630,29218,613231,1/10/2026,Exclusive Banner
+Ayato Kirishima,Tanabata,SPD,Aogiri,Balance,203738,231244,232226,34983,27586,584681,6/28/2025,Chain Pack, Tayato
 Touka Kirishima,New Year,SPD,Anteiku,DPS,207497,231147,232656,36422,28096,590867,12/27/2025,Exclusive Banner, Toka;Btouka
 Iwao Kuroiwa,Arata Proto (Rampage),SKL,CCG,Support,204036,231127,232148,34289,27555,595884,8/23/2025,Limited Banner
 Hinami Fueguchi,Tanabata,STR,Anteiku,Support,203753,230890,231822,34120,28173,585633,6/28/2025,Exclusive Banner, Thina;Hina
@@ -32,6 +33,7 @@ Touka Kirishima,Flamewing,SKL,Anteiku,Balance,204484,230023,231003,35242,27561,5
 Juuzou Suzuya,Halloween,STR,CCG,DPS,206334,229947,231444,36163,27890,587184,10/17/2025,Exclusive Banner, Juzo;Rjuzo
 Kishou Arima,Halloween,SPD,CCG,Balance,206323,229928,231423,35386,28316,589131,10/17/2025,Fragments, Barima
 Uta,Rescue,SKL,No Org,Support,203796,229831,230760,33688,28351,589439,7/12/2025,Limited Banner
+Yoshimura,Non-Killing Owl,SKL,Anteiku,Balance,194449,229708,229708,32077,25012,569454,12/16/2024,Limited Banner, Owl;Gowl
 Ayato Kirishima,Easter,SKL,Aogiri,Burst,202623,229669,230591,35616,26414,581826,4/11/2025,Exclusive Banner, Eayato
 Kishou Arima,CCG's Reaper,PSY,CCG,Balance,202383,229589,230545,34954,22973,645588,11/18/2024,Carnival, Ixa
 Kureo Mado,Fueguchi 2,SPD,CCG,Support,202616,229434,229886,34091,27816,569454,3/31/2025,Chain Pack
@@ -44,7 +46,6 @@ Hinami Fueguchi,Growing Maiden,SPD,Anteiku,Support,200173,227920,228848,30926,29
 Matasaka Kamishiro,Shachi,WIT,No Org,Burst,204019,227545,229013,39846,26796,521870,10/31/2024,VIP, Shachi;Sachi
 Touka Kirishima,Natsu Matsuri,SKL,Anteiku,Support,203849,227376,228844,34148,28198,585633,8/9/2025,Fragments, Toka;Stouka
 Sen Takatsuki,Novelist,STR,No Org,Support,200972,227337,228238,32652,27816,574212,3/2/2025,Exclusive Banner
-Ayato Kirishima,Tanabata,SPD,Aogiri,Balance,203738,227267,228736,34983,27586,584681,6/28/2025,Chain Pack, Tayato
 Yakumo Oomori,Torture,SKL,Aogiri,DPS,203716,227248,228718,36220,27077,575640,6/19/2025,Limited Banner, Yamori;Jason
 Tatara,Revenge,STR,Aogiri,Balance,203646,227169,228636,34868,28096,575164,5/31/2025,Fragments, Rtatara
 Juuzou Suzuya,Pet Boy,STR,No Org,Control,203620,227150,228619,35271,28020,572309,5/22/2025,Limited Banner, Juzo
@@ -55,7 +56,6 @@ Touka Kirishima,Easter,SPD,Anteiku,DPS,202500,225973,227424,35443,27113,568678,4
 Touka Kirishima,Anteiku,STR,Anteiku,Balance,202350,225802,227245,33803,27306,583729,3/28/2025,Limited Banner, Toka;Coffee
 Eto,Bandaged Mysteries,SKL,Aogiri,Support,196145,225258,226224,32940,24503,564696,1/20/2025,Limited Banner
 Shuu Tsukiyama,Mr. MM,SPD,No Org,Balance,201377,224810,226247,34954,27561,555179,3/14/2025,Limited Banner, Shu
-Yoshimura,Non-Killing Owl,SKL,Anteiku,Balance,194449,224779,225176,32077,25012,569454,12/16/2024,Limited Banner, Owl;Gowl
 Kishou Arima,Lightning God,STR,CCG,Burst,192630,224440,224898,34954,24503,512354,10/31/2024,Fragments, Rarima
 Ken Kaneki,Combat Outfit,STR,Aogiri,Support,195657,222914,223815,33228,25522,545662,1/29/2025,Exclusive Banner, Mken
 Juuzou Suzuya,CCG Maverick,SKL,CCG,DPS,191215,221984,222471,34954,22209,536146,11/18/2024,Limited Banner, Juzo;Gjuzo
