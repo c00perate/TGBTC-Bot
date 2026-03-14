@@ -10,6 +10,7 @@ Hinami Fueguchi,Hina Matsuri,SKL,Anteiku,Support,209048,232700,234210,33141,2921
 Nishiki Nishio,Anteiku,STR,Anteiku,Support,208886,232534,234043,33889,28912,615134,2/22/2026,Limited Banner
 Noro,Overpower,WIT,Aogiri,DPS,208607,232291,233812,37026,27688,599908,9/15/2025,Carnival
 Rize Kamishiro,Valentine's Day,SPD,No Org,Balance,208601,232277,233795,34868,28224,621320,2/7/2026,Exclusive Banner
+Nishiki Nishio,Taiikusai,SPD,Anteiku,DPS,204496,232032,233003,35904,27281,580398,9/6/2025,Exclusive Banner
 Sen Takatsuki,Elegant Deception,SPD,No Org,Support,208335,231992,233504,33285,29523,616086,1/24/2026,Limited Banner
 Uta,The Past,PSY,No Org,DPS,208157,231852,233377,36824,28493,591818,8/11/2025,Carnival, GOAT
 Roma Hoito,Anteiku,SKL,Anteiku,Support,208099,231764,233278,35040,29192,597053,1/17/2026,Limited Banner
@@ -26,6 +27,7 @@ Koutarou Amon,Doujima-Kai,PSY,CCG,Balance,205312,230776,231745,35530,28835,56469
 Juuzou Suzuya,Scorpion 1/56,SPD,CCG,Control,203967,230694,231717,35299,27535,582302,7/26/2025,Limited Banner, Juzo;Bjuzo
 Rize Kamishiro,Christmas,STR,No Org,Balance,206940,230563,232063,35731,28045,594198,12/13/2025,Exclusive Banner
 Kishou Arima,Half Year Anniversary,SKL,CCG,Burst,203568,230550,231501,36738,26618,573737,5/8/2025,Exclusive Banner, Garima
+Yukinori Shinohara,Arata Proto (Rampage),SPD,CCG,Control,203344,230498,231440,35702,27357,570406,4/25/2025,Limited Banner, Shino
 Kousuke Houji,Chi She,SKL,CCG,Support,206740,230343,231836,34350,28759,596101,11/29/2025,Limited Banner, Hoji
 Ayato Kirishima,Wings of Power-seeker,PSY,Aogiri,DPS,204392,230263,231302,35817,26796,588488,1/13/2025,Carnival, Cayato
 Touka Kirishima,1st Anniversary,STR,Anteiku,Support,206641,230253,231750,34062,29014,598956,11/1/2025,Exclusive Banner, Toka;Atouka
@@ -42,7 +44,6 @@ Naki,Prisoner,SPD,Aogiri,Support,205505,229068,230548,34062,28504,592770,10/4/20
 Kiyoko Aura,Special Class Ghoul Investigator,STR,CCG,Support,204999,228523,229990,32796,28784,595149,9/20/2025,Limited Banner
 Shuu Tsukiyama,Mr. MM,SPD,No Org,Balance,201377,228457,229407,34954,27561,555179,3/14/2025,Limited Banner, Shu
 Tatara,Wordless Avenger,SPD,Aogiri,DPS,198231,228349,229319,34379,26542,545662,2/23/2025,Limited Banner
-Nishiki Nishio,Taiikusai,SPD,Anteiku,DPS,204496,228039,229513,35904,27281,580398,9/6/2025,Exclusive Banner
 Touka Kirishima,Taiikusai,SKL,Anteiku,Control,204407,227935,229404,34005,28300,586584,9/6/2025,Fragments, Toka
 Hinami Fueguchi,Growing Maiden,SPD,Anteiku,Support,200173,227920,228848,30926,29345,559937,2/8/2025,Chain Pack,Hina
 Matasaka Kamishiro,Shachi,WIT,No Org,Burst,204019,227545,229013,39846,26796,521870,10/31/2024,VIP, Shachi;Sachi
@@ -53,7 +54,6 @@ Tatara,Revenge,STR,Aogiri,Balance,203646,227169,228636,34868,28096,575164,5/31/2
 Juuzou Suzuya,Pet Boy,STR,No Org,Control,203620,227150,228619,35271,28020,572309,5/22/2025,Limited Banner, Juzo
 Yoshitoki Washuu,Chief,SPD,CCG,Support,203628,227115,228570,32767,28606,587060,6/5/2025,Limited Banner
 Koutarou Amon,Half Year Anniversary,SKL,CCG,DPS,203423,226931,228393,35184,27586,574688,5/8/2025,Chain Pack, Kotaro;Gamon
-Yukinori Shinohara,Arata Proto (Rampage),SPD,CCG,Control,203344,226851,228312,35702,27357,570406,4/25/2025,Limited Banner
 Touka Kirishima,Easter,SPD,Anteiku,DPS,202500,225973,227424,35443,27113,568678,4/11/2025,Chain Pack, Toka;Etouka
 Touka Kirishima,Anteiku,STR,Anteiku,Balance,202350,225802,227245,33803,27306,583729,3/28/2025,Limited Banner, Toka;Coffee
 Eto,Bandaged Mysteries,SKL,Aogiri,Support,196145,225258,226224,32940,24503,564696,1/20/2025,Limited Banner
@@ -73,7 +73,7 @@ Ayato Kirishima,Rebelwing,STR,Aogiri,DPS,191864,218640,219490,35530,22719,526629
 Itori,Helter Skelter,STR,No Org,Support,187830,218379,218738,27185,25522,545662,11/18/2024,Fragments
 Iwao Kuroiwa,Arata Proto,SKL,CCG,Balance,188136,217737,218130,30926,24757,498079,10/31/2024,Free
 Yukinori Shinohara,Arata Proto,SKL,CCG,Control,187365,217057,217525,33228,21444,521870,10/31/2024,Free
-Noro,Quick Revival,SPD,Aogiri,DPS,186946,216948,217242,33803,19660,540904,10/31/2024,Free
+Noro,Quick Revival,SPD,Aogiri,DPS,186946,216948,217242,33803,19660,540904,10/31/2024,Free, Shino
 Mougan Tanakamaru,Battleground Gentleman,STR,CCG,Balance,186397,216388,216801,35242,21954,469528,10/31/2024,Free, Mogan
 Ayumu Hogi,Long-haired Ghoul Investigator,SPD,CCG,Balance,186864,216299,216757,33228,23738,474287,10/31/2024,Free
 Ryouko Fueguchi,Daughter Protector,SKL,Anteiku,Support,188689,216073,216922,30350,26287,493320,11/18/2024,Fragments, Ryoko
