@@ -38,10 +38,9 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-@bot.command(name='command')
+@bot.command(name='command', aliases=['commands'])
 async def show_commands(ctx):
     await ctx.send(
-        "Commands:\n\n"
         "`![character] [optional: skl/spd/str/psy/wit]`\n"
         "Example: `!arima wit`\n"
         "Example: `!arima`\n\n"
