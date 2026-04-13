@@ -12,7 +12,8 @@ COLOUR = {
     "PSY": discord.Color.yellow(),
     "SPD": discord.Color.blue(),
     "SKL": discord.Color.green(),
-    "STR": discord.Color.red()
+    "STR": discord.Color.red(),
+    "DST": discord.Color.light_embed()
 }
 
 SEARCH_QUERIES = {

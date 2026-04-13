@@ -1,4 +1,5 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
+Ken Kaneki,√A,DST,Anteiku,Balance,228521,252401,253987,39414,28478,609900,4/13/2026,Carnival, DST
 Touka Kirishima,Flame Strike,PSY,Anteiku,DPS,213519,237383,238963,38925,28402,613707,3/9/2026,Carnival, Toka
 Ayato Kirishima,Wings of Ardor,WIT,Aogiri,DPS,212895,236741,238316,39126,28555,602287,2/2/2026,Carnival, Wayato
 Kishou Arima,Invincible Investigator,WIT,CCG,DPS,212336,236164,237733,38465,28682,604666,12/29/2025,Carnival,
@@ -71,6 +72,7 @@ Renji Yomo,Taciturn Warrior,SPD,Anteiku,Support,189445,219616,220024,32364,25522
 Shuu Tsukiyama,Gourmet,STR,No Org,Balance,188007,219427,220396,29775,23738,540904,10/31/2024,Free, Shu
 Touka Kirishima,Rabbit,SPD,Anteiku,Burst,192399,218917,219797,34954,24757,502837,1/1/2025,Chain Pack, Toka;Rabbit
 Ayato Kirishima,Rebelwing,STR,Aogiri,DPS,191864,218640,219490,35530,22719,526629,12/16/2024,Exclusive Banner, Rayato
+Touka Kirishima,Blazewing,STR,Anteiku,Burst,187568,218444,218892,33228,22719,502837,10/31/2024,Free, Toka
 Itori,Helter Skelter,STR,No Org,Support,187830,218379,218738,27185,25522,545662,11/18/2024,Fragments
 Iwao Kuroiwa,Arata Proto,SKL,CCG,Balance,188136,217737,218130,30926,24757,498079,10/31/2024,Free
 Yukinori Shinohara,Arata Proto,SKL,CCG,Control,187365,217057,217525,33228,21444,521870,10/31/2024,Free
@@ -80,7 +82,6 @@ Ayumu Hogi,Long-haired Ghoul Investigator,SPD,CCG,Balance,186864,216299,216757,3
 Ryouko Fueguchi,Daughter Protector,SKL,Anteiku,Support,188689,216073,216922,30350,26287,493320,11/18/2024,Fragments, Ryoko
 Hinami Fueguchi,Christmas,SPD,Anteiku,Balance,192192,215299,216627,34091,23738,536146,12/23/2024,Chain Pack,Hina
 Enji Koma,Devil Ape,STR,Anteiku,Control,186791,215033,215909,33515,23738,469528,10/31/2024,Free
-Touka Kirishima,Blazewing,STR,Anteiku,Burst,187568,214606,215512,33228,22719,502837,10/31/2024,Free, Toka
 Yakumo Oomori,Jason,STR,Aogiri,Control,187524,214168,214949,34379,23228,474287,10/31/2024,Free, Yamori;Jason
 Hinami Fueguchi,Fledgling Butterfly,SKL,Anteiku,Balance,187492,214054,214855,34379,21189,512354,10/31/2024,Fragments,Hina
 Kousuke Houji,Red Tongue Hitman,SPD,CCG,Control,186855,213905,214681,34091,22973,474287,10/31/2024,Free, Hoji
