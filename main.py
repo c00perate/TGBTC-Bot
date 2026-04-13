@@ -31,8 +31,8 @@ async def on_message(message):
     if bot.user.mentioned_in(message) and not message.mention_everyone:
         if message.author.id == 1164259640452857906:
             await message.channel.send("hi matti")
-        else:
-            await message.channel.send("Try `!command` for help!")
+        #else:
+        #    await message.channel.send("Try `!command` for help!")
         return
     
     await bot.process_commands(message)
