@@ -64,3 +64,6 @@ FACTION_DISPLAY = {
 
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1xTd6d87NKzWBIdyTXbvqlRKioALJq9LgdFnvcutXztY/edit?usp=sharing"
 ERROR_URL = "https://raw.githubusercontent.com/c00perate/btc-images/main/error.png"
+
+INFO = "All Cell CP include LR cells without upgrades\nData taken from Strategic Arena"
+SERVER = "https://discord.gg/BE5GaYk6wq"

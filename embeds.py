@@ -1,6 +1,6 @@
 import discord
 from typing import Dict, List
-from config import FACTION_DISPLAY, COLOUR
+from config import FACTION_DISPLAY, COLOUR, SERVER
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
@@ -23,15 +23,14 @@ def create_character_embed(char: Dict) -> discord.Embed:
                        f"**DEF:** {char['Base DEF']} (#{char['Base DEF_rank']})\n"
                        f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
 
-        ("Details", f"**Release Date:** {char['Release Date']}\n"
+        (" ", f"**Release Date:** {char['Release Date']}\n"
                     f"**Obtained:** {char['Obtained']}", False),
     ]
     
     for name, value, inline in fields:
         embed.add_field(name=name, value=value, inline=inline)
     
-    embed.set_footer(text="All Cell CP include LR cells without upgrades\n"
-                          "Data taken from Strategic Arena")
+    embed.set_footer(text=SERVER)
     
     return embed
 
@@ -83,8 +82,7 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_n
     )
     
     embed.set_footer(
-        text="All Cell CP include LR cells without upgrades\n"
-             "Data taken from Strategic Arena"
+        text=SERVER
     )
     
     return embed
@@ -132,7 +130,7 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
     effect = cell['Effect'] if cell['Effect'] else None
     
     embed = discord.Embed(
-        title=f"{cell['Character']} [{cell['Title']}]\n{cell['Type']} Cell",
+        title=f"{cell['Character']} [{cell['Title']}]",
         description=f"**Base Stat: {cell['Base Stat']} {cell['Type']}**",
         color=COLOUR[cell['Attribute']]
     )
