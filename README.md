@@ -1,6 +1,7 @@
 # TG:BTC Bot
 
-Try `!command` to view full command list
+Discord bot made for the game, Tokyo Ghoul: Break the Chains.
+Try `!command` to view full command list.
 
 ## Setup
 1. Install dependencies: `pip install -r requirements.txt`
