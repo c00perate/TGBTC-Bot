@@ -1,6 +1,7 @@
 import csv
 from collections import defaultdict
 from typing import Optional, List, Dict
+from cells import CellsDatabase
 
 class CharacterDatabase:
     
@@ -12,6 +13,7 @@ class CharacterDatabase:
         self._load_characters('csv/characters.csv')
         self._build_character_index()
         self._calculate_rankings()
+        self._has_cell()
     
 
     def _load_characters(self, csv_path: str):
@@ -23,6 +25,7 @@ class CharacterDatabase:
                 for field in int_fields:
                     row[field] = int(row[field])
                 row['Nicknames'] = str(row.get('Nicknames', ''))
+                row['LR Cell(s)'] = []
                 self.characters.append(row)
     
 
@@ -87,3 +90,17 @@ class CharacterDatabase:
     def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
     
+    def _has_cell(self): 
+        cell_db = CellsDatabase() 
+        for cell in cell_db.cells:
+            char_name = cell['Character'].lower()
+            char_title = cell['Title'].lower()
+            char_attr = cell['Attribute'].upper()
+            
+            key = (char_name, char_attr)
+            matching_chars = self.char_index.get(key, [])
+            
+            for match in matching_chars:
+                if match['Title'].lower() == char_title:
+                    match['LR Cell(s)'].append(cell['Type'])
+                    break

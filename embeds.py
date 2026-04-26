@@ -13,7 +13,9 @@ def create_character_embed(char: Dict) -> discord.Embed:
         color=COLOUR[char['Attribute']]
     )
     embed.set_thumbnail(url=thumbnail_url)
-    
+
+    cell_des = ", ".join(char['LR Cell(s)']) if char['LR Cell(s)'] else "None"
+
     fields = [
         ("Combat Power", f"**Base:** {char['Base CP']} (#{char['Base CP_rank']})\n"
                          f"**3x Cell:** {char['3x Cell CP']} (#{char['3x Cell CP_rank']})\n"
@@ -24,7 +26,8 @@ def create_character_embed(char: Dict) -> discord.Embed:
                        f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
 
         (" ", f"**Release Date:** {char['Release Date']}\n"
-                    f"**Obtained:** {char['Obtained']}", False),
+              f"**Obtained:** {char['Obtained']}\n"
+              f"**LR Cell(s):** {cell_des}", False),
     ]
     
     for name, value, inline in fields:
@@ -66,6 +69,8 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
                                              f"**4x Cell:** {str(overall_cp4)}")
     embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/main/factions/{faction.lower()}.png")
     
+    embed.set_footer(text=SERVER)
+
     return embed
 
 
@@ -146,5 +151,7 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
 
     if effect:
         embed.set_footer(text=effect)
-    
+    else:
+        embed.set_footer(text=SERVER)
+        
     return embed
