@@ -1,18 +1,24 @@
 import discord
+from urllib.request import urlopen
 from typing import Dict, List
-from config import FACTION_DISPLAY, COLOUR, SERVER
+from config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
     title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
-    
+
     embed = discord.Embed(
         title=f"{char['Character']} [{char['Title']}]",
         description=f"**{char['Attribute']}** | **{char['Faction']}** | **{char['Tactic']}**",
         color=COLOUR[char['Attribute']]
     )
-    embed.set_thumbnail(url=thumbnail_url)
+
+    try:
+        urlopen(thumbnail_url)
+        embed.set_thumbnail(url=thumbnail_url)
+    except:
+        embed.set_thumbnail(url=ERROR_URL)        
 
     cell_des = ", ".join(char['LR Cell(s)']) if char['LR Cell(s)'] else "None"
 
@@ -132,14 +138,19 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
     title_slug = cell['Title'].lower().replace(' ', '').replace('/', '')
     type_slug = cell['Type'].lower()
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/lrcells/{character_slug}-{title_slug}-{type_slug}.png"
-    effect = cell['Effect'] if cell['Effect'] else None
+    effect = cell['Effect'] if cell['Effect'] else None  
+
+    try:
+        urlopen(thumbnail_url)
+        embed.set_thumbnail(url=thumbnail_url)
+    except:
+        embed.set_thumbnail(url=ERROR_URL)  
     
     embed = discord.Embed(
         title=f"{cell['Character']} [{cell['Title']}]",
         description=f"**Base Stat: {cell['Base Stat']} {cell['Type']}**",
         color=COLOUR[cell['Attribute']]
     )
-    embed.set_thumbnail(url=thumbnail_url)
     
     fields = [
         ("Cell Stats", f"+{cell['Stat 1']} \t+{cell['Stat 2']} \n+{cell['Stat 3']} \t+{cell['Stat 4']}", False),
@@ -153,5 +164,5 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
         embed.set_footer(text=effect)
     else:
         embed.set_footer(text=SERVER)
-        
+            
     return embed
