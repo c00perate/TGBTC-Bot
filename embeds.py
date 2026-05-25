@@ -1,5 +1,5 @@
 import discord
-from urllib.request import urlopen
+#from urllib.request import urlopen
 from typing import Dict, List
 from config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
 
@@ -14,11 +14,13 @@ def create_character_embed(char: Dict) -> discord.Embed:
         color=COLOUR[char['Attribute']]
     )
 
+    embed.set_thumbnail(url=thumbnail_url)
+    '''
     try:
         urlopen(thumbnail_url)
         embed.set_thumbnail(url=thumbnail_url)
     except:
-        embed.set_thumbnail(url=ERROR_URL)        
+        embed.set_thumbnail(url=ERROR_URL)  '''      
 
     cell_des = ", ".join(char['LR Cell(s)']) if char['LR Cell(s)'] else "None"
 
@@ -140,11 +142,14 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/lrcells/{character_slug}-{title_slug}-{type_slug}.png"
     effect = cell['Effect'] if cell['Effect'] else None  
 
+    embed.set_thumbnail(url=thumbnail_url)
+
+    '''
     try:
         urlopen(thumbnail_url)
         embed.set_thumbnail(url=thumbnail_url)
     except:
-        embed.set_thumbnail(url=ERROR_URL)  
+        embed.set_thumbnail(url=ERROR_URL)  '''
     
     embed = discord.Embed(
         title=f"{cell['Character']} [{cell['Title']}]",
