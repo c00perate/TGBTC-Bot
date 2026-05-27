@@ -142,7 +142,6 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/lrcells/{character_slug}-{title_slug}-{type_slug}.png"
     effect = cell['Effect'] if cell['Effect'] else None  
 
-    embed.set_thumbnail(url=thumbnail_url)
 
     '''
     try:
@@ -157,6 +156,8 @@ def create_cells_embed(cell: Dict) -> discord.Embed:
         color=COLOUR[cell['Attribute']]
     )
     
+    embed.set_thumbnail(url=thumbnail_url)
+
     fields = [
         ("Cell Stats", f"+{cell['Stat 1']} \t+{cell['Stat 2']} \n+{cell['Stat 3']} \t+{cell['Stat 4']}", False),
         ("Cell Effect", f"{cell['Description']}", False),
