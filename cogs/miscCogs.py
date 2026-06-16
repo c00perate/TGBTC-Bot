@@ -44,7 +44,7 @@ class Misc(commands.Cog):
     async def remove_role(self, ctx, member: discord.Member, role: str):
 
         #remove the and later this is just for tests
-        if not any(role.name == "Mod" for role in ctx.author.roles) and (ctx.author.id == 715421855716212777 or ctx.author.id == 482343889567744021):
+        if not any(role.name == "Mod" for role in ctx.author.roles) and (ctx.author.id != 715421855716212777 or ctx.author.id != 482343889567744021):
             await ctx.send("boii u really though :joy: :joy: :v:")
             return
 
