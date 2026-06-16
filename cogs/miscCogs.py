@@ -40,30 +40,30 @@ class Misc(commands.Cog):
             await ctx.send("Couldn't assign role.")
             print(e)
 
-@commands.command(name='removerole')
-async def remove_role(self, ctx, member: discord.Member, role: str):
+    @commands.command(name='removerole')
+    async def remove_role(self, ctx, member: discord.Member, role: str):
 
-    #remove the and later this is just for tests
-    if not any(role.name == "Mod" for role in ctx.author.roles) and (ctx.author.id == 715421855716212777 or ctx.author.id == 482343889567744021):
-        await ctx.send("boii u really though :joy: :joy: :v:")
-        return
+        #remove the and later this is just for tests
+        if not any(role.name == "Mod" for role in ctx.author.roles) and (ctx.author.id == 715421855716212777 or ctx.author.id == 482343889567744021):
+            await ctx.send("boii u really though :joy: :joy: :v:")
+            return
 
-    role = discord.utils.find(
-        lambda r: r.name.lower() == role.lower(),
-        ctx.guild.roles
-    )
-    
-    if not role:
-        await ctx.send("Role not found.")
-        return
+        role = discord.utils.find(
+            lambda r: r.name.lower() == role.lower(),
+            ctx.guild.roles
+        )
+        
+        if not role:
+            await ctx.send("Role not found.")
+            return
 
-    try:
-        await member.remove_roles(role)
-        await ctx.send(f"{member.mention} is no longer {role.name}!")
+        try:
+            await member.remove_roles(role)
+            await ctx.send(f"{member.mention} is no longer {role.name}!")
 
-    except Exception as e:
-        await ctx.send("Couldn't remove role.")
-        print(e)
+        except Exception as e:
+            await ctx.send("Couldn't remove role.")
+            print(e)
 
 async def setup(bot):
     await bot.add_cog(Misc(bot))
