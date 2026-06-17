@@ -45,7 +45,7 @@ class Misc(commands.Cog):
 
         #remove the and later this is just for tests
         if not any(role.name == "Mod" for role in ctx.author.roles) and (ctx.author.id != 715421855716212777 or ctx.author.id != 482343889567744021):
-            await ctx.send("boii u really though :joy: :joy: :v:")
+            await ctx.send("boii u really thought :joy: :joy: :v:")
             return
 
         role = discord.utils.find(
@@ -59,7 +59,7 @@ class Misc(commands.Cog):
 
         try:
             await member.remove_roles(role)
-            await ctx.send(f"{member.mention} is no longer {role.name}!")
+            await ctx.send(f"{member.mention} is no longer a {role.name}!")
 
         except Exception as e:
             await ctx.send("Couldn't remove role.")
