@@ -1,12 +1,12 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
-Haise Sasaki,Sealed Memory,WIT,CCG,Balance,233535,258186,260029,43980,29159,770244,6/22/2026,Carnival,
+Haise Sasaki,Sealed Memory,WIT,CCG,Balance,234392,258400,260029,39857,29159,631014,6/22/2026,Carnival,
 Nishiki Nishio,Orochi,PSY,No Org,Burst,233949,257852,259446,39069,28937,614183,5/18/2026,Carnival,
 Ken Kaneki,√A,DST,Anteiku,Balance,233712,257592,259178,39414,28478,609900,4/13/2026,Carnival,DST
 Touka Kirishima,Flame Strike,PSY,Anteiku,DPS,232833,256697,258277,38925,28402,613707,3/9/2026,Carnival,Toka
 Ayato Kirishima,Wings of Ardor,WIT,Aogiri,DPS,232187,256033,257608,39126,28555,602287,2/2/2026,Carnival,Wayato
 Ayato Kirishima,1.5th Anniversary,STR,Aogiri,DPS,230174,253954,255507,38004,28300,603714,4/28/2026,Exclusive Banner,Anniayato;Rayato
+Touka Kirishima,June Bride,STR,Anteiku,Balance,229945,253807,255387,37440,28751,630062,09/23/2026,Limited Banner,Bridetoka;toka
 Mutsuki Tooru,Cowardly Investigator,SKL,CCG,Support,229344,253086,254626,36163,28377,618941,6/9/2026,Limited Banner,Toru
-Touka Kirishima,June Bride,STR,Anteiku,Balence,229122,253601,255387,41510,28751,762021,09/23/2026,Limited Banner,Bridetoka;toka
 Urie Kuki,Class Monitor,SPD,CCG,Balance,229093,252831,254370,36997,28122,609424,5/26/2026,Limited Banner,
 Haise Sasaki,Mentor,SPD,CCG,DPS,228786,252512,254047,37573,27969,599432,5/11/2026,Exclusive Banner,
 Kishou Arima,Invincible Investigator,WIT,CCG,DPS,231604,255432,257001,38465,28682,604666,12/29/2025,Carnival,Darima
@@ -36,7 +36,7 @@ Yakumo Oomori,Warrior,WIT,Aogiri,Burst,224587,251605,252558,35817,27816,588488,3
 Shuu Tsukiyama,Bloody Feast,PSY,Anteiku,Burst,224402,251741,252720,37544,27051,592294,4/28/2025,Carnival,Shu
 Naki,Prisoner,SPD,Aogiri,Support,224228,247791,249271,34062,28504,592770,10/4/2025,Limited Banner,
 Koutarou Amon,Doujima-Kai,PSY,CCG,Balance,224124,249588,250557,35530,28835,564696,2/17/2025,Carnival,Kotaro;Doujima
-Kiyoko Aura,Special Class Ghoul Investigator,STR,CCG,Support,223712,247236,248703,32796,28784,595149,9/20/2025,Limited Banner,
+Kiyoko Aura,Special Class Ghoul Investigator,STR,CCG,Support,223712,251699,252621,32796,28784,595149,9/20/2025,Limited Banner,
 Touka Kirishima,Flamewing,SKL,Anteiku,Balance,223259,248798,249778,35242,27561,583729,2/8/2025,Exclusive Banner,Toka;Charm;Flamewing
 Ayato Kirishima,Wings of Power-seeker,PSY,Aogiri,DPS,223137,249008,250047,35817,26796,588488,1/13/2025,Carnival,Cayato
 Nishiki Nishio,Taiikusai,SPD,Anteiku,DPS,223114,250650,251621,35904,27281,580398,9/6/2025,Exclusive Banner,
