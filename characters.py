@@ -13,7 +13,6 @@ class CharacterDatabase:
         self._load_characters('csv/characters.csv')
         self._build_character_index()
         self._calculate_rankings()
-        self._has_cell()
     
 
     def _load_characters(self, csv_path: str):
@@ -63,22 +62,6 @@ class CharacterDatabase:
             for rank, char in enumerate(sorted_chars, start=1):
                 char[f'{stat}_rank'] = rank
     
-
-    def _has_cell(self): 
-        cell_db = CellsDatabase() 
-        for cell in cell_db.cells:
-            char_name = cell['Character'].lower()
-            char_title = cell['Title'].lower()
-            char_attr = cell['Attribute'].upper()
-            
-            key = (char_name, char_attr)
-            matching_chars = self.char_index.get(key, [])
-            
-            for match in matching_chars:
-                if match['Title'].lower() == char_title:
-                    match['LR Cell(s)'].append(cell['Type'])
-                    break
-
 
     #for teams.py, to display title
     def find_character(self, name: str, attribute: str, title: Optional[str] = None) -> Optional[Dict]:
