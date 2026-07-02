@@ -2,7 +2,6 @@ import discord
 #from urllib.request import urlopen
 from typing import Dict, List
 from config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
-import time
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
@@ -76,7 +75,7 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     embed.add_field(name="Ultimate", value=team['ult'], inline=False)
     embed.add_field(name="Overall CP", value=f"**3x Cell:** {str(overall_cp3)}\n"
                                              f"**4x Cell:** {str(overall_cp4)}")
-    embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/main/factions/{faction.lower()}.png?v=.png?v={int(time.time())}")
+    embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/main/factions/{faction.lower()}.png")
     
     embed.set_footer(text=SERVER)
 
