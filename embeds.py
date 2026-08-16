@@ -1,19 +1,29 @@
 import discord
-from typing import Dict
-from config import *
+#from urllib.request import urlopen
+from typing import Dict, List
+from config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')
     title_slug = char['Title'].lower().replace(' ', '').replace('/', '')
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/characters/{character_slug}-{title_slug}.png"
-    
+
     embed = discord.Embed(
         title=f"{char['Character']} [{char['Title']}]",
         description=f"**{char['Attribute']}** | **{char['Faction']}** | **{char['Tactic']}**",
         color=COLOUR[char['Attribute']]
     )
+
     embed.set_thumbnail(url=thumbnail_url)
-    
+    '''
+    try:
+        urlopen(thumbnail_url)
+        embed.set_thumbnail(url=thumbnail_url)
+    except:
+        embed.set_thumbnail(url=ERROR_URL)  '''      
+
+    cell_des = ", ".join(char['LR Cell(s)']) if char['LR Cell(s)'] else "None"
+
     fields = [
         ("Combat Power", f"**Base:** {char['Base CP']} (#{char['Base CP_rank']})\n"
                          f"**3x Cell:** {char['3x Cell CP']} (#{char['3x Cell CP_rank']})\n"
@@ -23,20 +33,20 @@ def create_character_embed(char: Dict) -> discord.Embed:
                        f"**DEF:** {char['Base DEF']} (#{char['Base DEF_rank']})\n"
                        f"**HP:** {char['Base HP']} (#{char['Base HP_rank']})", False),
 
-        ("Details", f"**Release Date:** {char['Release Date']}\n"
-                    f"**Obtained:** {char['Obtained']}", False),
+        (" ", f"**Release Date:** {char['Release Date']}\n"
+              f"**Obtained:** {char['Obtained']}\n"
+              f"**LR Cell(s):** {cell_des}", False),
     ]
     
     for name, value, inline in fields:
         embed.add_field(name=name, value=value, inline=inline)
     
-    embed.set_footer(text="All Cell CP include LR cells without upgrades\n"
-                          "Data taken from Strategic Arena")
+    embed.set_footer(text=SERVER)
     
     return embed
 
-def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
 
+def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
     display_name = FACTION_DISPLAY[faction]['name']
     team_members = []
     overall_cp3 = 0
@@ -57,7 +67,7 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
             overall_cp4 += char['4x Cell CP']
     
     embed = discord.Embed(
-        title=f"{display_name} Team",
+        title=f"{display_name} Team - {team['teamname']}",
         description=f"\n".join(team_members),
         color=FACTION_DISPLAY[faction]['colour']
     )
@@ -67,7 +77,10 @@ def create_team_embed(faction: str, team: Dict, char_db) -> discord.Embed:
                                              f"**4x Cell:** {str(overall_cp4)}")
     embed.set_thumbnail(url=f"https://raw.githubusercontent.com/c00perate/btc-images/main/factions/{faction.lower()}.png")
     
+    embed.set_footer(text=SERVER)
+
     return embed
+
 
 def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_num: int) -> discord.Embed:
     description = '\n'.join(
@@ -76,17 +89,17 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_n
     )
 
     embed = discord.Embed(
-        title=f"Top 10 Characters Ranked by {stat_name}",
+        title=f"Characters Ranked by {stat_name}",
         description=description,
         color=discord.Color.light_gray()
     )
     
     embed.set_footer(
-        text="All Cell CP include LR cells without upgrades\n"
-             "Data taken from Strategic Arena"
+        text=SERVER
     )
     
     return embed
+
 
 def create_name_embed(matches: list) -> discord.Embed:
     description = '\n'.join(
@@ -104,20 +117,47 @@ def create_name_embed(matches: list) -> discord.Embed:
 
     return embed
 
-def create_cell_embed(cell: Dict) -> discord.Embed:
+
+def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discord.Embed:
+    description = '\n'.join(
+        f"{start_index + i + 1}. {cell['Character']} [{cell['Title']}] - {cell['Attribute']} ({cell['Type']})"
+        for i, cell in enumerate(matches)
+    )
+    
+    embed = discord.Embed(
+        title="List of Cells",
+        description=description,
+        color=discord.Color.light_gray()
+    )
+    
+    embed.set_footer(text="Use !cell [name] [attribute] [type] to view a specific cell")
+    
+    return embed
+
+
+def create_cells_embed(cell: Dict) -> discord.Embed:
     character_slug = cell['Character'].lower().replace(' ', '')
     title_slug = cell['Title'].lower().replace(' ', '').replace('/', '')
     type_slug = cell['Type'].lower()
     thumbnail_url = f"https://raw.githubusercontent.com/c00perate/btc-images/main/lrcells/{character_slug}-{title_slug}-{type_slug}.png"
-    effect = cell['Effect'] if cell['Effect'] else None
+    effect = cell['Effect'] if cell['Effect'] else None  
+
+
+    '''
+    try:
+        urlopen(thumbnail_url)
+        embed.set_thumbnail(url=thumbnail_url)
+    except:
+        embed.set_thumbnail(url=ERROR_URL)  '''
     
     embed = discord.Embed(
-        title=f"{cell['Character']} [{cell['Title']}]\n{cell['Type']} Cell",
+        title=f"{cell['Character']} [{cell['Title']}]",
         description=f"**Base Stat: {cell['Base Stat']} {cell['Type']}**",
         color=COLOUR[cell['Attribute']]
     )
-    embed.set_thumbnail(url=thumbnail_url)
     
+    embed.set_thumbnail(url=thumbnail_url)
+
     fields = [
         ("Cell Stats", f"+{cell['Stat 1']} \t+{cell['Stat 2']} \n+{cell['Stat 3']} \t+{cell['Stat 4']}", False),
         ("Cell Effect", f"{cell['Description']}", False),
@@ -128,5 +168,7 @@ def create_cell_embed(cell: Dict) -> discord.Embed:
 
     if effect:
         embed.set_footer(text=effect)
-    
+    else:
+        embed.set_footer(text=SERVER)
+            
     return embed

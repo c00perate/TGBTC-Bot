@@ -1,38 +1,50 @@
 import discord
-from typing import Dict, List
-from config import *
 from discord.ui import View, Button
-from embeds import create_character_embed
 
 class Paginator(View):
-    def __init__(self, items, embed_factory, timeout=180):
+
+    def __init__(self, items, embed_factory, author_id, timeout=60):
         super().__init__(timeout=timeout)
         self.items = items
         self.embed_factory = embed_factory
         self.current_index = 0
+        self.author_id = author_id
         self.message = None
-
         self.update_buttons()
+
 
     def update_buttons(self):
         self.children[0].disabled = (self.current_index == 0)
         self.children[1].disabled = (self.current_index == len(self.items) - 1)
 
+
+    async def interaction_check(self, interaction: discord.Interaction) -> bool:
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message(
+                "These buttons aren't for you.",
+                ephemeral=True
+            )
+            return False
+        return True    
+
+
     @discord.ui.button(label="◀ Previous", style=discord.ButtonStyle.primary)
-    async def previous_button(self, interaction: discord.Interaction, button: Button):
+    async def previous_button(self, button: discord.ui.Button, interaction: discord.Interaction):
         if self.current_index > 0:
             self.current_index -= 1
             self.update_buttons()
             embed = self.embed_factory(self.items[self.current_index])
             await interaction.response.edit_message(embed=embed, view=self)
 
+
     @discord.ui.button(label="Next ▶", style=discord.ButtonStyle.primary)
-    async def next_button(self, interaction: discord.Interaction, button: Button):
+    async def next_button(self, button: discord.ui.Button, interaction: discord.Interaction):
         if self.current_index < len(self.items) - 1:
             self.current_index += 1
             self.update_buttons()
             embed = self.embed_factory(self.items[self.current_index])
             await interaction.response.edit_message(embed=embed, view=self)
+
 
     async def on_timeout(self):
         for child in self.children:
