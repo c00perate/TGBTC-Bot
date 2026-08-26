@@ -113,7 +113,7 @@ def create_name_embed(matches: list) -> discord.Embed:
         color=discord.Color.light_gray()
     )
 
-    embed.set_footer(text="Use ![name] [attribute] to view specific character")
+    embed.set_footer(text="Use /find-char [name] [attribute] to view specific character")
 
     return embed
 
@@ -130,7 +130,7 @@ def create_cells_list_embed(matches: List[Dict], start_index: int = 0) -> discor
         color=discord.Color.light_gray()
     )
     
-    embed.set_footer(text="Use !cell [name] [attribute] [type] to view a specific cell")
+    embed.set_footer(text="Use /find-cell [name] [attribute] [type] to view a specific cell")
     
     return embed
 

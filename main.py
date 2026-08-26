@@ -5,7 +5,7 @@ import os
 
 intents = discord.Intents.default()
 
-bot = commands.Bot(intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 
 @bot.event
@@ -13,6 +13,18 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     print(f"Connected to {len(bot.guilds)} servers")
     print(f"loaded cogs: {[cog for cog in bot.cogs]}")
+
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    
+    if message.content.startswith("!"):
+        await message.channel.send("The bot has been updated with slash commads! Use /command" \
+        "to see available commands!")
+
+    await bot.process_commands(message)
+
 
 
 for file in os.listdir("./cogs"):

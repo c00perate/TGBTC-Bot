@@ -25,7 +25,7 @@ class Teams(commands.Cog):
         
         teams = self.team.get_teams_by_faction(faction_lower)
 
-        print(teams)
+        #print(teams)
         
         if not teams:
             await ctx.respond(f"No teams found for {faction}", ephermeral=True)

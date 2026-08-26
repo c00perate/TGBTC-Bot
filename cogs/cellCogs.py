@@ -12,7 +12,7 @@ class Cells(commands.Cog):
         self.db = CellsDatabase()
 
     #guild_ids=[TEST_GUILD]
-    @discord.slash_command(name="find-cell", description="List all available cells for a character!")
+    @discord.slash_command(name="find-cell", description="List all available cells for a character!", guild_ids=[TEST_GUILD])
     async def test(self, ctx, *, name:str, attr:str, slot:Option(str, "Enter the Slot of the Cell", required = False, default = ' ')):
         tempstr = name + " " + attr + " " + slot
 
