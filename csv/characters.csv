@@ -1,20 +1,21 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
-Saiko Yonebayashi,Otaku Investigator,SPD,CCG,Support,230435,254201,255749,37055,28606,608473,8/4/2026,Limited Banner,Chud
 Yoshimura,Owl of Readiness,PSY,Anteiku,Balance,235076,259094,260726,39241,28606,625127,7/27/2026,Carnival,spowl
 Haise Sasaki,Sealed Memory,WIT,CCG,Balance,234513,258430,260029,39357,28759,617514,6/22/2026,Carnival,Chaise
 Nishiki Nishio,Orochi,PSY,No Org,Burst,233949,257852,259446,39069,28937,614183,5/18/2026,Carnival,Orochi
 Ken Kaneki,√A,DST,Anteiku,Balance,233712,257592,259178,39414,28478,609900,4/13/2026,Carnival,DST
 Touka Kirishima,Flame Strike,PSY,Anteiku,DPS,232833,256697,258277,38925,28402,613707,3/9/2026,Carnival,Toka
 Ayato Kirishima,Wings of Ardor,WIT,Aogiri,DPS,232187,256033,257608,39126,28555,602287,2/2/2026,Carnival,Wayato
+Kishou Arima,Invincible Investigator,WIT,CCG,DPS,231604,255432,257001,38465,28682,604666,12/29/2025,Carnival,Darima
+Yakumo Oomori,Natsu Matsuri,SPD,Aogiri,DPS,230751,254542,256099,37745,28198,613231,8/18/2026,Exclusive Banner,Jason;bjason
+Saiko Yonebayashi,Neet Investigator,SPD,CCG,Support,230435,254201,255749,37055,28606,608473,8/4/2026,Limited Banner,Chud
+Rize Kamishiro,Seaside Carnival Party,SKL,No Org,DPS,230198,254067,255650,37400,28122,616086,07/21/2026,Exclusive Banner,srize
 Ginshi Shirazu,Delinquent Youth,STR,CCG,Burst,230192,253967,255518,37314,28224,614183,7/7/2026,Limited Banner,
 Ayato Kirishima,1.5th Anniversary,STR,Aogiri,DPS,230174,253954,255507,38004,28300,603714,4/28/2026,Exclusive Banner,Anniayato;Rayato
 Touka Kirishima,June Bride,STR,Anteiku,Balance,230066,253837,255387,36940,28351,616562,09/23/2026,Limited Banner,Bridetoka;toka
-Rize Kamishiro,Seaside Carnival Party,SKL,No Org,DPS,230198,254067,255650,37400,28122,616086,07/21/2026,Exclusive Banner,srize
 Akira Mado,June Bride,SKL,CCG,Support,229477,253193,254724,33861,29370,628458,6/21/2026,Fragments,Wifey
 Mutsuki Tooru,Cowardly Investigator,SKL,CCG,Support,229344,253086,254626,36163,28377,618941,6/9/2026,Limited Banner,Toru
 Urie Kuki,Class Monitor,SPD,CCG,Balance,229093,252831,254370,36997,28122,609424,5/26/2026,Limited Banner,
 Haise Sasaki,Mentor,SPD,CCG,DPS,228786,252512,254047,37573,27969,599432,5/11/2026,Exclusive Banner,
-Kishou Arima,Invincible Investigator,WIT,CCG,DPS,231604,255432,257001,38465,28682,604666,12/29/2025,Carnival,Darima
 Hideyoshi Nagachika,Best Friend,PSY,No Org,Support,228698,252381,253901,33372,29523,622748,11/24/2025,Carnival,Hide
 Yoshimura,Cleaner,PSY,No Org,DPS,228589,252298,253827,37371,28020,596101,10/20/2025,Carnival,
 Naki,1.5th Anniversary,SKL,Aogiri,Support,228580,252294,253825,36307,28122,612755,4/28/2026,Fragments,Anninaki
@@ -27,7 +28,7 @@ Rize Kamishiro,Valentine's Day,SPD,No Org,Balance,227474,251150,252668,34868,282
 Sen Takatsuki,Elegant Deception,SPD,No Org,Support,227267,250924,252436,33285,29523,616086,1/24/2026,Limited Banner,
 Uta,The Past,PSY,No Org,DPS,227194,252917,253924,36824,28493,591818,8/11/2025,Carnival,Cuta;Goat
 Roma Hoito,Anteiku,SKL,Anteiku,Support,226959,250624,252138,35040,29192,597053,1/17/2026,Limited Banner,
-Ken Kaneki,1st Anniversary,SKL,Anteiku,DPS,226752,250437,251958,36767,28555,588012,11/15/2025,Exclusive Banner,Aken
+Ken Kaneki,1st Anniversary,SKL,Anteiku,DPS,226752,254004,255008,36767,28555,588012,11/15/2025,Exclusive Banner,Aken
 Uta,New Year,STR,No Org,Support,226636,250283,251792,33630,29218,613231,1/10/2026,Exclusive Banner,
 Touka Kirishima,New Year,SPD,Anteiku,DPS,226264,249914,251423,36422,28096,590867,12/27/2025,Exclusive Banner,Toka;Btouka
 Kishou Arima,Second Owl Raid,WIT,CCG,DPS,226138,249793,251304,37256,27586,588963,7/7/2025,Carnival,Warima
@@ -46,8 +47,8 @@ Touka Kirishima,Flamewing,SKL,Anteiku,Balance,223259,248798,249778,35242,27561,5
 Ayato Kirishima,Wings of Power-seeker,PSY,Aogiri,DPS,223137,249008,250047,35817,26796,588488,1/13/2025,Carnival,Cayato
 Nishiki Nishio,Taiikusai,SPD,Anteiku,DPS,223114,250650,251621,35904,27281,580398,9/6/2025,Exclusive Banner,
 Touka Kirishima,Taiikusai,SKL,Anteiku,Control,223056,246584,248053,34005,28300,586584,9/6/2025,Fragments,Toka
-Ken Kaneki,Centipede Rampage,WIT,Aogiri,DPS,222890,248862,249828,35817,26287,593246,12/9/2024,Carnival,Centi
-Matasaka Kamishiro,Shachi,WIT,No Org,Burst,222703,246229,247697,39846,26796,521870,10/31/2024,VIP,
+Ken Kaneki,Centipede Rampage,WIT,Aogiri,DPS,222890,253609,254152,35817,26287,593246,12/9/2024,Carnival,Centi
+Matasaka Kamishiro,Shachi,WIT,No Org,Burst,222703,246229,247697,39846,26796,521870,10/31/2024,VIP,Shachi
 Iwao Kuroiwa,Arata Proto (Rampage),SKL,CCG,Support,222703,249794,250815,34289,27555,595884,8/23/2025,Limited Banner,
 Ken Kaneki,Natsu Matsuri,STR,Anteiku,Balance,222567,249422,250406,35040,27343,590894,8/9/2025,Exclusive Banner,
 Touka Kirishima,Natsu Matsuri,SKL,Anteiku,Support,222453,249770,250703,34148,28198,585633,8/9/2025,Fragments,Toka
