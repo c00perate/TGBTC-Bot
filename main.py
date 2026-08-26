@@ -14,10 +14,12 @@ async def on_ready():
     print(f"Connected to {len(bot.guilds)} servers")
     print(f"loaded cogs: {[cog for cog in bot.cogs]}")
 
-
+#async def setup_hook():
 for file in os.listdir("./cogs"):
     if file.endswith(".py"):
         bot.load_extension(f"cogs.{file[:-3]}")
+
+#bot.setup_hook = setup_hook
 
 if __name__ == '__main__':
     try:
