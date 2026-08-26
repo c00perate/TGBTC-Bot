@@ -30,7 +30,7 @@ async def on_message(message):
     
     if message.content.startswith("!"):
         await message.channel.send("The bot has been updated with slash commands! Use /command " \
-        "to see available commands!")
+        "to see available commands. Join the support server for more information: discord.gg/BE5GaYk6wq")
 
     await bot.process_commands(message)
 
