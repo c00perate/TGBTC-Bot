@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
-from config import FACTION_DISPLAY
-from teams import TeamDatabase
-from characters import CharacterDatabase
-from embeds import create_team_embed
-from config import TEST_GUILD
-from buttons import Paginator
+from src.config import FACTION_DISPLAY
+from src.teams import TeamDatabase
+from src.characters import CharacterDatabase
+from src.embeds import create_team_embed
+from src.config import TEST_GUILD
+from src.buttons import Paginator
 
 class Teams(commands.Cog):
 

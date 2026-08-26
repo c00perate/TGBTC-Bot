@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from config import TOKEN
+from src.config import TOKEN
 import os
 
 intents = discord.Intents.default()

@@ -1,7 +1,7 @@
 import discord
 #from urllib.request import urlopen
 from typing import Dict, List
-from config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
+from src.config import FACTION_DISPLAY, COLOUR, SERVER, ERROR_URL
 
 def create_character_embed(char: Dict) -> discord.Embed:
     character_slug = char['Character'].lower().replace(' ', '')

@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 from discord.commands import Option
-from config import SEARCH_QUERIES
-from characters import CharacterDatabase
-from embeds import create_ranking_embed
-from buttons import Paginator
-from config import TEST_GUILD
+from src.config import SEARCH_QUERIES
+from src.characters import CharacterDatabase
+from src.embeds import create_ranking_embed
+from src.buttons import Paginator
+from src.config import TEST_GUILD
 
 class Rankings(commands.Cog):
 

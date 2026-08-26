@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 from discord.commands import Option
-from cells import CellsDatabase
-from embeds import create_cells_embed, create_cells_list_embed
-from buttons import Paginator
-from config import TEST_GUILD
+from src.cells import CellsDatabase
+from src.embeds import create_cells_embed, create_cells_list_embed
+from src.buttons import Paginator
+from src.config import TEST_GUILD
 
 class Cells(commands.Cog):
     def __init__(self, bot):

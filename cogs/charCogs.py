@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 from discord.commands import Option
-from characters import CharacterDatabase
-from embeds import create_name_embed, create_character_embed
-from buttons import Paginator
-from config import TEST_GUILD
+from src.characters import CharacterDatabase
+from src.embeds import create_name_embed, create_character_embed
+from src.buttons import Paginator
+from src.config import TEST_GUILD
 
 class Characters(commands.Cog):
     def __init__(self, bot):

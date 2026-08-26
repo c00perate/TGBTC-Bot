@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from config import SHEET_URL
-from config import TEST_GUILD
+from src.config import SHEET_URL
+from src.config import TEST_GUILD
 
 class Misc(commands.Cog):
     def __init__(self, bot):

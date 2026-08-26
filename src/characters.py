@@ -1,7 +1,7 @@
 import csv
 from collections import defaultdict
 from typing import Optional, List, Dict
-from cells import CellsDatabase
+from src.cells import CellsDatabase
 
 class CharacterDatabase:
     
