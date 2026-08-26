@@ -22,7 +22,7 @@ async def on_message(message):
         return
     
     if message.content.startswith("!"):
-        await message.channel.send("The bot has been updated with slash commads! Use /command" \
+        await message.channel.send("The bot has been updated with slash commands! Use /command " \
         "to see available commands!")
 
     await bot.process_commands(message)
