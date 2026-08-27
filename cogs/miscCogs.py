@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from src.config import SHEET_URL
+from src.config import SHEET_URL, SERVER
 from src.config import TEST_GUILD
 
 class Misc(commands.Cog):
@@ -19,6 +19,12 @@ class Misc(commands.Cog):
     @discord.slash_command(name="sheet", description="base stat sheet for the bot")
     async def show_sheet(self, ctx):
         await ctx.respond(f"Here's my [sheet]({SHEET_URL})")
+
+    @discord.slash_command(name="resources", description="community resources", guild_ids=[TEST_GUILD])
+    async def show_resources(self, ctx):
+        await ctx.respond(f"Bot support server: {SERVER}\n"
+            "Gluttony server (for leaks): https://discord.gg/jurzSUchHU\n"
+            "Chatmojo website: https://tkgbtc.com")
 
 
     #, guild_ids=[TEST_GUILD]
