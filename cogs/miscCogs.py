@@ -24,7 +24,8 @@ class Misc(commands.Cog):
     async def show_resources(self, ctx):
         await ctx.respond(f"Bot support server: {SERVER}\n"
             "Gluttony server (for leaks): https://discord.gg/jurzSUchHU\n"
-            "Chatmojo website: https://tkgbtc.com")
+            "Chatmojo website: https://tkgbtc.com", 
+             ephemeral=True)
 
 
     #, guild_ids=[TEST_GUILD]
