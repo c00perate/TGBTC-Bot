@@ -20,7 +20,7 @@ class Misc(commands.Cog):
     async def show_sheet(self, ctx):
         await ctx.respond(f"Here's my [sheet]({SHEET_URL})")
 
-    @discord.slash_command(name="resources", description="community resources", guild_ids=[TEST_GUILD])
+    @discord.slash_command(name="resources", description="community resources")
     async def show_resources(self, ctx):
         await ctx.respond(f"Bot support server: {SERVER}\n"
             "Gluttony server (for leaks): https://discord.gg/jurzSUchHU\n"
