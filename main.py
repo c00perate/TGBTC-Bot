@@ -8,7 +8,6 @@ intents.message_content = True
 
 
 bot = commands.Bot(
-        command_prefix='!', 
         intents=intents, 
         activity=discord.Game(name="Use /command for a guide!"),
         default_command_integration_types={
