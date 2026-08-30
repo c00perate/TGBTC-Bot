@@ -12,7 +12,7 @@ class Misc(commands.Cog):
     @discord.slash_command(name="credit", aliases=["credits"], description="show the credits for the bot")
     async def show_credits(self, ctx):
         await ctx.respond(
-            "Made by c00per and Hnff for the Tokyo Ghoul: Break the Chains (Global) server! Now with slash commands!"
+            "Made by c00per and Hnff."
         )
 
     #, guild_ids=[TEST_GUILD]
