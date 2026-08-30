@@ -94,9 +94,7 @@ def create_ranking_embed(stat_name: str, top_chars: list, stat_key: str, start_n
         color=discord.Color.light_gray()
     )
     
-    embed.set_footer(
-        text=SERVER
-    )
+    embed.set_footer(text=SERVER)
     
     return embed
 

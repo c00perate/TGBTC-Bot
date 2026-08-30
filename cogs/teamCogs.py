@@ -14,6 +14,7 @@ class Teams(commands.Cog):
         self.team = TeamDatabase()
         self.char = CharacterDatabase()
 
+
     #, guild_ids = [TEST_GUILD]
     @discord.slash_command(name='team', description="shows the meta teams for a faction!")
     async def show_team(self, ctx, faction: str):
@@ -36,7 +37,6 @@ class Teams(commands.Cog):
         
         for team in teams:
             pages.append(create_team_embed(faction_lower, team, self.char))
-
 
         if(len(pages) != 1):
             view = Paginator(pages, lambda e: e, author_id=ctx.author.id)

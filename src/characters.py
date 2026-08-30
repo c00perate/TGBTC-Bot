@@ -90,6 +90,7 @@ class CharacterDatabase:
     def get_top_characters(self, stat: str, limit: int) -> List[Dict]:
         return self.rankings.get(stat, [])[:limit]
 
+
     def _has_cell(self): 
         cell_db = CellsDatabase() 
         for cell in cell_db.cells:

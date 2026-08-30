@@ -11,6 +11,7 @@ class Characters(commands.Cog):
         self.bot = bot
         self.db = CharacterDatabase()
 
+
     #, guild_ids=[TEST_GUILD]
     @discord.slash_command(name="find-char", description="returns all characters with matching name and attribute")
     async def handle_character_search(self, ctx, name:str, attr:Option(str, "Enter the attribute of the character", required = False, default = ' ')):
@@ -71,6 +72,7 @@ class Characters(commands.Cog):
         else:
             await ctx.respond("Invalid command! Try `/command` for help!", ephemeral=True)
             return
+
 
 def setup(bot):
     bot.add_cog(Characters(bot))

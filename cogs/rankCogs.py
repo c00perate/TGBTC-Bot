@@ -37,5 +37,6 @@ class Rankings(commands.Cog):
         message = await ctx.respond(embed=pages[0], view=view)
         view.message = message
 
+
 def setup(bot):
     bot.add_cog(Rankings(bot))

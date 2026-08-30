@@ -36,7 +36,6 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-
 for file in os.listdir("./cogs"):
     if file.endswith(".py"):
         bot.load_extension(f"cogs.{file[:-3]}")
