@@ -1,5 +1,7 @@
 # TG:BTC Bot
 
+Discord bot made for the mobile game, Tokyo Ghoul: Break the Chains. Supports slash commands.
+
 ## Setup
 1. Install dependencies: `pip install -r requirements.txt`
 2. Create a `.env` file with:
