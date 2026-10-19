@@ -1,6 +1,7 @@
 # TG:BTC Bot
 
 Discord bot made for the mobile game, Tokyo Ghoul: Break the Chains. Supports slash commands.
+
 Support server: https://discord.gg/BE5GaYk6wq
 
 ## Setup
