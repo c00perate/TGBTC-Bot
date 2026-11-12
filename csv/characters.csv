@@ -1,4 +1,7 @@
 Character,Title,Attribute,Faction,Tactic,Base CP,3x Cell CP,4x Cell CP,Base ATK,Base DEF,Base HP,Release Date,Obtained,Nicknames
+Seido Takizawa,OWL,WIT,Aogiri,DPS,237393,261378,262999,39817,29320,621320,9/11/2026,Carnival,
+Haise Sasaki,2nd Anniversary,STR,CCG,DPS,234242,258048,259609,39846,27281,601811,11/10/2026,Exclusive Banner,
+Hinami Fueguchi,Halloween,SPD,Anteiku,Support,231224,254995,256544,34148,30033,628934,10/27/2026,Exclusive Banner
 Ayato Kirishima,Black Rabbit,DST,Aogiri,DPS,236379,260347,261962,39587,28963,626079,10/5/2026,Carnival,dstayato
 Juuzou Suzuya,False Girl,PSY,CCG,DPS,235723,259670,261278,39702,28886,618941,8/30/2026,Carnival,Juzo
 Yoshimura,Owl of Readiness,PSY,Anteiku,Balance,235076,259094,260726,39241,28606,625127,7/27/2026,Carnival,spowl
@@ -7,7 +10,7 @@ Nishiki Nishio,Orochi,PSY,No Org,Burst,233949,257852,259446,39069,28937,614183,5
 Ken Kaneki,√A,DST,Anteiku,Balance,233712,257592,259178,39414,28478,609900,4/13/2026,Carnival,DST
 Touka Kirishima,Flame Strike,PSY,Anteiku,DPS,232833,256697,258277,38925,28402,613707,3/9/2026,Carnival,Toka
 Ayato Kirishima,Wings of Ardor,WIT,Aogiri,DPS,232187,256033,257608,39126,28555,602287,2/2/2026,Carnival,Wayato
-Kishou Arima,Invincible Investigator,WIT,CCG,DPS,231604,255432,257001,38465,28682,604666,12/29/2025,Carnival,Darima
+Kishou Arima,Invincible Investigator,WIT,CCG,DPS,231604,260973,261982,38465,28682,604666,12/29/2025,Carnival,Darima
 Roma Hoito,Mad Clown,STR,No Org,Support,231195,254989,256546,36163,29039,623224,8/31/2026,Limited Banner
 Miza Kusakari,Triple Blade,SKL,Aogiri,Support,231155,254946,256502,36335,29116,617989,10/12/2026,Limited Banner
 Yakumo Oomori,Natsu Matsuri,SPD,Aogiri,DPS,230751,254542,256099,37745,28198,613231,8/18/2026,Exclusive Banner,Jason;bjason
@@ -25,7 +28,7 @@ Haise Sasaki,Mentor,SPD,CCG,DPS,228786,252512,254047,37573,27969,599432,5/11/202
 Hideyoshi Nagachika,Best Friend,PSY,No Org,Support,228698,252381,253901,33372,29523,622748,11/24/2025,Carnival,Hide
 Yoshimura,Cleaner,PSY,No Org,DPS,228589,252298,253827,37371,28020,596101,10/20/2025,Carnival,
 Naki,1.5th Anniversary,SKL,Aogiri,Support,228580,252294,253825,36307,28122,612755,4/28/2026,Fragments,Anninaki
-Eto,3M Downloads,STR,Aogiri,Support,228559,252201,253707,33026,29625,613195,4/12/2026,Exclusive Banner,
+Eto,3M Downloads,STR,Aogiri,Support,228559,255638,256567,33026,29625,613195,4/12/2026,Exclusive Banner,
 Hinami Fueguchi,Hina Matsuri,SKL,Anteiku,Support,228149,251801,253311,33141,29218,622272,3/3/2026,Exclusive Banner,Hina
 Tatara,Easter,SKL,Aogiri,Balance,228013,251708,253233,36019,28198,609900,3/31/2026,Exclusive Banner,Etats
 Nishiki Nishio,Anteiku,STR,Anteiku,Support,227969,251617,253126,33889,28912,615134,2/21/2026,Limited Banner,
@@ -37,7 +40,7 @@ Roma Hoito,Anteiku,SKL,Anteiku,Support,226959,250624,252138,35040,29192,597053,1
 Ken Kaneki,1st Anniversary,SKL,Anteiku,DPS,226752,254004,255008,36767,28555,588012,11/15/2025,Exclusive Banner,Aken
 Uta,New Year,STR,No Org,Support,226636,250283,251792,33630,29218,613231,1/10/2026,Exclusive Banner,
 Touka Kirishima,New Year,SPD,Anteiku,DPS,226264,249914,251423,36422,28096,590867,12/27/2025,Exclusive Banner,Toka;Btouka
-Kishou Arima,Second Owl Raid,WIT,CCG,DPS,226138,249793,251304,37256,27586,588963,7/7/2025,Carnival,Warima
+Kishou Arima,Second Owl Raid,WIT,CCG,DPS,226138,257008,257981,37256,27586,588963,7/7/2025,Carnival,Warima
 Yoshimura,Owl (Anteiku),WIT,Anteiku,DPS,226111,249765,251276,36968,27510,594673,6/2/2025,Carnival,Owl;Cowl;Wowl
 Rize Kamishiro,Christmas,STR,No Org,Balance,225684,253516,254517,35731,28045,594198,12/13/2025,Exclusive Banner,
 Kousuke Houji,Chi She,SKL,CCG,Support,225519,252249,253272,34350,28759,596101,11/29/2025,Limited Banner,Hoji
